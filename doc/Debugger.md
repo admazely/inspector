@@ -1,6 +1,7 @@
 # Debugger
 
 _Auto generated documentation for WebKit inspector `1.0`_
+
 Debugger domain exposes JavaScript debugging capabilities. It allows setting and removing breakpoints, stepping through execution, exploring stack traces, etc.
 
 

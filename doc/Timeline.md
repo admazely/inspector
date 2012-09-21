@@ -1,6 +1,7 @@
 # Timeline
 
 _Auto generated documentation for WebKit inspector `1.0`_
+
 Timeline provides its clients with instrumentation records that are generated during the page runtime. Timeline instrumentation can be started and stopped using corresponding commands. While timeline is started, it is generating timeline event records.
 
 

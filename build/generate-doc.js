@@ -20,6 +20,7 @@ module.exports = function (api) {
 
         // Print domain description
         if (domain.description) {
+            doc.write('\n');
             doc.write(domain.description + '\n');
             doc.write('\n');
         }

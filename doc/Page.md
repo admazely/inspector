@@ -1,6 +1,7 @@
 # Page
 
 _Auto generated documentation for WebKit inspector `1.0`_
+
 Actions and events related to the inspected page belong to the page domain.
 
 

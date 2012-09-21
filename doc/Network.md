@@ -1,6 +1,7 @@
 # Network
 
 _Auto generated documentation for WebKit inspector `1.0`_
+
 Network domain allows tracking network activities of the page. It exposes information about http, file, data and other requests and responses, their headers, bodies, timing, etc.
 
 
