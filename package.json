@@ -1,0 +1,34 @@
+{
+    "name": "inspector",
+    "description": "Node.js binding for WebKit Inspector API",
+    "version": "0.1.0",
+    "author": "Andreas Madsen <amwebdk@gmail.com>",
+    "main": "./inspector.js",
+    "scripts": {
+      "test": "tap ./test"
+    },
+    "repository" : {
+        "type": "git",
+        "url": "git://github.com/AndreasMadsen/inspector.git"
+    },
+    "keywords": [
+        "WebKit",
+        "inspector",
+        "Chrome",
+        "Safari",
+        "binding"
+    ],
+    "dependencies": {
+        "ws": "0.4.x",
+        "flower": "0.6.x"
+    },
+    "devDependencies": {
+        "tap": "0.3.x",
+        "temp": "0.4.x"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": "0.6 || 0.8",
+        "npm": "1"
+    }
+}
