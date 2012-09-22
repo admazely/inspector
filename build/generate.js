@@ -6,3 +6,6 @@ var api = JSON.parse( fs.readFileSync(path.resolve(__dirname, 'inspector.json'),
 
 var doc = require('./generate-doc.js');
     doc(api);
+
+var lib = require('./generate-lib.js');
+    lib(api);
