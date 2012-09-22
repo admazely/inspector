@@ -46,7 +46,7 @@ _**includeCommandLineAPI ( optional boolean )**_<br>
 _**doNotPauseOnExceptionsAndMuteConsole ( optional boolean )**_<br>
 > Specifies whether evaluation should stop on exceptions and mute console. Overrides setPauseOnException state.
 
-_**contextId ( optional [Runtime.ExecutionContextId](Runtime.md#class-executioncontextid))**_<br>
+_**contextId ( optional [Runtime.ExecutionContextId](Runtime.md#class-executioncontextid) )**_<br>
 > Specifies in which isolated context to perform evaluation. Each content script lives in an isolated context and this parameter may be used to specify one of those contexts. If the parameter is omitted or 0 the evaluation will be performed in the context of the inspected page.
 
 _**returnByValue ( optional boolean )**_<br>
@@ -57,7 +57,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( [RemoteObject](#class-remoteobject))**_<br>
+_**result ( [RemoteObject](#class-remoteobject) )**_<br>
 > Evaluation result.
 
 _**wasThrown ( optional boolean )**_<br>
@@ -71,13 +71,13 @@ Calls function with given declaration on the given object. Object group of the r
 
 ### Parameters
 
-_**objectId ( [RemoteObjectId](#class-remoteobjectid))**_<br>
+_**objectId ( [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Identifier of the object to call function on.
 
 _**functionDeclaration ( string )**_<br>
 > Declaration of the function to call.
 
-_**arguments ( optional array of [CallArgument](#class-callargument))**_<br>
+_**arguments ( optional array of [CallArgument](#class-callargument) )**_<br>
 > Call arguments. All call arguments must belong to the same JavaScript world as the target object.
 
 _**doNotPauseOnExceptionsAndMuteConsole ( optional boolean )**_<br>
@@ -91,7 +91,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( [RemoteObject](#class-remoteobject))**_<br>
+_**result ( [RemoteObject](#class-remoteobject) )**_<br>
 > Call result.
 
 _**wasThrown ( optional boolean )**_<br>
@@ -105,7 +105,7 @@ Returns properties of a given object. Object group of the result is inherited fr
 
 ### Parameters
 
-_**objectId ( [RemoteObjectId](#class-remoteobjectid))**_<br>
+_**objectId ( [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Identifier of the object to return properties for.
 
 _**ownProperties ( optional boolean )**_<br>
@@ -116,7 +116,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( array of [PropertyDescriptor](#class-propertydescriptor))**_<br>
+_**result ( array of [PropertyDescriptor](#class-propertydescriptor) )**_<br>
 > Object properties.
 
 
@@ -127,7 +127,7 @@ Releases remote object with given id.
 
 ### Parameters
 
-_**objectId ( [RemoteObjectId](#class-remoteobjectid))**_<br>
+_**objectId ( [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Identifier of the object to release.
 
 _**callback ( function )**_<br>
@@ -188,7 +188,7 @@ _**error ( error )**_<br>
 
 ### Results
 
-_**context ( [ExecutionContextDescription](#class-executioncontextdescription))**_<br>
+_**context ( [ExecutionContextDescription](#class-executioncontextdescription) )**_<br>
 > A newly created execution contex.
 
 
@@ -206,10 +206,10 @@ _Type: object_
 
 ### Properties
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["object","function","undefined","string","number","boolean"] )**_<br>
 > Object type.
 
-_**subtype ( optional string )**_<br>
+_**subtype ( optional string enumerated ["array","null","node","regexp","date"] )**_<br>
 > Object subtype hint. Specified for <code>object</code> type values only.
 
 _**className ( optional string )**_<br>
@@ -221,10 +221,10 @@ _**value ( optional any )**_<br>
 _**description ( optional string )**_<br>
 > String representation of the object.
 
-_**objectId ( optional [RemoteObjectId](#class-remoteobjectid))**_<br>
+_**objectId ( optional [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Unique object identifier (for non-primitive values).
 
-_**preview ( optional [ObjectPreview](#class-objectpreview))**_<br>
+_**preview ( optional [ObjectPreview](#class-objectpreview) )**_<br>
 > Preview containsing abbreviated property values.
 
 
@@ -241,7 +241,7 @@ _**lossless ( boolean )**_<br>
 _**overflow ( boolean )**_<br>
 > True iff some of the properties of the original did not fit.
 
-_**properties ( array of [PropertyPreview](#class-propertypreview))**_<br>
+_**properties ( array of [PropertyPreview](#class-propertypreview) )**_<br>
 > List of the properties.
 
 
@@ -255,13 +255,13 @@ _Type: object_
 _**name ( string )**_<br>
 > Property name.
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["object","function","undefined","string","number","boolean"] )**_<br>
 > Object type.
 
 _**value ( optional string )**_<br>
 > User-friendly property value string.
 
-_**subtype ( optional string )**_<br>
+_**subtype ( optional string enumerated ["array","null","node","regexp","date"] )**_<br>
 > Object subtype hint. Specified for <code>object</code> type values only.
 
 
@@ -275,16 +275,16 @@ _Type: object_
 _**name ( string )**_<br>
 > Property name.
 
-_**value ( optional [RemoteObject](#class-remoteobject))**_<br>
+_**value ( optional [RemoteObject](#class-remoteobject) )**_<br>
 > The value associated with the property.
 
 _**writable ( optional boolean )**_<br>
 > True if the value associated with the property may be changed (data descriptors only).
 
-_**get ( optional [RemoteObject](#class-remoteobject))**_<br>
+_**get ( optional [RemoteObject](#class-remoteobject) )**_<br>
 > A function which serves as a getter for the property, or <code>undefined</code> if there is no getter (accessor descriptors only).
 
-_**set ( optional [RemoteObject](#class-remoteobject))**_<br>
+_**set ( optional [RemoteObject](#class-remoteobject) )**_<br>
 > A function which serves as a setter for the property, or <code>undefined</code> if there is no setter (accessor descriptors only).
 
 _**configurable ( boolean )**_<br>
@@ -307,7 +307,7 @@ _Type: object_
 _**value ( optional any )**_<br>
 > Primitive value.
 
-_**objectId ( optional [RemoteObjectId](#class-remoteobjectid))**_<br>
+_**objectId ( optional [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Remote object handle.
 
 
@@ -323,7 +323,7 @@ _Type: object_
 
 ### Properties
 
-_**id ( [ExecutionContextId](#class-executioncontextid))**_<br>
+_**id ( [ExecutionContextId](#class-executioncontextid) )**_<br>
 > Unique id of the execution context. It can be used to specify in which execution context script evaluation should be performed.
 
 _**isPageContext ( boolean )**_<br>
@@ -332,7 +332,7 @@ _**isPageContext ( boolean )**_<br>
 _**name ( string )**_<br>
 > Human readable name describing given context.
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Id of the owning frame.
 
 

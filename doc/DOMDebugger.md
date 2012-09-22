@@ -26,10 +26,10 @@ Sets breakpoint on particular operation with DOM.
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > Identifier of the node to set breakpoint on.
 
-_**type ( [DOMBreakpointType](#class-dombreakpointtype))**_<br>
+_**type ( [DOMBreakpointType](#class-dombreakpointtype) )**_<br>
 > Type of the operation to stop upon.
 
 _**callback ( function )**_<br>
@@ -45,10 +45,10 @@ Removes DOM breakpoint that was set using `setDOMBreakpoint`.
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > Identifier of the node to remove breakpoint from.
 
-_**type ( [DOMBreakpointType](#class-dombreakpointtype))**_<br>
+_**type ( [DOMBreakpointType](#class-dombreakpointtype) )**_<br>
 > Type of the breakpoint to remove.
 
 _**callback ( function )**_<br>

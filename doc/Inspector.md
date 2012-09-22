@@ -52,7 +52,7 @@ _**script ( string )**_<br>
 
 ### Results
 
-_**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 _**hints ( object )**_<br>
 
 

@@ -47,7 +47,7 @@ _**error ( error )**_<br>
 
 ### Parameters
 
-_**traceLogId ( [TraceLogId](#class-tracelogid))**_<br>
+_**traceLogId ( [TraceLogId](#class-tracelogid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
@@ -64,27 +64,27 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**traceLogId ( [TraceLogId](#class-tracelogid))**_<br>
+_**traceLogId ( [TraceLogId](#class-tracelogid) )**_<br>
 
 
 ### Canvas.getTraceLog([TraceLogId](#class-tracelogid), callback)
 
 ### Parameters
 
-_**traceLogId ( [TraceLogId](#class-tracelogid))**_<br>
+_**traceLogId ( [TraceLogId](#class-tracelogid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**traceLog ( [TraceLog](#class-tracelog))**_<br>
+_**traceLog ( [TraceLog](#class-tracelog) )**_<br>
 
 
 ### Canvas.replayTraceLog([TraceLogId](#class-tracelogid), stepNo, callback)
 
 ### Parameters
 
-_**traceLogId ( [TraceLogId](#class-tracelogid))**_<br>
+_**traceLogId ( [TraceLogId](#class-tracelogid) )**_<br>
 _**stepNo ( integer )**_<br>
 _**callback ( function )**_<br>
 
@@ -121,8 +121,8 @@ _Type: object_
 
 ### Properties
 
-_**id ( [TraceLogId](#class-tracelogid))**_<br>
-_**calls ( array of [Call](#class-call))**_<br>
+_**id ( [TraceLogId](#class-tracelogid) )**_<br>
+_**calls ( array of [Call](#class-call) )**_<br>
 
 
 

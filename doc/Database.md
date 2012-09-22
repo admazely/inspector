@@ -47,7 +47,7 @@ _**error ( error )**_<br>
 
 ### Parameters
 
-_**databaseId ( [DatabaseId](#class-databaseid))**_<br>
+_**databaseId ( [DatabaseId](#class-databaseid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
@@ -60,7 +60,7 @@ _**tableNames ( array )**_<br>
 
 ### Parameters
 
-_**databaseId ( [DatabaseId](#class-databaseid))**_<br>
+_**databaseId ( [DatabaseId](#class-databaseid) )**_<br>
 _**query ( string )**_<br>
 _**callback ( function )**_<br>
 
@@ -69,7 +69,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 _**columnNames ( optional array )**_<br>
 _**values ( optional array )**_<br>
-_**sqlError ( optional [Error](#class-error))**_<br>
+_**sqlError ( optional [Error](#class-error) )**_<br>
 
 
 ## Events
@@ -78,7 +78,7 @@ _**sqlError ( optional [Error](#class-error))**_<br>
 
 ### Results
 
-_**database ( [Database](#class-database))**_<br>
+_**database ( [Database](#class-database) )**_<br>
 
 
 ## Types
@@ -94,7 +94,7 @@ _Type: object_
 
 ### Properties
 
-_**id ( [DatabaseId](#class-databaseid))**_<br>
+_**id ( [DatabaseId](#class-databaseid) )**_<br>
 > Database ID.
 
 _**domain ( string )**_<br>

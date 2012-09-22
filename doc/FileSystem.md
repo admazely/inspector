@@ -52,7 +52,7 @@ Returns root directory of the FileSystem, if exists.
 _**origin ( string )**_<br>
 > Security origin of requesting FileSystem. One of frames in current page needs to have this security origin.
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["temporary","persistent"] )**_<br>
 > FileSystem type of requesting FileSystem.
 
 _**callback ( function )**_<br>
@@ -63,7 +63,7 @@ _**error ( error )**_<br>
 _**errorCode ( integer )**_<br>
 > 0, if no error. Otherwise, errorCode is set to FileError::ErrorCode value.
 
-_**root ( optional [Entry](#class-entry))**_<br>
+_**root ( optional [Entry](#class-entry) )**_<br>
 > Contains root of the requested FileSystem if the command completed successfully.
 
 
@@ -85,7 +85,7 @@ _**error ( error )**_<br>
 _**errorCode ( integer )**_<br>
 > 0, if no error. Otherwise, errorCode is set to FileError::ErrorCode value.
 
-_**entries ( optional array of [Entry](#class-entry))**_<br>
+_**entries ( optional array of [Entry](#class-entry) )**_<br>
 > Contains all entries on directory if the command completed successfully.
 
 
@@ -107,7 +107,7 @@ _**error ( error )**_<br>
 _**errorCode ( integer )**_<br>
 > 0, if no error. Otherwise, errorCode is set to FileError::ErrorCode value.
 
-_**metadata ( optional [Metadata](#class-metadata))**_<br>
+_**metadata ( optional [Metadata](#class-metadata) )**_<br>
 > Contains metadata of the entry if the command completed successfully.
 
 
@@ -188,7 +188,7 @@ _**isDirectory ( boolean )**_<br>
 _**mimeType ( optional string )**_<br>
 > MIME type of the entry, available for a file only.
 
-_**resourceType ( optional [Page.ResourceType](Page.md#class-resourcetype))**_<br>
+_**resourceType ( optional [Page.ResourceType](Page.md#class-resourcetype) )**_<br>
 > ResourceType of the entry, available for a file only.
 
 _**isTextFile ( optional boolean )**_<br>

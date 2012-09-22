@@ -85,7 +85,7 @@ Enables console to refer to the node with given id via $x (see Command Line API 
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > DOM node id to be accessible by means of $x command line API.
 
 _**callback ( function )**_<br>
@@ -113,7 +113,7 @@ _**error ( error )**_<br>
 
 ### Results
 
-_**message ( [ConsoleMessage](#class-consolemessage))**_<br>
+_**message ( [ConsoleMessage](#class-consolemessage) )**_<br>
 > Console message that has been added.
 
 
@@ -138,16 +138,16 @@ _Type: object_
 
 ### Properties
 
-_**source ( string )**_<br>
+_**source ( string enumerated ["html","wml","xml","javascript","network","console-api","other"] )**_<br>
 > Message source.
 
-_**level ( string )**_<br>
+_**level ( string enumerated ["tip","log","warning","error","debug"] )**_<br>
 > Message severity.
 
 _**text ( string )**_<br>
 > Message text.
 
-_**type ( optional string )**_<br>
+_**type ( optional string enumerated ["log","dir","dirxml","trace","startGroup","startGroupCollapsed","endGroup","assert"] )**_<br>
 > Console message type.
 
 _**url ( optional string )**_<br>
@@ -159,13 +159,13 @@ _**line ( optional integer )**_<br>
 _**repeatCount ( optional integer )**_<br>
 > Repeat count for repeated messages.
 
-_**parameters ( optional array of [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**parameters ( optional array of [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Message parameters in case of the formatted message.
 
-_**stackTrace ( optional [StackTrace](#class-stacktrace))**_<br>
+_**stackTrace ( optional [StackTrace](#class-stacktrace) )**_<br>
 > JavaScript stack trace for assertions and error messages.
 
-_**networkRequestId ( optional [Network.RequestId](Network.md#class-requestid))**_<br>
+_**networkRequestId ( optional [Network.RequestId](Network.md#class-requestid) )**_<br>
 > Identifier of the network request associated with this message.
 
 

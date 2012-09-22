@@ -84,7 +84,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**identifier ( [ScriptIdentifier](#class-scriptidentifier))**_<br>
+_**identifier ( [ScriptIdentifier](#class-scriptidentifier) )**_<br>
 > Identifier of the added script.
 
 
@@ -93,7 +93,7 @@ _**identifier ( [ScriptIdentifier](#class-scriptidentifier))**_<br>
 
 ### Parameters
 
-_**identifier ( [ScriptIdentifier](#class-scriptidentifier))**_<br>
+_**identifier ( [ScriptIdentifier](#class-scriptidentifier) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
@@ -147,7 +147,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**cookies ( array of [Cookie](#class-cookie))**_<br>
+_**cookies ( array of [Cookie](#class-cookie) )**_<br>
 > Array of cookie objects.
 
 _**cookiesString ( string )**_<br>
@@ -185,7 +185,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**frameTree ( [FrameResourceTree](#class-frameresourcetree))**_<br>
+_**frameTree ( [FrameResourceTree](#class-frameresourcetree) )**_<br>
 > Present frame / resource tree structure.
 
 
@@ -196,7 +196,7 @@ Returns content of the given resource.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame id to get resource for.
 
 _**url ( string )**_<br>
@@ -221,7 +221,7 @@ Searches for given string in resource content.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame id for resource to search in.
 
 _**url ( string )**_<br>
@@ -241,7 +241,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( array of [SearchMatch](#class-searchmatch))**_<br>
+_**result ( array of [SearchMatch](#class-searchmatch) )**_<br>
 > List of search matches.
 
 
@@ -266,7 +266,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( array of [SearchResult](#class-searchresult))**_<br>
+_**result ( array of [SearchResult](#class-searchresult) )**_<br>
 > List of search results.
 
 
@@ -277,7 +277,7 @@ Sets given markup as the document's HTML.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame id to set HTML for.
 
 _**html ( string )**_<br>
@@ -358,7 +358,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( string )**_<br>
+_**result ( string enumerated ["allowed","disabled","forbidden"] )**_<br>
 > Script execution status: "allowed" if scripts can be executed, "disabled" if script execution has been disabled through page settings, "forbidden" if script execution for the given page is not possible for other reasons.
 
 
@@ -517,7 +517,7 @@ _**timestamp ( number )**_<br>
 
 ### Results
 
-_**frame ( [Frame](#class-frame))**_<br>
+_**frame ( [Frame](#class-frame) )**_<br>
 > Frame object.
 
 
@@ -526,7 +526,7 @@ _**frame ( [Frame](#class-frame))**_<br>
 
 ### Results
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Id of the frame that has been detached.
 
 
@@ -550,7 +550,7 @@ _**id ( string )**_<br>
 _**parentId ( optional string )**_<br>
 > Parent frame identifier.
 
-_**loaderId ( [Network.LoaderId](Network.md#class-loaderid))**_<br>
+_**loaderId ( [Network.LoaderId](Network.md#class-loaderid) )**_<br>
 > Identifier of the loader associated with this frame.
 
 _**name ( optional string )**_<br>
@@ -573,10 +573,10 @@ _Type: object_
 
 ### Properties
 
-_**frame ( [Frame](#class-frame))**_<br>
+_**frame ( [Frame](#class-frame) )**_<br>
 > Frame information for this tree item.
 
-_**childFrames ( optional array of [FrameResourceTree](#class-frameresourcetree))**_<br>
+_**childFrames ( optional array of [FrameResourceTree](#class-frameresourcetree) )**_<br>
 > Child frames.
 
 _**resources ( array )**_<br>
@@ -607,7 +607,7 @@ _Type: object_
 _**url ( string )**_<br>
 > Resource URL.
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Resource frame id.
 
 _**matchesCount ( number )**_<br>

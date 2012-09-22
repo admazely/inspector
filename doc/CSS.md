@@ -88,7 +88,7 @@ Returns requested styles for a DOM node identified by `nodeId`.
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 _**includePseudo ( optional boolean )**_<br>
 > Whether to include pseudo styles (default: true).
 
@@ -100,13 +100,13 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**matchedCSSRules ( optional array of [CSSRule](#class-cssrule))**_<br>
+_**matchedCSSRules ( optional array of [CSSRule](#class-cssrule) )**_<br>
 > CSS rules matching this node, from all applicable stylesheets.
 
-_**pseudoElements ( optional array of [PseudoIdRules](#class-pseudoidrules))**_<br>
+_**pseudoElements ( optional array of [PseudoIdRules](#class-pseudoidrules) )**_<br>
 > Pseudo style rules for this node.
 
-_**inherited ( optional array of [InheritedStyleEntry](#class-inheritedstyleentry))**_<br>
+_**inherited ( optional array of [InheritedStyleEntry](#class-inheritedstyleentry) )**_<br>
 > A chain of inherited styles (from the immediate node parent up to the DOM tree root).
 
 
@@ -117,16 +117,16 @@ Returns the styles defined inline (explicitly in the "style" attribute and impli
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**inlineStyle ( optional [CSSStyle](#class-cssstyle))**_<br>
+_**inlineStyle ( optional [CSSStyle](#class-cssstyle) )**_<br>
 > Inline style for the specified DOM node.
 
-_**attributesStyle ( optional [CSSStyle](#class-cssstyle))**_<br>
+_**attributesStyle ( optional [CSSStyle](#class-cssstyle) )**_<br>
 > Attribute-defined element style (e.g. resulting from "width=20 height=100%").
 
 
@@ -137,13 +137,13 @@ Returns the computed style for a DOM node identified by `nodeId`.
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**computedStyle ( array of [CSSComputedStyleProperty](#class-csscomputedstyleproperty))**_<br>
+_**computedStyle ( array of [CSSComputedStyleProperty](#class-csscomputedstyleproperty) )**_<br>
 > Computed style for the specified DOM node.
 
 
@@ -159,7 +159,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**headers ( array of [CSSStyleSheetHeader](#class-cssstylesheetheader))**_<br>
+_**headers ( array of [CSSStyleSheetHeader](#class-cssstylesheetheader) )**_<br>
 > Descriptor entries for all available stylesheets.
 
 
@@ -170,13 +170,13 @@ Returns stylesheet data for the specified `styleSheetId`.
 
 ### Parameters
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**styleSheet ( [CSSStyleSheetBody](#class-cssstylesheetbody))**_<br>
+_**styleSheet ( [CSSStyleSheetBody](#class-cssstylesheetbody) )**_<br>
 > Stylesheet contents for the specified <code>styleSheetId</code>.
 
 
@@ -187,7 +187,7 @@ Returns the current textual content and the URL for a stylesheet.
 
 ### Parameters
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
@@ -204,7 +204,7 @@ Sets the new stylesheet text, thereby invalidating all existing `CSSStyleId`'s a
 
 ### Parameters
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 _**text ( string )**_<br>
 _**callback ( function )**_<br>
 
@@ -219,7 +219,7 @@ Sets the new `text` for a property in the respective style, at offset `propertyI
 
 ### Parameters
 
-_**styleId ( [CSSStyleId](#class-cssstyleid))**_<br>
+_**styleId ( [CSSStyleId](#class-cssstyleid) )**_<br>
 _**propertyIndex ( integer )**_<br>
 _**text ( string )**_<br>
 _**overwrite ( boolean )**_<br>
@@ -228,7 +228,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**style ( [CSSStyle](#class-cssstyle))**_<br>
+_**style ( [CSSStyle](#class-cssstyle) )**_<br>
 > The resulting style after the property text modification.
 
 
@@ -239,7 +239,7 @@ Toggles the property in the respective style, at offset `propertyIndex`. The `di
 
 ### Parameters
 
-_**styleId ( [CSSStyleId](#class-cssstyleid))**_<br>
+_**styleId ( [CSSStyleId](#class-cssstyleid) )**_<br>
 _**propertyIndex ( integer )**_<br>
 _**disable ( boolean )**_<br>
 _**callback ( function )**_<br>
@@ -247,7 +247,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**style ( [CSSStyle](#class-cssstyle))**_<br>
+_**style ( [CSSStyle](#class-cssstyle) )**_<br>
 > The resulting style after the property toggling.
 
 
@@ -258,14 +258,14 @@ Modifies the rule selector.
 
 ### Parameters
 
-_**ruleId ( [CSSRuleId](#class-cssruleid))**_<br>
+_**ruleId ( [CSSRuleId](#class-cssruleid) )**_<br>
 _**selector ( string )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**rule ( [CSSRule](#class-cssrule))**_<br>
+_**rule ( [CSSRule](#class-cssrule) )**_<br>
 > The resulting rule after the selector modification.
 
 
@@ -276,14 +276,14 @@ Creates a new empty rule with the given `selector` in a special "inspector" styl
 
 ### Parameters
 
-_**contextNodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**contextNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 _**selector ( string )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**rule ( [CSSRule](#class-cssrule))**_<br>
+_**rule ( [CSSRule](#class-cssrule) )**_<br>
 > The newly created rule.
 
 
@@ -299,7 +299,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**cssProperties ( array of [CSSPropertyInfo](#class-csspropertyinfo))**_<br>
+_**cssProperties ( array of [CSSPropertyInfo](#class-csspropertyinfo) )**_<br>
 > Supported property metainfo.
 
 
@@ -310,10 +310,10 @@ Ensures that the given node will have specified pseudo-classes whenever its styl
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > The element id for which to force the pseudo state.
 
-_**forcedPseudoClasses ( array )**_<br>
+_**forcedPseudoClasses ( array enumerated ["active","focus","hover","visited"] )**_<br>
 > Element pseudo classes to force when computing the element's style.
 
 _**callback ( function )**_<br>
@@ -343,7 +343,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**profile ( [SelectorProfile](#class-selectorprofile))**_<br>
+_**profile ( [SelectorProfile](#class-selectorprofile) )**_<br>
 
 
 ### CSS.getNamedFlowCollection([DOM.NodeId](DOM.md#class-nodeid), callback)
@@ -352,7 +352,7 @@ Returns the Named Flows from the document.
 
 ### Parameters
 
-_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > The document node id for which to get the Named Flow Collection.
 
 _**callback ( function )**_<br>
@@ -360,7 +360,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**namedFlows ( array of [NamedFlow](#class-namedflow))**_<br>
+_**namedFlows ( array of [NamedFlow](#class-namedflow) )**_<br>
 > An array containing the Named Flows in the document.
 
 
@@ -374,14 +374,14 @@ _**namedFlows ( array of [NamedFlow](#class-namedflow))**_<br>
 
 ### Results
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 
 
 ### Event: namedFlowCreated
 
 ### Results
 
-_**namedFlow ( [NamedFlow](#class-namedflow))**_<br>
+_**namedFlow ( [NamedFlow](#class-namedflow) )**_<br>
 > The new Named Flow.
 
 
@@ -390,7 +390,7 @@ _**namedFlow ( [NamedFlow](#class-namedflow))**_<br>
 
 ### Results
 
-_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > The document node id.
 
 _**flowName ( string )**_<br>
@@ -402,7 +402,7 @@ _**flowName ( string )**_<br>
 
 ### Results
 
-_**namedFlow ( [NamedFlow](#class-namedflow))**_<br>
+_**namedFlow ( [NamedFlow](#class-namedflow) )**_<br>
 > The Named Flow whose layout may have changed.
 
 
@@ -420,7 +420,7 @@ _Type: object_
 
 ### Properties
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 > Enclosing stylesheet identifier.
 
 _**ordinal ( integer )**_<br>
@@ -439,7 +439,7 @@ _Type: object_
 
 ### Properties
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 > Enclosing stylesheet identifier.
 
 _**ordinal ( integer )**_<br>
@@ -456,7 +456,7 @@ _Type: object_
 _**pseudoId ( integer )**_<br>
 > Pseudo style identifier (see <code>enum PseudoId</code> in <code>RenderStyleConstants.h</code>).
 
-_**rules ( array of [CSSRule](#class-cssrule))**_<br>
+_**rules ( array of [CSSRule](#class-cssrule) )**_<br>
 > CSS rules applicable to the pseudo style.
 
 
@@ -467,10 +467,10 @@ _Type: object_
 
 ### Properties
 
-_**inlineStyle ( optional [CSSStyle](#class-cssstyle))**_<br>
+_**inlineStyle ( optional [CSSStyle](#class-cssstyle) )**_<br>
 > The ancestor node's inline style, if any, in the style inheritance chain.
 
-_**matchedCSSRules ( array of [CSSRule](#class-cssrule))**_<br>
+_**matchedCSSRules ( array of [CSSRule](#class-cssrule) )**_<br>
 > CSS rules matching the ancestor node in the style inheritance chain.
 
 
@@ -484,7 +484,7 @@ _Type: object_
 _**name ( string )**_<br>
 > DOM attribute name (e.g. "width").
 
-_**style ( [CSSStyle](#class-cssstyle))**_<br>
+_**style ( [CSSStyle](#class-cssstyle) )**_<br>
 > CSS style generated by the respective DOM attribute.
 
 
@@ -495,16 +495,16 @@ _Type: object_
 
 ### Properties
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 > The stylesheet identifier.
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Owner frame identifier.
 
 _**sourceURL ( string )**_<br>
 > Stylesheet resource URL.
 
-_**origin ( [StyleSheetOrigin](#class-stylesheetorigin))**_<br>
+_**origin ( [StyleSheetOrigin](#class-stylesheetorigin) )**_<br>
 > Stylesheet origin.
 
 _**title ( string )**_<br>
@@ -521,10 +521,10 @@ _Type: object_
 
 ### Properties
 
-_**styleSheetId ( [StyleSheetId](#class-stylesheetid))**_<br>
+_**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 > The stylesheet identifier.
 
-_**rules ( array of [CSSRule](#class-cssrule))**_<br>
+_**rules ( array of [CSSRule](#class-cssrule) )**_<br>
 > Stylesheet resource URL.
 
 _**text ( optional string )**_<br>
@@ -538,7 +538,7 @@ _Type: object_
 
 ### Properties
 
-_**ruleId ( optional [CSSRuleId](#class-cssruleid))**_<br>
+_**ruleId ( optional [CSSRuleId](#class-cssruleid) )**_<br>
 > The CSS rule identifier (absent for user agent stylesheet and user-specified stylesheet rules).
 
 _**selectorText ( string )**_<br>
@@ -550,16 +550,16 @@ _**sourceURL ( optional string )**_<br>
 _**sourceLine ( integer )**_<br>
 > Line ordinal of the rule selector start character in the resource.
 
-_**origin ( [StyleSheetOrigin](#class-stylesheetorigin))**_<br>
+_**origin ( [StyleSheetOrigin](#class-stylesheetorigin) )**_<br>
 > Parent stylesheet's origin.
 
-_**style ( [CSSStyle](#class-cssstyle))**_<br>
+_**style ( [CSSStyle](#class-cssstyle) )**_<br>
 > Associated style declaration.
 
-_**selectorRange ( optional [SourceRange](#class-sourcerange))**_<br>
+_**selectorRange ( optional [SourceRange](#class-sourcerange) )**_<br>
 > The rule selector range in the underlying resource (if available).
 
-_**media ( optional array of [CSSMedia](#class-cssmedia))**_<br>
+_**media ( optional array of [CSSMedia](#class-cssmedia) )**_<br>
 > Media list array (for rules involving media queries). The array enumerates media queries starting with the innermost one, going outwards.
 
 
@@ -626,19 +626,19 @@ _Type: object_
 
 ### Properties
 
-_**styleId ( optional [CSSStyleId](#class-cssstyleid))**_<br>
+_**styleId ( optional [CSSStyleId](#class-cssstyleid) )**_<br>
 > The CSS style identifier (absent for attribute styles).
 
-_**cssProperties ( array of [CSSProperty](#class-cssproperty))**_<br>
+_**cssProperties ( array of [CSSProperty](#class-cssproperty) )**_<br>
 > CSS properties in the style.
 
-_**shorthandEntries ( array of [ShorthandEntry](#class-shorthandentry))**_<br>
+_**shorthandEntries ( array of [ShorthandEntry](#class-shorthandentry) )**_<br>
 > Computed values for all shorthands found in the style.
 
 _**cssText ( optional string )**_<br>
 > Style declaration text (if available).
 
-_**range ( optional [SourceRange](#class-sourcerange))**_<br>
+_**range ( optional [SourceRange](#class-sourcerange) )**_<br>
 > Style declaration range in the enclosing stylesheet (if available).
 
 _**width ( optional string )**_<br>
@@ -673,10 +673,10 @@ _**text ( optional string )**_<br>
 _**parsedOk ( optional boolean )**_<br>
 > Whether the property is understood by the browser (implies <code>true</code> if absent).
 
-_**status ( optional string )**_<br>
+_**status ( optional string enumerated ["active","inactive","disabled","style"] )**_<br>
 > The property status: "active" (implied if absent) if the property is effective in the style, "inactive" if the property is overridden by a same-named property in this style later on, "disabled" if the property is disabled by the user, "style" if the property is reported by the browser rather than by the CSS source parser.
 
-_**range ( optional [SourceRange](#class-sourcerange))**_<br>
+_**range ( optional [SourceRange](#class-sourcerange) )**_<br>
 > The entire property range in the enclosing style declaration (if available).
 
 
@@ -690,7 +690,7 @@ _Type: object_
 _**text ( string )**_<br>
 > Media query text.
 
-_**source ( string )**_<br>
+_**source ( string enumerated ["mediaRule","importRule","linkedSheet","inlineSheet"] )**_<br>
 > Source of the media query: "mediaRule" if specified by a @media rule, "importRule" if specified by an @import rule, "linkedSheet" if specified by a "media" attribute in a linked stylesheet's LINK tag, "inlineSheet" if specified by a "media" attribute in an inline stylesheet's STYLE tag.
 
 _**sourceURL ( optional string )**_<br>
@@ -736,7 +736,7 @@ _Type: object_
 _**totalTime ( number )**_<br>
 > Total processing time for all selectors in the profile (in milliseconds.)
 
-_**data ( array of [SelectorProfileEntry](#class-selectorprofileentry))**_<br>
+_**data ( array of [SelectorProfileEntry](#class-selectorprofileentry) )**_<br>
 > CSS selector profile entries.
 
 
@@ -747,10 +747,10 @@ _Type: object_
 
 ### Properties
 
-_**regionOverset ( string )**_<br>
+_**regionOverset ( string enumerated ["overset","fit","empty"] )**_<br>
 > The "overset" attribute of a Named Flow.
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > The corresponding DOM node id.
 
 
@@ -761,7 +761,7 @@ _Type: object_
 
 ### Properties
 
-_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > The document node id.
 
 _**name ( string )**_<br>
@@ -770,10 +770,10 @@ _**name ( string )**_<br>
 _**overset ( boolean )**_<br>
 > The "overset" attribute of a Named Flow.
 
-_**content ( array of [DOM.NodeId](DOM.md#class-nodeid))**_<br>
+_**content ( array of [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > An array of nodes that flow into the Named Flow.
 
-_**regions ( array of [Region](#class-region))**_<br>
+_**regions ( array of [Region](#class-region) )**_<br>
 > An array of regions associated with the Named Flow.
 
 

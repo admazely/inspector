@@ -150,10 +150,10 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**breakpointId ( [BreakpointId](#class-breakpointid))**_<br>
+_**breakpointId ( [BreakpointId](#class-breakpointid) )**_<br>
 > Id of the created breakpoint for further reference.
 
-_**locations ( array of [Location](#class-location))**_<br>
+_**locations ( array of [Location](#class-location) )**_<br>
 > List of the locations this breakpoint resolved into upon addition.
 
 
@@ -164,7 +164,7 @@ Sets JavaScript breakpoint at a given location.
 
 ### Parameters
 
-_**location ( [Location](#class-location))**_<br>
+_**location ( [Location](#class-location) )**_<br>
 > Location to set breakpoint in.
 
 _**condition ( optional string )**_<br>
@@ -175,10 +175,10 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**breakpointId ( [BreakpointId](#class-breakpointid))**_<br>
+_**breakpointId ( [BreakpointId](#class-breakpointid) )**_<br>
 > Id of the created breakpoint for further reference.
 
-_**actualLocation ( [Location](#class-location))**_<br>
+_**actualLocation ( [Location](#class-location) )**_<br>
 > Location this breakpoint resolved into.
 
 
@@ -189,7 +189,7 @@ Removes JavaScript breakpoint.
 
 ### Parameters
 
-_**breakpointId ( [BreakpointId](#class-breakpointid))**_<br>
+_**breakpointId ( [BreakpointId](#class-breakpointid) )**_<br>
 _**callback ( function )**_<br>
 
 ### Results
@@ -203,7 +203,7 @@ Continues execution until specific location is reached.
 
 ### Parameters
 
-_**location ( [Location](#class-location))**_<br>
+_**location ( [Location](#class-location) )**_<br>
 > Location to continue to.
 
 _**callback ( function )**_<br>
@@ -284,7 +284,7 @@ Searches for given string in script content.
 
 ### Parameters
 
-_**scriptId ( [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
 > Id of the script to search in.
 
 _**query ( string )**_<br>
@@ -301,7 +301,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( array of [Page.SearchMatch](Page.md#class-searchmatch))**_<br>
+_**result ( array of [Page.SearchMatch](Page.md#class-searchmatch) )**_<br>
 > List of search matches.
 
 
@@ -328,7 +328,7 @@ Edits JavaScript source live.
 
 ### Parameters
 
-_**scriptId ( [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
 > Id of the script to edit.
 
 _**scriptSource ( string )**_<br>
@@ -342,7 +342,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**callFrames ( optional array of [CallFrame](#class-callframe))**_<br>
+_**callFrames ( optional array of [CallFrame](#class-callframe) )**_<br>
 > New stack trace in case editing has happened while VM was stopped.
 
 _**result ( optional object )**_<br>
@@ -356,7 +356,7 @@ Restarts particular call frame from the beginning.
 
 ### Parameters
 
-_**callFrameId ( [CallFrameId](#class-callframeid))**_<br>
+_**callFrameId ( [CallFrameId](#class-callframeid) )**_<br>
 > Call frame identifier to evaluate on.
 
 _**callback ( function )**_<br>
@@ -364,7 +364,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**callFrames ( array of [CallFrame](#class-callframe))**_<br>
+_**callFrames ( array of [CallFrame](#class-callframe) )**_<br>
 > New stack trace.
 
 _**result ( object )**_<br>
@@ -378,7 +378,7 @@ Returns source for the script with given id.
 
 ### Parameters
 
-_**scriptId ( [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
 > Id of the script to get source for.
 
 _**callback ( function )**_<br>
@@ -397,7 +397,7 @@ Returns detailed informtation on given function.
 
 ### Parameters
 
-_**functionId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid))**_<br>
+_**functionId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
 > Id of the function to get location for.
 
 _**callback ( function )**_<br>
@@ -405,7 +405,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**details ( [FunctionDetails](#class-functiondetails))**_<br>
+_**details ( [FunctionDetails](#class-functiondetails) )**_<br>
 > Information about the function.
 
 
@@ -416,7 +416,7 @@ Defines pause on exceptions state. Can be set to stop on all exceptions, uncaugh
 
 ### Parameters
 
-_**state ( string )**_<br>
+_**state ( string enumerated ["none","uncaught","all"] )**_<br>
 > Pause on exceptions mode.
 
 _**callback ( function )**_<br>
@@ -432,7 +432,7 @@ Evaluates expression on a given call frame.
 
 ### Parameters
 
-_**callFrameId ( [CallFrameId](#class-callframeid))**_<br>
+_**callFrameId ( [CallFrameId](#class-callframeid) )**_<br>
 > Call frame identifier to evaluate on.
 
 _**expression ( string )**_<br>
@@ -455,7 +455,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Object wrapper for the evaluation result.
 
 _**wasThrown ( optional boolean )**_<br>
@@ -480,7 +480,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**scriptId ( optional [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( optional [ScriptId](#class-scriptid) )**_<br>
 > Id of the script.
 
 _**syntaxErrorMessage ( optional string )**_<br>
@@ -494,10 +494,10 @@ Runs script with given id in a given context.
 
 ### Parameters
 
-_**scriptId ( [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
 > Id of the script to run.
 
-_**contextId ( optional [Runtime.ExecutionContextId](Runtime.md#class-executioncontextid))**_<br>
+_**contextId ( optional [Runtime.ExecutionContextId](Runtime.md#class-executioncontextid) )**_<br>
 > Specifies in which isolated context to perform script run. Each content script lives in an isolated context and this parameter may be used to specify one of those contexts. If the parameter is omitted or 0 the evaluation will be performed in the context of the inspected page.
 
 _**objectGroup ( optional string )**_<br>
@@ -511,7 +511,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Run result.
 
 _**wasThrown ( optional boolean )**_<br>
@@ -544,7 +544,7 @@ _**error ( error )**_<br>
 
 ### Results
 
-_**scriptId ( [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
 > Identifier of the script parsed.
 
 _**url ( string )**_<br>
@@ -595,10 +595,10 @@ _**errorMessage ( string )**_<br>
 
 ### Results
 
-_**breakpointId ( [BreakpointId](#class-breakpointid))**_<br>
+_**breakpointId ( [BreakpointId](#class-breakpointid) )**_<br>
 > Breakpoint unique identifier.
 
-_**location ( [Location](#class-location))**_<br>
+_**location ( [Location](#class-location) )**_<br>
 > Actual breakpoint location.
 
 
@@ -607,10 +607,10 @@ _**location ( [Location](#class-location))**_<br>
 
 ### Results
 
-_**callFrames ( array of [CallFrame](#class-callframe))**_<br>
+_**callFrames ( array of [CallFrame](#class-callframe) )**_<br>
 > Call stack the virtual machine stopped on.
 
-_**reason ( string )**_<br>
+_**reason ( string enumerated ["XHR","DOM","EventListener","exception","assert","CSPViolation","other"] )**_<br>
 > Pause reason.
 
 _**data ( optional object )**_<br>
@@ -644,7 +644,7 @@ _Type: object_
 
 ### Properties
 
-_**scriptId ( [ScriptId](#class-scriptid))**_<br>
+_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
 > Script identifier as reported in the <code>Debugger.scriptParsed</code>.
 
 _**lineNumber ( integer )**_<br>
@@ -661,7 +661,7 @@ _Type: object_
 
 ### Properties
 
-_**location ( [Location](#class-location))**_<br>
+_**location ( [Location](#class-location) )**_<br>
 > Location of the function.
 
 _**name ( optional string )**_<br>
@@ -673,7 +673,7 @@ _**displayName ( optional string )**_<br>
 _**inferredName ( optional string )**_<br>
 > Name of the function inferred from its initial assignment.
 
-_**scopeChain ( optional array of [Scope](#class-scope))**_<br>
+_**scopeChain ( optional array of [Scope](#class-scope) )**_<br>
 > Scope chain for this closure.
 
 
@@ -684,19 +684,19 @@ _Type: object_
 
 ### Properties
 
-_**callFrameId ( [CallFrameId](#class-callframeid))**_<br>
+_**callFrameId ( [CallFrameId](#class-callframeid) )**_<br>
 > Call frame identifier. This identifier is only valid while the virtual machine is paused.
 
 _**functionName ( string )**_<br>
 > Name of the JavaScript function called on this call frame.
 
-_**location ( [Location](#class-location))**_<br>
+_**location ( [Location](#class-location) )**_<br>
 > Location in the source code.
 
-_**scopeChain ( array of [Scope](#class-scope))**_<br>
+_**scopeChain ( array of [Scope](#class-scope) )**_<br>
 > Scope chain for this call frame.
 
-_**this ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**this ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > <code>this</code> object for this call frame.
 
 
@@ -707,10 +707,10 @@ _Type: object_
 
 ### Properties
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["global","local","with","closure","catch"] )**_<br>
 > Scope type.
 
-_**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Object representing the scope. For <code>global</code> and <code>with</code> scopes it represents the actual object; for the rest of the scopes, it is artificial transient object enumerating scope variables as its properties.
 
 

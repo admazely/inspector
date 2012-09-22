@@ -122,7 +122,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**headers ( array of [ProfileHeader](#class-profileheader))**_<br>
+_**headers ( array of [ProfileHeader](#class-profileheader) )**_<br>
 
 
 ### Profiler.getProfile(type, uid, callback)
@@ -136,7 +136,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**profile ( [Profile](#class-profile))**_<br>
+_**profile ( [Profile](#class-profile) )**_<br>
 
 
 ### Profiler.removeProfile(type, uid, callback)
@@ -189,7 +189,7 @@ _**error ( error )**_<br>
 
 ### Parameters
 
-_**objectId ( [HeapSnapshotObjectId](#class-heapsnapshotobjectid))**_<br>
+_**objectId ( [HeapSnapshotObjectId](#class-heapsnapshotobjectid) )**_<br>
 _**objectGroup ( optional string )**_<br>
 > Symbolic group name that can be used to release multiple objects.
 
@@ -198,7 +198,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Evaluation result.
 
 
@@ -207,7 +207,7 @@ _**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
 
 ### Parameters
 
-_**objectId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid))**_<br>
+_**objectId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
 > Identifier of the object to get heap object id for.
 
 _**callback ( function )**_<br>
@@ -215,7 +215,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**heapSnapshotObjectId ( [HeapSnapshotObjectId](#class-heapsnapshotobjectid))**_<br>
+_**heapSnapshotObjectId ( [HeapSnapshotObjectId](#class-heapsnapshotobjectid) )**_<br>
 > Id of the heap snapshot object corresponding to the passed remote object id.
 
 
@@ -226,7 +226,7 @@ _**heapSnapshotObjectId ( [HeapSnapshotObjectId](#class-heapsnapshotobjectid))**
 
 ### Results
 
-_**header ( [ProfileHeader](#class-profileheader))**_<br>
+_**header ( [ProfileHeader](#class-profileheader) )**_<br>
 
 
 ### Event: addHeapSnapshotChunk
@@ -270,7 +270,7 @@ _Type: object_
 
 ### Properties
 
-_**typeId ( string )**_<br>
+_**typeId ( string enumerated ["CPU","CSS","HEAP"] )**_<br>
 > Profile type name.
 
 _**title ( string )**_<br>

@@ -85,7 +85,7 @@ _**result ( boolean )**_<br>
 
 ### Results
 
-_**record ( [TimelineEvent](#class-timelineevent))**_<br>
+_**record ( [TimelineEvent](#class-timelineevent) )**_<br>
 > Timeline event record data.
 
 
@@ -104,7 +104,7 @@ _**type ( string )**_<br>
 _**data ( object )**_<br>
 > Event data.
 
-_**children ( optional array of [TimelineEvent](#class-timelineevent))**_<br>
+_**children ( optional array of [TimelineEvent](#class-timelineevent) )**_<br>
 > Nested records.
 
 

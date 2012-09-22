@@ -98,7 +98,7 @@ Specifies whether to always send extra HTTP headers with the requests from this 
 
 ### Parameters
 
-_**headers ( [Headers](#class-headers))**_<br>
+_**headers ( [Headers](#class-headers) )**_<br>
 > Map with extra HTTP headers.
 
 _**callback ( function )**_<br>
@@ -114,7 +114,7 @@ Returns content served for the given request.
 
 ### Parameters
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Identifier of the network request to get content for.
 
 _**callback ( function )**_<br>
@@ -136,7 +136,7 @@ This method sends a new XMLHttpRequest which is identical to the original one. T
 
 ### Parameters
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Identifier of XHR to replay.
 
 _**callback ( function )**_<br>
@@ -226,28 +226,28 @@ _**error ( error )**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**frameId ( [FrameId](#class-frameid))**_<br>
+_**frameId ( [FrameId](#class-frameid) )**_<br>
 > Frame identifier.
 
-_**loaderId ( [LoaderId](#class-loaderid))**_<br>
+_**loaderId ( [LoaderId](#class-loaderid) )**_<br>
 > Loader identifier.
 
 _**documentURL ( string )**_<br>
 > URL of the document this request is loaded for.
 
-_**request ( [Request](#class-request))**_<br>
+_**request ( [Request](#class-request) )**_<br>
 > Request data.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**initiator ( [Initiator](#class-initiator))**_<br>
+_**initiator ( [Initiator](#class-initiator) )**_<br>
 > Request initiator.
 
-_**redirectResponse ( optional [Response](#class-response))**_<br>
+_**redirectResponse ( optional [Response](#class-response) )**_<br>
 > Redirect response data.
 
 
@@ -256,7 +256,7 @@ _**redirectResponse ( optional [Response](#class-response))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
 
@@ -265,22 +265,22 @@ _**requestId ( [RequestId](#class-requestid))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**frameId ( [FrameId](#class-frameid))**_<br>
+_**frameId ( [FrameId](#class-frameid) )**_<br>
 > Frame identifier.
 
-_**loaderId ( [LoaderId](#class-loaderid))**_<br>
+_**loaderId ( [LoaderId](#class-loaderid) )**_<br>
 > Loader identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**type ( [Page.ResourceType](Page.md#class-resourcetype))**_<br>
+_**type ( [Page.ResourceType](Page.md#class-resourcetype) )**_<br>
 > Resource type.
 
-_**response ( [Response](#class-response))**_<br>
+_**response ( [Response](#class-response) )**_<br>
 > Response data.
 
 
@@ -289,10 +289,10 @@ _**response ( [Response](#class-response))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
 _**dataLength ( integer )**_<br>
@@ -307,10 +307,10 @@ _**encodedDataLength ( integer )**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
 
@@ -319,10 +319,10 @@ _**timestamp ( [Timestamp](#class-timestamp))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
 _**errorText ( string )**_<br>
@@ -337,25 +337,25 @@ _**canceled ( optional boolean )**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**frameId ( [FrameId](#class-frameid))**_<br>
+_**frameId ( [FrameId](#class-frameid) )**_<br>
 > Frame identifier.
 
-_**loaderId ( [LoaderId](#class-loaderid))**_<br>
+_**loaderId ( [LoaderId](#class-loaderid) )**_<br>
 > Loader identifier.
 
 _**documentURL ( string )**_<br>
 > URL of the document this request is loaded for.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**initiator ( [Initiator](#class-initiator))**_<br>
+_**initiator ( [Initiator](#class-initiator) )**_<br>
 > Request initiator.
 
-_**resource ( [CachedResource](#class-cachedresource))**_<br>
+_**resource ( [CachedResource](#class-cachedresource) )**_<br>
 > Cached resource data.
 
 
@@ -364,13 +364,13 @@ _**resource ( [CachedResource](#class-cachedresource))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**request ( [WebSocketRequest](#class-websocketrequest))**_<br>
+_**request ( [WebSocketRequest](#class-websocketrequest) )**_<br>
 > WebSocket request data.
 
 
@@ -379,13 +379,13 @@ _**request ( [WebSocketRequest](#class-websocketrequest))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**response ( [WebSocketResponse](#class-websocketresponse))**_<br>
+_**response ( [WebSocketResponse](#class-websocketresponse) )**_<br>
 > WebSocket response data.
 
 
@@ -394,7 +394,7 @@ _**response ( [WebSocketResponse](#class-websocketresponse))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
 _**url ( string )**_<br>
@@ -406,10 +406,10 @@ _**url ( string )**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
 
@@ -418,13 +418,13 @@ _**timestamp ( [Timestamp](#class-timestamp))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**response ( [WebSocketFrame](#class-websocketframe))**_<br>
+_**response ( [WebSocketFrame](#class-websocketframe) )**_<br>
 > WebSocket response data.
 
 
@@ -433,10 +433,10 @@ _**response ( [WebSocketFrame](#class-websocketframe))**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
 _**errorMessage ( string )**_<br>
@@ -448,13 +448,13 @@ _**errorMessage ( string )**_<br>
 
 ### Results
 
-_**requestId ( [RequestId](#class-requestid))**_<br>
+_**requestId ( [RequestId](#class-requestid) )**_<br>
 > Request identifier.
 
-_**timestamp ( [Timestamp](#class-timestamp))**_<br>
+_**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
 
-_**response ( [WebSocketFrame](#class-websocketframe))**_<br>
+_**response ( [WebSocketFrame](#class-websocketframe) )**_<br>
 > WebSocket response data.
 
 
@@ -542,7 +542,7 @@ _**url ( string )**_<br>
 _**method ( string )**_<br>
 > HTTP request method.
 
-_**headers ( [Headers](#class-headers))**_<br>
+_**headers ( [Headers](#class-headers) )**_<br>
 > HTTP request headers.
 
 _**postData ( optional string )**_<br>
@@ -565,7 +565,7 @@ _**status ( number )**_<br>
 _**statusText ( string )**_<br>
 > HTTP response status text.
 
-_**headers ( [Headers](#class-headers))**_<br>
+_**headers ( [Headers](#class-headers) )**_<br>
 > HTTP response headers.
 
 _**headersText ( optional string )**_<br>
@@ -574,7 +574,7 @@ _**headersText ( optional string )**_<br>
 _**mimeType ( string )**_<br>
 > Resource mimeType as determined by the browser.
 
-_**requestHeaders ( optional [Headers](#class-headers))**_<br>
+_**requestHeaders ( optional [Headers](#class-headers) )**_<br>
 > Refined HTTP request headers that were actually transmitted over the network.
 
 _**requestHeadersText ( optional string )**_<br>
@@ -589,7 +589,7 @@ _**connectionId ( number )**_<br>
 _**fromDiskCache ( optional boolean )**_<br>
 > Specifies that the request was served from the disk cache.
 
-_**timing ( optional [ResourceTiming](#class-resourcetiming))**_<br>
+_**timing ( optional [ResourceTiming](#class-resourcetiming) )**_<br>
 > Timing information for the given request.
 
 
@@ -603,7 +603,7 @@ _Type: object_
 _**requestKey3 ( string )**_<br>
 > HTTP response status text.
 
-_**headers ( [Headers](#class-headers))**_<br>
+_**headers ( [Headers](#class-headers) )**_<br>
 > HTTP response headers.
 
 
@@ -620,7 +620,7 @@ _**status ( number )**_<br>
 _**statusText ( string )**_<br>
 > HTTP response status text.
 
-_**headers ( [Headers](#class-headers))**_<br>
+_**headers ( [Headers](#class-headers) )**_<br>
 > HTTP response headers.
 
 _**challengeResponse ( string )**_<br>
@@ -654,10 +654,10 @@ _Type: object_
 _**url ( string )**_<br>
 > Resource URL.
 
-_**type ( [Page.ResourceType](Page.md#class-resourcetype))**_<br>
+_**type ( [Page.ResourceType](Page.md#class-resourcetype) )**_<br>
 > Type of this resource.
 
-_**response ( optional [Response](#class-response))**_<br>
+_**response ( optional [Response](#class-response) )**_<br>
 > Cached response data.
 
 _**bodySize ( number )**_<br>
@@ -671,10 +671,10 @@ _Type: object_
 
 ### Properties
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["parser","script","other"] )**_<br>
 > Type of this initiator.
 
-_**stackTrace ( optional [Console.StackTrace](Console.md#class-stacktrace))**_<br>
+_**stackTrace ( optional [Console.StackTrace](Console.md#class-stacktrace) )**_<br>
 > Initiator JavaScript stack trace, set for Script only.
 
 _**url ( optional string )**_<br>

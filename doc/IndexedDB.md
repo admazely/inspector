@@ -53,7 +53,7 @@ Requests database names for given frame's security origin.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame id.
 
 _**callback ( function )**_<br>
@@ -61,7 +61,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**securityOriginWithDatabaseNames ( [SecurityOriginWithDatabaseNames](#class-securityoriginwithdatabasenames))**_<br>
+_**securityOriginWithDatabaseNames ( [SecurityOriginWithDatabaseNames](#class-securityoriginwithdatabasenames) )**_<br>
 > Frame with database names.
 
 
@@ -72,7 +72,7 @@ Requests database with given name in given frame.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame id.
 
 _**databaseName ( string )**_<br>
@@ -83,7 +83,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**databaseWithObjectStores ( [DatabaseWithObjectStores](#class-databasewithobjectstores))**_<br>
+_**databaseWithObjectStores ( [DatabaseWithObjectStores](#class-databasewithobjectstores) )**_<br>
 > Database with an array of object stores.
 
 
@@ -94,7 +94,7 @@ Requests data from object store or index.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame id.
 
 _**databaseName ( string )**_<br>
@@ -112,7 +112,7 @@ _**skipCount ( integer )**_<br>
 _**pageSize ( integer )**_<br>
 > Number of records to fetch.
 
-_**keyRange ( optional [KeyRange](#class-keyrange))**_<br>
+_**keyRange ( optional [KeyRange](#class-keyrange) )**_<br>
 > Key range.
 
 _**callback ( function )**_<br>
@@ -120,7 +120,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**objectStoreDataEntries ( array of [DataEntry](#class-dataentry))**_<br>
+_**objectStoreDataEntries ( array of [DataEntry](#class-dataentry) )**_<br>
 > Array of object store data entries.
 
 _**hasMore ( boolean )**_<br>
@@ -156,7 +156,7 @@ _**name ( string )**_<br>
 _**version ( string )**_<br>
 > Database version.
 
-_**objectStores ( array of [ObjectStore](#class-objectstore))**_<br>
+_**objectStores ( array of [ObjectStore](#class-objectstore) )**_<br>
 > Object stores in this database.
 
 
@@ -170,13 +170,13 @@ _Type: object_
 _**name ( string )**_<br>
 > Object store name.
 
-_**keyPath ( [KeyPath](#class-keypath))**_<br>
+_**keyPath ( [KeyPath](#class-keypath) )**_<br>
 > Object store key path.
 
 _**autoIncrement ( boolean )**_<br>
 > If true, object store has auto increment flag set.
 
-_**indexes ( array of [ObjectStoreIndex](#class-objectstoreindex))**_<br>
+_**indexes ( array of [ObjectStoreIndex](#class-objectstoreindex) )**_<br>
 > Indexes in this object store.
 
 
@@ -190,7 +190,7 @@ _Type: object_
 _**name ( string )**_<br>
 > Index name.
 
-_**keyPath ( [KeyPath](#class-keypath))**_<br>
+_**keyPath ( [KeyPath](#class-keypath) )**_<br>
 > Index key path.
 
 _**unique ( boolean )**_<br>
@@ -207,7 +207,7 @@ _Type: object_
 
 ### Properties
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["number","string","date","array"] )**_<br>
 > Key type.
 
 _**number ( optional number )**_<br>
@@ -219,7 +219,7 @@ _**string ( optional string )**_<br>
 _**date ( optional number )**_<br>
 > Date value.
 
-_**array ( optional array of [Key](#class-key))**_<br>
+_**array ( optional array of [Key](#class-key) )**_<br>
 > Array value.
 
 
@@ -230,10 +230,10 @@ _Type: object_
 
 ### Properties
 
-_**lower ( optional [Key](#class-key))**_<br>
+_**lower ( optional [Key](#class-key) )**_<br>
 > Lower bound.
 
-_**upper ( optional [Key](#class-key))**_<br>
+_**upper ( optional [Key](#class-key) )**_<br>
 > Upper bound.
 
 _**lowerOpen ( boolean )**_<br>
@@ -250,13 +250,13 @@ _Type: object_
 
 ### Properties
 
-_**key ( [Key](#class-key))**_<br>
+_**key ( [Key](#class-key) )**_<br>
 > Key.
 
-_**primaryKey ( [Key](#class-key))**_<br>
+_**primaryKey ( [Key](#class-key) )**_<br>
 > Primary key.
 
-_**value ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**value ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Value.
 
 
@@ -267,7 +267,7 @@ _Type: object_
 
 ### Properties
 
-_**type ( string )**_<br>
+_**type ( string enumerated ["null","string","array"] )**_<br>
 > Key path type.
 
 _**string ( optional string )**_<br>

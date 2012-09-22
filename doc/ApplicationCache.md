@@ -29,7 +29,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**frameIds ( array of [FrameWithManifest](#class-framewithmanifest))**_<br>
+_**frameIds ( array of [FrameWithManifest](#class-framewithmanifest) )**_<br>
 > Array of frame identifiers with manifest urls for each frame containing a document associated with some application cache.
 
 
@@ -53,7 +53,7 @@ Returns manifest URL for document in the given frame.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Identifier of the frame containing document whose manifest is retrieved.
 
 _**callback ( function )**_<br>
@@ -72,7 +72,7 @@ Returns relevant application cache data for the document in given frame.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Identifier of the frame containing document whose application cache is retrieved.
 
 _**callback ( function )**_<br>
@@ -80,7 +80,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**applicationCache ( [ApplicationCache](#class-applicationcache))**_<br>
+_**applicationCache ( [ApplicationCache](#class-applicationcache) )**_<br>
 > Relevant application cache data for the document in given frame.
 
 
@@ -91,7 +91,7 @@ _**applicationCache ( [ApplicationCache](#class-applicationcache))**_<br>
 
 ### Results
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Identifier of the frame containing document whose application cache updated status.
 
 _**manifestURL ( string )**_<br>
@@ -146,7 +146,7 @@ _**creationTime ( number )**_<br>
 _**updateTime ( number )**_<br>
 > Application cache update time.
 
-_**resources ( array of [ApplicationCacheResource](#class-applicationcacheresource))**_<br>
+_**resources ( array of [ApplicationCacheResource](#class-applicationcacheresource) )**_<br>
 > Application cache resources.
 
 
@@ -157,7 +157,7 @@ _Type: object_
 
 ### Properties
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Frame identifier.
 
 _**manifestURL ( string )**_<br>

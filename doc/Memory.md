@@ -24,8 +24,8 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**domGroups ( array of [DOMGroup](#class-domgroup))**_<br>
-_**strings ( [StringStatistics](#class-stringstatistics))**_<br>
+_**domGroups ( array of [DOMGroup](#class-domgroup) )**_<br>
+_**strings ( [StringStatistics](#class-stringstatistics) )**_<br>
 
 
 ### Memory.getProcessMemoryDistribution(callback)
@@ -37,7 +37,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**distribution ( [MemoryBlock](#class-memoryblock))**_<br>
+_**distribution ( [MemoryBlock](#class-memoryblock) )**_<br>
 > An object describing all memory allocated by the process
 
 
@@ -84,8 +84,8 @@ _Type: object_
 _**size ( integer )**_<br>
 _**title ( string )**_<br>
 _**documentURI ( optional string )**_<br>
-_**nodeCount ( array of [NodeCount](#class-nodecount))**_<br>
-_**listenerCount ( array of [ListenerCount](#class-listenercount))**_<br>
+_**nodeCount ( array of [NodeCount](#class-nodecount) )**_<br>
+_**listenerCount ( array of [ListenerCount](#class-listenercount) )**_<br>
 
 
 ### Class: MemoryBlock
@@ -100,7 +100,7 @@ _**size ( optional number )**_<br>
 _**name ( string )**_<br>
 > Unique name used to identify the component that allocated this block
 
-_**children ( optional array of [MemoryBlock](#class-memoryblock))**_<br>
+_**children ( optional array of [MemoryBlock](#class-memoryblock) )**_<br>
 
 
 

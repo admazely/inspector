@@ -153,6 +153,17 @@ module.exports = function (api) {
         };
     }
 
+    function extractEnums(param) {
+        var ref = param['enum'] || false;
+        if (param.items && param.items['enum']) {
+            ref = param.items['enum'];
+        }
+
+        if (ref === false) return false;
+
+        return 'enumerated ' + JSON.stringify(ref, null, null) + ' ';
+    }
+
     function convertMarkdownHash(link) {
         return link
                 .replace(/(\[[^\]]+\])(\([^\)]+\))/g, '$1')
@@ -179,6 +190,7 @@ module.exports = function (api) {
 
             params.forEach(function (param) {
                 var ref = extractRef(param);
+                var enums = extractEnums(param);
 
                 md += '_**';
                 md += param.name + ' ( ';
@@ -193,7 +205,9 @@ module.exports = function (api) {
 
                 if (ref) {
                     if (param.type) md += 'of ';
-                    md += createMarkDownLink(ref.name, ref.id);
+                    md += createMarkDownLink(ref.name, ref.id) + ' ';
+                } else if (enums) {
+                    md += enums;
                 }
 
                 md += ')';

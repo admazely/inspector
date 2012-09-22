@@ -68,7 +68,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**root ( [Node](#class-node))**_<br>
+_**root ( [Node](#class-node) )**_<br>
 > Resulting node.
 
 
@@ -79,7 +79,7 @@ Requests that children of the node with given id are returned to the caller in f
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to get children for.
 
 _**callback ( function )**_<br>
@@ -95,7 +95,7 @@ Executes `querySelector` on a given node.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to query upon.
 
 _**selector ( string )**_<br>
@@ -106,7 +106,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Query selector result.
 
 
@@ -117,7 +117,7 @@ Executes `querySelectorAll` on a given node.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to query upon.
 
 _**selector ( string )**_<br>
@@ -128,7 +128,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeIds ( array of [NodeId](#class-nodeid))**_<br>
+_**nodeIds ( array of [NodeId](#class-nodeid) )**_<br>
 > Query selector result.
 
 
@@ -139,7 +139,7 @@ Sets node name for a node with given id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to set name for.
 
 _**name ( string )**_<br>
@@ -150,7 +150,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > New node's id.
 
 
@@ -161,7 +161,7 @@ Sets node value for a node with given id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to set value for.
 
 _**value ( string )**_<br>
@@ -180,7 +180,7 @@ Removes node with given id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to remove.
 
 _**callback ( function )**_<br>
@@ -196,7 +196,7 @@ Sets attribute for an element with given id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the element to set attribute for.
 
 _**name ( string )**_<br>
@@ -218,7 +218,7 @@ Sets attributes on element with given id. This method is useful when user edits 
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the element to set attributes for.
 
 _**text ( string )**_<br>
@@ -240,7 +240,7 @@ Removes attribute with given name from an element with given id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the element to remove attribute from.
 
 _**name ( string )**_<br>
@@ -259,7 +259,7 @@ Returns event listeners relevant to the node.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to get listeners for.
 
 _**callback ( function )**_<br>
@@ -267,7 +267,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**listeners ( array of [EventListener](#class-eventlistener))**_<br>
+_**listeners ( array of [EventListener](#class-eventlistener) )**_<br>
 > Array of relevant listeners.
 
 
@@ -278,7 +278,7 @@ Returns node's HTML markup.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to get markup for.
 
 _**callback ( function )**_<br>
@@ -297,7 +297,7 @@ Sets node HTML markup, returns new node id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to set markup for.
 
 _**outerHTML ( string )**_<br>
@@ -352,7 +352,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeIds ( array of [NodeId](#class-nodeid))**_<br>
+_**nodeIds ( array of [NodeId](#class-nodeid) )**_<br>
 > Ids of the search result nodes.
 
 
@@ -379,7 +379,7 @@ Requests that the node is sent to the caller given the JavaScript node object re
 
 ### Parameters
 
-_**objectId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid))**_<br>
+_**objectId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
 > JavaScript object id to convert into node.
 
 _**callback ( function )**_<br>
@@ -387,7 +387,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Node id for given object.
 
 
@@ -401,7 +401,7 @@ Enters the 'inspect' mode. In this mode, elements that user is hovering over are
 _**enabled ( boolean )**_<br>
 > True to enable inspection mode, false to disable it.
 
-_**highlightConfig ( optional [HighlightConfig](#class-highlightconfig))**_<br>
+_**highlightConfig ( optional [HighlightConfig](#class-highlightconfig) )**_<br>
 > A descriptor for the highlight appearance of hovered-over nodes. May be omitted if <code>enabled == false</code>.
 
 _**callback ( function )**_<br>
@@ -429,10 +429,10 @@ _**width ( integer )**_<br>
 _**height ( integer )**_<br>
 > Rectangle height
 
-_**color ( optional [RGBA](#class-rgba))**_<br>
+_**color ( optional [RGBA](#class-rgba) )**_<br>
 > The highlight fill color (default: transparent).
 
-_**outlineColor ( optional [RGBA](#class-rgba))**_<br>
+_**outlineColor ( optional [RGBA](#class-rgba) )**_<br>
 > The highlight outline color (default: transparent).
 
 _**callback ( function )**_<br>
@@ -448,10 +448,10 @@ Highlights DOM node with given id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Identifier of the node to highlight.
 
-_**highlightConfig ( [HighlightConfig](#class-highlightconfig))**_<br>
+_**highlightConfig ( [HighlightConfig](#class-highlightconfig) )**_<br>
 > A descriptor for the highlight appearance.
 
 _**callback ( function )**_<br>
@@ -480,13 +480,13 @@ Highlights owner element of the frame with given id.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid))**_<br>
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Identifier of the frame to highlight.
 
-_**contentColor ( optional [RGBA](#class-rgba))**_<br>
+_**contentColor ( optional [RGBA](#class-rgba) )**_<br>
 > The content box highlight fill color (default: transparent).
 
-_**contentOutlineColor ( optional [RGBA](#class-rgba))**_<br>
+_**contentOutlineColor ( optional [RGBA](#class-rgba) )**_<br>
 > The content box highlight outline color (default: transparent).
 
 _**callback ( function )**_<br>
@@ -510,7 +510,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node for given path.
 
 
@@ -521,7 +521,7 @@ Resolves JavaScript node object for given node id.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to resolve.
 
 _**objectGroup ( optional string )**_<br>
@@ -532,7 +532,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject))**_<br>
+_**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > JavaScript object wrapper for given node.
 
 
@@ -543,7 +543,7 @@ Returns attributes for the specified node.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to retrieve attibutes for.
 
 _**callback ( function )**_<br>
@@ -562,13 +562,13 @@ Moves node into the new container, places it before the given anchor.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to drop.
 
-_**targetNodeId ( [NodeId](#class-nodeid))**_<br>
+_**targetNodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the element to drop into.
 
-_**insertBeforeNodeId ( optional [NodeId](#class-nodeid))**_<br>
+_**insertBeforeNodeId ( optional [NodeId](#class-nodeid) )**_<br>
 > Drop node before given one.
 
 _**callback ( function )**_<br>
@@ -576,7 +576,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > New id of the moved node.
 
 
@@ -629,10 +629,10 @@ _**error ( error )**_<br>
 
 ### Results
 
-_**parentId ( [NodeId](#class-nodeid))**_<br>
+_**parentId ( [NodeId](#class-nodeid) )**_<br>
 > Parent node id to populate with children.
 
-_**nodes ( array of [Node](#class-node))**_<br>
+_**nodes ( array of [Node](#class-node) )**_<br>
 > Child nodes array.
 
 
@@ -641,7 +641,7 @@ _**nodes ( array of [Node](#class-node))**_<br>
 
 ### Results
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node that has changed.
 
 _**name ( string )**_<br>
@@ -656,7 +656,7 @@ _**value ( string )**_<br>
 
 ### Results
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node that has changed.
 
 _**name ( string )**_<br>
@@ -668,7 +668,7 @@ _**name ( string )**_<br>
 
 ### Results
 
-_**nodeIds ( array of [NodeId](#class-nodeid))**_<br>
+_**nodeIds ( array of [NodeId](#class-nodeid) )**_<br>
 > Ids of the nodes for which the inline styles have been invalidated.
 
 
@@ -677,7 +677,7 @@ _**nodeIds ( array of [NodeId](#class-nodeid))**_<br>
 
 ### Results
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node that has changed.
 
 _**characterData ( string )**_<br>
@@ -689,7 +689,7 @@ _**characterData ( string )**_<br>
 
 ### Results
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node that has changed.
 
 _**childNodeCount ( integer )**_<br>
@@ -701,13 +701,13 @@ _**childNodeCount ( integer )**_<br>
 
 ### Results
 
-_**parentNodeId ( [NodeId](#class-nodeid))**_<br>
+_**parentNodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node that has changed.
 
-_**previousNodeId ( [NodeId](#class-nodeid))**_<br>
+_**previousNodeId ( [NodeId](#class-nodeid) )**_<br>
 > If of the previous siblint.
 
-_**node ( [Node](#class-node))**_<br>
+_**node ( [Node](#class-node) )**_<br>
 > Inserted node data.
 
 
@@ -716,10 +716,10 @@ _**node ( [Node](#class-node))**_<br>
 
 ### Results
 
-_**parentNodeId ( [NodeId](#class-nodeid))**_<br>
+_**parentNodeId ( [NodeId](#class-nodeid) )**_<br>
 > Parent id.
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node that has been removed.
 
 
@@ -728,10 +728,10 @@ _**nodeId ( [NodeId](#class-nodeid))**_<br>
 
 ### Results
 
-_**hostId ( [NodeId](#class-nodeid))**_<br>
+_**hostId ( [NodeId](#class-nodeid) )**_<br>
 > Host element id.
 
-_**root ( [Node](#class-node))**_<br>
+_**root ( [Node](#class-node) )**_<br>
 > Shadow root.
 
 
@@ -740,10 +740,10 @@ _**root ( [Node](#class-node))**_<br>
 
 ### Results
 
-_**hostId ( [NodeId](#class-nodeid))**_<br>
+_**hostId ( [NodeId](#class-nodeid) )**_<br>
 > Host element id.
 
-_**rootId ( [NodeId](#class-nodeid))**_<br>
+_**rootId ( [NodeId](#class-nodeid) )**_<br>
 > Shadow root id.
 
 
@@ -761,7 +761,7 @@ _Type: object_
 
 ### Properties
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Node identifier that is passed into the rest of the DOM messages as the <code>nodeId</code>. Backend will only push node with given <code>id</code> once. It is aware of all requested nodes and will only fire DOM events for nodes known to the client.
 
 _**nodeType ( integer )**_<br>
@@ -779,7 +779,7 @@ _**nodeValue ( string )**_<br>
 _**childNodeCount ( optional integer )**_<br>
 > Child count for <code>Container</code> nodes.
 
-_**children ( optional array of [Node](#class-node))**_<br>
+_**children ( optional array of [Node](#class-node) )**_<br>
 > Child nodes of this node when requested with children.
 
 _**attributes ( optional array )**_<br>
@@ -806,10 +806,10 @@ _**name ( optional string )**_<br>
 _**value ( optional string )**_<br>
 > <code>Attr</code>'s value.
 
-_**contentDocument ( optional [Node](#class-node))**_<br>
+_**contentDocument ( optional [Node](#class-node) )**_<br>
 > Content document for frame owner elements.
 
-_**shadowRoots ( optional array of [Node](#class-node))**_<br>
+_**shadowRoots ( optional array of [Node](#class-node) )**_<br>
 > Shadow root list for given element host.
 
 
@@ -829,13 +829,13 @@ _**useCapture ( boolean )**_<br>
 _**isAttribute ( boolean )**_<br>
 > <code>EventListener</code>'s isAttribute.
 
-_**nodeId ( [NodeId](#class-nodeid))**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Target <code>DOMNode</code> id.
 
 _**handlerBody ( string )**_<br>
 > Event handler function body.
 
-_**location ( optional [Debugger.Location](Debugger.md#class-location))**_<br>
+_**location ( optional [Debugger.Location](Debugger.md#class-location) )**_<br>
 > Handler code location.
 
 _**sourceName ( optional string )**_<br>
@@ -872,16 +872,16 @@ _Type: object_
 _**showInfo ( optional boolean )**_<br>
 > Whether the node info tooltip should be shown (default: false).
 
-_**contentColor ( optional [RGBA](#class-rgba))**_<br>
+_**contentColor ( optional [RGBA](#class-rgba) )**_<br>
 > The content box highlight fill color (default: transparent).
 
-_**paddingColor ( optional [RGBA](#class-rgba))**_<br>
+_**paddingColor ( optional [RGBA](#class-rgba) )**_<br>
 > The padding highlight fill color (default: transparent).
 
-_**borderColor ( optional [RGBA](#class-rgba))**_<br>
+_**borderColor ( optional [RGBA](#class-rgba) )**_<br>
 > The border highlight fill color (default: transparent).
 
-_**marginColor ( optional [RGBA](#class-rgba))**_<br>
+_**marginColor ( optional [RGBA](#class-rgba) )**_<br>
 > The margin highlight fill color (default: transparent).
 
 
