@@ -30,7 +30,7 @@ module.exports = function (api) {
         doc.write('    this._inspector = inspector;\n');
 
         // Generate event index
-        doc.write('    this._eventNames = [\n');
+        doc.write('    var events = [\n');
         var events = (domain.events || []);
         events.map(function (event, i) {
             doc.write("        '" + domain.domain + "." + event.name + "'");
@@ -42,6 +42,11 @@ module.exports = function (api) {
             }
         });
         doc.write('    ];\n');
+
+        // Generate event listener validator
+        doc.write("    this.on('newListener', function (name) {\n");
+        doc.write('        if (events.indexOf(name) === -1) {');
+        doc.write('        ');
 
         // Generate constructor <end>
         doc.write('}\n');
