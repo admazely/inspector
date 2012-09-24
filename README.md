@@ -113,6 +113,8 @@ inspect.Page.once('loadEventFired', function (error, response) {
 });
 ```
 
+_Note: if the event isn't supported the inspector module will throw._
+
 ### Event: connect
 
 Emitted once a connection is successfully established.
