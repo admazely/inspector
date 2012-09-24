@@ -108,6 +108,28 @@ test("native WebKit inspector binding", function (t) {
             });
         });
 
+        t.test('constructor callback', function (t) {
+            var inspect;
+
+            inspect = inspector(9222, '127.0.0.1', 'about:blank', function () {
+                ping(inspect, function (err, pong) {
+                    t.equal(err, null);
+                    t.equal(pong, true);
+
+                    inspect.close(t.end.bind(t));
+                });
+            });
+        });
+
+        t.test('close event', function (t) {
+            var inspect;
+
+            inspect = inspector(9222, '127.0.0.1', 'about:blank', function () {
+                inspect.once('close', t.end.bind(t));
+                inspect.close();
+            });
+        });
+
         t.test("console clear event", function (t) {
             var inspect;
 
