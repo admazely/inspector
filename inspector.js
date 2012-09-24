@@ -31,7 +31,7 @@ function WebKitInspector(port, host, href, callback) {
     // Add library domains
     var domains = Object.keys(library);
     for (var i = 0, l = domains.length; i < l; i++) {
-        this[ domains[i] ] = library[ domains[i] ](this);
+        this[ domains[i] ] = new library[ domains[i] ](this);
     }
 
     // Setup host and port parameters
@@ -42,7 +42,6 @@ function WebKitInspector(port, host, href, callback) {
         throw new Error('A host name must be speficed');
     }
     if (typeof href !== 'string') {
-        console.log(href);
         throw new Error('A page url must be speficed');
     }
 
@@ -71,7 +70,7 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
             var pages = JSON.parse(buffer.toString());
             for (var i = 0, l = pages.length; i < l; i++) {
                 if (pages[i].url === href) {
-                    wsUrl = pages[i].webSocketDebuggerUrl;
+                    wsUrl = pages[i].webSocketDebuggerUrl || false;
                     break;
                 }
             }
@@ -81,10 +80,16 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
                 return self.emit('error', new Error('No page with the given url was found'));
             }
 
+            // Check that a WebSocket connection is allowed
+            if (wsUrl === false) {
+                return self.emit('error', new Error('Another inspector is already listning'));
+            }
+
             // Connect to the WebSocket
-            self.ws = new WebSocket(wsUrl);
-            self.ws.on('error', self.emit.bind(self, 'error'));
-            self.ws.once('open', self.emit.bind(self, 'connect'));
+            self._ws = new WebSocket(wsUrl);
+            self._ws.on('message', self._respond.bind(self));
+            self._ws.on('error', self.emit.bind(self, 'error'));
+            self._ws.once('open', self.emit.bind(self, 'connect'));
         });
     });
 
@@ -133,14 +138,22 @@ WebKitInspector.prototype._splitArgs = function (argsList) {
 };
 
 WebKitInspector.prototype._request = function (method, params, callback) {
+    var self = this;
+    var newId = ++this._id;
+
     var request = {
-        'id': (++this._id),
+        'id': newId,
         'method': method,
         'params': params
     };
 
-    this._callbacks[this._id] = callback;
-    this._ws.send(JSON.stringify(request));
+    this._callbacks[newId] = callback;
+    this._ws.send(JSON.stringify(request), function (err) {
+        if (err) {
+            delete self._callbacks[newId];
+            callback(err, null);
+        }
+    });
 };
 
 WebKitInspector.prototype._respond = function (message) {
@@ -149,24 +162,32 @@ WebKitInspector.prototype._respond = function (message) {
     // respond from a request
     if (message.id) {
         var callback = this._callbacks[message.id];
+
+        // Emit error if callback isn't defined
+        if (callback === undefined) {
+            this.emit('error', new Error('atempt to fire a missing callback'));
+            return;
+        }
+
         delete this._callbacks[message.id];
 
         if (message.error) {
             callback.call(null, message.error, null);
         } else {
-            callback.call(null, null, message.params);
+            callback.call(null, null, message.result);
         }
-
-        this._callbacks[message.id](message.params);
-        return;
     }
 
     // respond from a notification
-    var method = message.method.split('.');
-    this[ method[0] ].emit(method[1], message.params);
+    else {
+        var method = message.method.split('.');
+        this[ method[0] ].emit(method[1], message.params);
+    }
 };
 
 WebKitInspector.prototype.close = function (callback) {
+    var self = this;
+
     if (this._closed) return;
     this._closed = true;
 
@@ -174,9 +195,9 @@ WebKitInspector.prototype.close = function (callback) {
     if (callback) this.once('close', callback);
 
     // Close WebSocket or just emit close
-    if (this.ws) {
-        this.ws.once('close', this.emit.bind(this, 'close'));
-        this.ws.close();
+    if (this._ws) {
+        this._ws.once('close', self.emit.bind(self, 'close'));
+        this._ws.close();
     } else {
         this.emit('close');
     }
