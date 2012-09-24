@@ -70,7 +70,7 @@ All WebKit Inspector domains are documented in the
 [doc](https://github.com/AndreasMadsen/inspector/blob/master/doc/README.md)
 directory.
 
-#### inspect\[method\]\[command\]\(parameters [...], callback\)
+#### inspect\[domain\]\[command\]\(parameters [...], callback\)
 
 Commands are executed by by adding a `[command]` to the domain object, and then
 call it by adding parameters and `callback` as descibed in the
@@ -101,7 +101,8 @@ The event handler is only emitted with a single parameter, there is a object
 containing properties as described in the
 [documentation](https://github.com/AndreasMadsen/inspector/blob/master/doc/README.md).
 
-Example on
+Example on how to listen on the `loadEventFired`, note that you must call
+`Page.enable()` first.
 
 ```JavaScript
 inspect.Page.once('loadEventFired', function (error, response) {
