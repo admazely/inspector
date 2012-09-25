@@ -28,12 +28,13 @@ module.exports = function (api) {
 
         // Generate inspector binding
         doc.write('    this._inspector = inspector;\n');
+        doc.write('\n');
 
         // Generate event index
         doc.write('    var events = [\n');
         var events = (domain.events || []);
         events.map(function (event, i) {
-            doc.write("        '" + domain.domain + "." + event.name + "'");
+            doc.write("        '" + event.name + "'");
 
             if (i === events.length - 1) {
                 doc.write('\n');
@@ -42,11 +43,14 @@ module.exports = function (api) {
             }
         });
         doc.write('    ];\n');
+        doc.write('\n');
 
         // Generate event listener validator
         doc.write("    this.on('newListener', function (name) {\n");
-        doc.write('        if (events.indexOf(name) === -1) {');
-        doc.write('        ');
+        doc.write('        if (events.indexOf(name) === -1) {\n');
+        doc.write("            throw new Error(name + ' event don\\'t exist');\n");
+        doc.write('        }\n');
+        doc.write('    });\n');
 
         // Generate constructor <end>
         doc.write('}\n');
