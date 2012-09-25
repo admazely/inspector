@@ -268,6 +268,8 @@ _**total ( integer )**_<br>
 
 _Type: object_
 
+Profile header.
+
 ### Properties
 
 _**typeId ( string enumerated ["CPU","CSS","HEAP"] )**_<br>
@@ -288,6 +290,8 @@ _**maxJSObjectId ( optional integer )**_<br>
 
 _Type: object_
 
+Profile.
+
 ### Properties
 
 _**head ( optional object )**_<br>
@@ -297,6 +301,8 @@ _**bottomUpHead ( optional object )**_<br>
 ### Class: HeapSnapshotObjectId
 
 _Type: string_
+
+Heap snashot object id.
 
 
 

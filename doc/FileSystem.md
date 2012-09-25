@@ -174,6 +174,8 @@ _**errorCode ( integer )**_<br>
 
 _Type: object_
 
+Represents a browser side file or directory.
+
 ### Properties
 
 _**url ( string )**_<br>
@@ -199,6 +201,8 @@ _**isTextFile ( optional boolean )**_<br>
 ### Class: Metadata
 
 _Type: object_
+
+Represents metadata of a file or entry.
 
 ### Properties
 

@@ -87,10 +87,14 @@ _**database ( [Database](#class-database) )**_<br>
 
 _Type: string_
 
+Unique identifier of Database object.
+
 
 ### Class: Database
 
 _Type: object_
+
+Database object.
 
 ### Properties
 
@@ -111,6 +115,8 @@ _**version ( string )**_<br>
 ### Class: Error
 
 _Type: object_
+
+Database error.
 
 ### Properties
 

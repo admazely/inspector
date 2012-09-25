@@ -111,6 +111,8 @@ _**error ( error )**_<br>
 
 ### Event: messageAdded
 
+Issued when new console message is added.
+
 ### Results
 
 _**message ( [ConsoleMessage](#class-consolemessage) )**_<br>
@@ -119,6 +121,8 @@ _**message ( [ConsoleMessage](#class-consolemessage) )**_<br>
 
 
 ### Event: messageRepeatCountUpdated
+
+Issued when subsequent message(s) are equal to the previous one(s).
 
 ### Results
 
@@ -129,12 +133,16 @@ _**count ( integer )**_<br>
 
 ### Event: messagesCleared
 
+Issued when console is cleared. This happens either upon `clearMessages` command or after page navigation.
+
 
 ## Types
 
 ### Class: ConsoleMessage
 
 _Type: object_
+
+Console message.
 
 ### Properties
 
@@ -174,6 +182,8 @@ _**networkRequestId ( optional [Network.RequestId](Network.md#class-requestid) )
 
 _Type: object_
 
+Stack entry for console errors and assertions.
+
 ### Properties
 
 _**functionName ( string )**_<br>
@@ -193,6 +203,8 @@ _**columnNumber ( integer )**_<br>
 ### Class: StackTrace
 
 _Type: array_
+
+Call frames for assertions or error messages.
 
 
 

@@ -369,8 +369,12 @@ _**namedFlows ( array of [NamedFlow](#class-namedflow) )**_<br>
 
 ### Event: mediaQueryResultChanged
 
+Fires whenever a MediaQuery result changes (for example, after a browser window has been resized.) The current implementation considers only viewport-dependent media features.
+
 
 ### Event: styleSheetChanged
+
+Fired whenever a stylesheet is changed as a result of the client operation.
 
 ### Results
 
@@ -378,6 +382,8 @@ _**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
 
 
 ### Event: namedFlowCreated
+
+Fires when a Named Flow is created.
 
 ### Results
 
@@ -387,6 +393,8 @@ _**namedFlow ( [NamedFlow](#class-namedflow) )**_<br>
 
 
 ### Event: namedFlowRemoved
+
+Fires when a Named Flow is removed: has no associated content nodes and regions.
 
 ### Results
 
@@ -399,6 +407,8 @@ _**flowName ( string )**_<br>
 
 
 ### Event: regionLayoutUpdated
+
+Fires when a Named Flow's layout may have changed.
 
 ### Results
 
@@ -418,6 +428,8 @@ _Type: string_
 
 _Type: object_
 
+This object identifies a CSS style in a unique way.
+
 ### Properties
 
 _**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
@@ -432,10 +444,14 @@ _**ordinal ( integer )**_<br>
 
 _Type: string_
 
+Stylesheet type: "user" for user stylesheets, "user-agent" for user-agent stylesheets, "inspector" for stylesheets created by the inspector (i.e. those holding the "via inspector" rules), "regular" for regular stylesheets.
+
 
 ### Class: CSSRuleId
 
 _Type: object_
+
+This object identifies a CSS rule in a unique way.
 
 ### Properties
 
@@ -451,6 +467,8 @@ _**ordinal ( integer )**_<br>
 
 _Type: object_
 
+CSS rule collection for a single pseudo style.
+
 ### Properties
 
 _**pseudoId ( integer )**_<br>
@@ -464,6 +482,8 @@ _**rules ( array of [CSSRule](#class-cssrule) )**_<br>
 ### Class: InheritedStyleEntry
 
 _Type: object_
+
+CSS rule collection for a single pseudo style.
 
 ### Properties
 
@@ -479,6 +499,8 @@ _**matchedCSSRules ( array of [CSSRule](#class-cssrule) )**_<br>
 
 _Type: object_
 
+CSS style information for a DOM style attribute.
+
 ### Properties
 
 _**name ( string )**_<br>
@@ -492,6 +514,8 @@ _**style ( [CSSStyle](#class-cssstyle) )**_<br>
 ### Class: CSSStyleSheetHeader
 
 _Type: object_
+
+CSS stylesheet metainformation.
 
 ### Properties
 
@@ -519,6 +543,8 @@ _**disabled ( boolean )**_<br>
 
 _Type: object_
 
+CSS stylesheet contents.
+
 ### Properties
 
 _**styleSheetId ( [StyleSheetId](#class-stylesheetid) )**_<br>
@@ -535,6 +561,8 @@ _**text ( optional string )**_<br>
 ### Class: CSSRule
 
 _Type: object_
+
+CSS rule representation.
 
 ### Properties
 
@@ -567,6 +595,8 @@ _**media ( optional array of [CSSMedia](#class-cssmedia) )**_<br>
 ### Class: SourceRange
 
 _Type: object_
+
+Text range within a resource.
 
 ### Properties
 
@@ -624,6 +654,8 @@ _**value ( string )**_<br>
 
 _Type: object_
 
+CSS style representation.
+
 ### Properties
 
 _**styleId ( optional [CSSStyleId](#class-cssstyleid) )**_<br>
@@ -652,6 +684,8 @@ _**height ( optional string )**_<br>
 ### Class: CSSProperty
 
 _Type: object_
+
+CSS style effective visual dimensions and source offsets.
 
 ### Properties
 
@@ -685,6 +719,8 @@ _**range ( optional [SourceRange](#class-sourcerange) )**_<br>
 
 _Type: object_
 
+CSS media query descriptor.
+
 ### Properties
 
 _**text ( string )**_<br>
@@ -704,6 +740,8 @@ _**sourceLine ( optional integer )**_<br>
 ### Class: SelectorProfileEntry
 
 _Type: object_
+
+CSS selector profile entry.
 
 ### Properties
 
@@ -745,6 +783,8 @@ _**data ( array of [SelectorProfileEntry](#class-selectorprofileentry) )**_<br>
 
 _Type: object_
 
+This object represents a region that flows from a Named Flow.
+
 ### Properties
 
 _**regionOverset ( string enumerated ["overset","fit","empty"] )**_<br>
@@ -758,6 +798,8 @@ _**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 ### Class: NamedFlow
 
 _Type: object_
+
+This object represents a Named Flow.
 
 ### Properties
 

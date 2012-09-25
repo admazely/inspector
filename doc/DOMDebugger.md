@@ -160,6 +160,8 @@ _**error ( error )**_<br>
 
 _Type: string_
 
+DOM breakpoint type.
+
 
 
 

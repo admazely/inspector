@@ -539,8 +539,12 @@ _**error ( error )**_<br>
 
 ### Event: globalObjectCleared
 
+Called when global has been cleared and debugger client should reset its state. Happens upon navigation or reload.
+
 
 ### Event: scriptParsed
+
+Fired when virtual machine parses script. This event is also fired for all known and uncollected scripts upon enabling debugger.
 
 ### Results
 
@@ -572,6 +576,8 @@ _**sourceMapURL ( optional string )**_<br>
 
 ### Event: scriptFailedToParse
 
+Fired when virtual machine fails to parse the script.
+
 ### Results
 
 _**url ( string )**_<br>
@@ -593,6 +599,8 @@ _**errorMessage ( string )**_<br>
 
 ### Event: breakpointResolved
 
+Fired when breakpoint is resolved to an actual script and location.
+
 ### Results
 
 _**breakpointId ( [BreakpointId](#class-breakpointid) )**_<br>
@@ -604,6 +612,8 @@ _**location ( [Location](#class-location) )**_<br>
 
 
 ### Event: paused
+
+Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
 
 ### Results
 
@@ -620,6 +630,8 @@ _**data ( optional object )**_<br>
 
 ### Event: resumed
 
+Fired when the virtual machine resumed execution.
+
 
 ## Types
 
@@ -627,20 +639,28 @@ _**data ( optional object )**_<br>
 
 _Type: string_
 
+Breakpoint identifier.
+
 
 ### Class: ScriptId
 
 _Type: string_
+
+Unique script identifier.
 
 
 ### Class: CallFrameId
 
 _Type: string_
 
+Call frame identifier.
+
 
 ### Class: Location
 
 _Type: object_
+
+Location in the source code.
 
 ### Properties
 
@@ -658,6 +678,8 @@ _**columnNumber ( optional integer )**_<br>
 ### Class: FunctionDetails
 
 _Type: object_
+
+Information about the function.
 
 ### Properties
 
@@ -682,6 +704,8 @@ _**scopeChain ( optional array of [Scope](#class-scope) )**_<br>
 
 _Type: object_
 
+JavaScript call frame. Array of call frames form the call stack.
+
 ### Properties
 
 _**callFrameId ( [CallFrameId](#class-callframeid) )**_<br>
@@ -704,6 +728,8 @@ _**this ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 ### Class: Scope
 
 _Type: object_
+
+Scope description.
 
 ### Properties
 

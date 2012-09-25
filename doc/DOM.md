@@ -624,8 +624,12 @@ _**error ( error )**_<br>
 
 ### Event: documentUpdated
 
+Fired when `Document` has been totally updated. Node ids are no longer valid.
+
 
 ### Event: setChildNodes
+
+Fired when backend wants to provide client with the missing DOM structure. This happens upon most of the calls requesting node ids.
 
 ### Results
 
@@ -638,6 +642,8 @@ _**nodes ( array of [Node](#class-node) )**_<br>
 
 
 ### Event: attributeModified
+
+Fired when `Element`'s attribute is modified.
 
 ### Results
 
@@ -654,6 +660,8 @@ _**value ( string )**_<br>
 
 ### Event: attributeRemoved
 
+Fired when `Element`'s attribute is removed.
+
 ### Results
 
 _**nodeId ( [NodeId](#class-nodeid) )**_<br>
@@ -666,6 +674,8 @@ _**name ( string )**_<br>
 
 ### Event: inlineStyleInvalidated
 
+Fired when `Element`'s inline style is modified via a CSS property modification.
+
 ### Results
 
 _**nodeIds ( array of [NodeId](#class-nodeid) )**_<br>
@@ -674,6 +684,8 @@ _**nodeIds ( array of [NodeId](#class-nodeid) )**_<br>
 
 
 ### Event: characterDataModified
+
+Mirrors `DOMCharacterDataModified` event.
 
 ### Results
 
@@ -687,6 +699,8 @@ _**characterData ( string )**_<br>
 
 ### Event: childNodeCountUpdated
 
+Fired when `Container`'s child node count has changed.
+
 ### Results
 
 _**nodeId ( [NodeId](#class-nodeid) )**_<br>
@@ -698,6 +712,8 @@ _**childNodeCount ( integer )**_<br>
 
 
 ### Event: childNodeInserted
+
+Mirrors `DOMNodeInserted` event.
 
 ### Results
 
@@ -714,6 +730,8 @@ _**node ( [Node](#class-node) )**_<br>
 
 ### Event: childNodeRemoved
 
+Mirrors `DOMNodeRemoved` event.
+
 ### Results
 
 _**parentNodeId ( [NodeId](#class-nodeid) )**_<br>
@@ -726,6 +744,8 @@ _**nodeId ( [NodeId](#class-nodeid) )**_<br>
 
 ### Event: shadowRootPushed
 
+Called when shadow root is pushed into the element.
+
 ### Results
 
 _**hostId ( [NodeId](#class-nodeid) )**_<br>
@@ -737,6 +757,8 @@ _**root ( [Node](#class-node) )**_<br>
 
 
 ### Event: shadowRootPopped
+
+Called when shadow root is popped from the element.
 
 ### Results
 
@@ -754,10 +776,14 @@ _**rootId ( [NodeId](#class-nodeid) )**_<br>
 
 _Type: integer_
 
+Unique DOM node identifier.
+
 
 ### Class: Node
 
 _Type: object_
+
+DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes. DOMNode is a base node mirror type.
 
 ### Properties
 
@@ -818,6 +844,8 @@ _**shadowRoots ( optional array of [Node](#class-node) )**_<br>
 
 _Type: object_
 
+DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes. DOMNode is a base node mirror type.
+
 ### Properties
 
 _**type ( string )**_<br>
@@ -847,6 +875,8 @@ _**sourceName ( optional string )**_<br>
 
 _Type: object_
 
+A structure holding an RGBA color.
+
 ### Properties
 
 _**r ( integer )**_<br>
@@ -866,6 +896,8 @@ _**a ( optional number )**_<br>
 ### Class: HighlightConfig
 
 _Type: object_
+
+Configuration data for the highlighting of page elements.
 
 ### Properties
 

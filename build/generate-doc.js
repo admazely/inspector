@@ -80,12 +80,22 @@ module.exports = function (api) {
 
             var returns = (event.parameters || []);
 
-            // Generate title and content
-            index.Events.push({
+            // Generate title
+            var output = {
                 short: event.name,
                 title: 'Event: ' + event.name,
-                content: createMarkdownAPI('Results', returns)
-            });
+                content: ''
+            };
+
+            // Generate content
+            if (event.description) {
+                output.content += convertMarkdownText(event.description) + '\n';
+                output.content += '\n';
+            }
+
+            output.content += createMarkdownAPI('Results', returns);
+
+            index.Events.push(output);
         });
 
         // Generate types index
@@ -102,7 +112,16 @@ module.exports = function (api) {
             };
 
             // Generate content
-            if (type.type) output.content += '_Type: ' + type.type + '_\n\n';
+            if (type.type) {
+                output.content += '_Type: ' + type.type + '_\n';
+                output.content += '\n';
+            }
+
+            if (type.description) {
+                output.content += convertMarkdownText(type.description) + '\n';
+                output.content += '\n';
+            }
+
             output.content += createMarkdownAPI('Properties', params);
 
             // Bind content

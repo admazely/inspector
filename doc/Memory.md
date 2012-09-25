@@ -48,6 +48,8 @@ _**distribution ( [MemoryBlock](#class-memoryblock) )**_<br>
 
 _Type: object_
 
+Number of nodes with given name.
+
 ### Properties
 
 _**nodeName ( string )**_<br>
@@ -58,6 +60,8 @@ _**count ( integer )**_<br>
 
 _Type: object_
 
+Number of JS event listeners by event type.
+
 ### Properties
 
 _**type ( string )**_<br>
@@ -67,6 +71,8 @@ _**count ( integer )**_<br>
 ### Class: StringStatistics
 
 _Type: object_
+
+Character data statistics for the page.
 
 ### Properties
 

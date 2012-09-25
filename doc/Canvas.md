@@ -100,6 +100,8 @@ _**screenshotDataUrl ( string )**_<br>
 
 _Type: string_
 
+Unique object identifier.
+
 
 ### Class: Call
 

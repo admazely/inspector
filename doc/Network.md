@@ -224,6 +224,8 @@ _**error ( error )**_<br>
 
 ### Event: requestWillBeSent
 
+Fired when page is about to send HTTP request.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -254,6 +256,8 @@ _**redirectResponse ( optional [Response](#class-response) )**_<br>
 
 ### Event: requestServedFromCache
 
+Fired if request ended up loading from cache.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -262,6 +266,8 @@ _**requestId ( [RequestId](#class-requestid) )**_<br>
 
 
 ### Event: responseReceived
+
+Fired when HTTP response is available.
 
 ### Results
 
@@ -287,6 +293,8 @@ _**response ( [Response](#class-response) )**_<br>
 
 ### Event: dataReceived
 
+Fired when data chunk was received over the network.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -305,6 +313,8 @@ _**encodedDataLength ( integer )**_<br>
 
 ### Event: loadingFinished
 
+Fired when HTTP request has finished loading.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -316,6 +326,8 @@ _**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 
 
 ### Event: loadingFailed
+
+Fired when HTTP request has failed to load.
 
 ### Results
 
@@ -334,6 +346,8 @@ _**canceled ( optional boolean )**_<br>
 
 
 ### Event: requestServedFromMemoryCache
+
+Fired when HTTP request has been served from memory cache.
 
 ### Results
 
@@ -362,6 +376,8 @@ _**resource ( [CachedResource](#class-cachedresource) )**_<br>
 
 ### Event: webSocketWillSendHandshakeRequest
 
+Fired when WebSocket is about to initiate handshake.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -376,6 +392,8 @@ _**request ( [WebSocketRequest](#class-websocketrequest) )**_<br>
 
 
 ### Event: webSocketHandshakeResponseReceived
+
+Fired when WebSocket handshake response becomes available.
 
 ### Results
 
@@ -392,6 +410,8 @@ _**response ( [WebSocketResponse](#class-websocketresponse) )**_<br>
 
 ### Event: webSocketCreated
 
+Fired upon WebSocket creation.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -404,6 +424,8 @@ _**url ( string )**_<br>
 
 ### Event: webSocketClosed
 
+Fired when WebSocket is closed.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -415,6 +437,8 @@ _**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 
 
 ### Event: webSocketFrameReceived
+
+Fired when WebSocket frame is received.
 
 ### Results
 
@@ -431,6 +455,8 @@ _**response ( [WebSocketFrame](#class-websocketframe) )**_<br>
 
 ### Event: webSocketFrameError
 
+Fired when WebSocket frame error occurs.
+
 ### Results
 
 _**requestId ( [RequestId](#class-requestid) )**_<br>
@@ -445,6 +471,8 @@ _**errorMessage ( string )**_<br>
 
 
 ### Event: webSocketFrameSent
+
+Fired when WebSocket frame is sent.
 
 ### Results
 
@@ -465,30 +493,42 @@ _**response ( [WebSocketFrame](#class-websocketframe) )**_<br>
 
 _Type: string_
 
+Unique loader identifier.
+
 
 ### Class: FrameId
 
 _Type: string_
+
+Unique frame identifier.
 
 
 ### Class: RequestId
 
 _Type: string_
 
+Unique request identifier.
+
 
 ### Class: Timestamp
 
 _Type: number_
+
+Number of seconds since epoch.
 
 
 ### Class: Headers
 
 _Type: object_
 
+Request / response headers as keys / values of JSON object.
+
 
 ### Class: ResourceTiming
 
 _Type: object_
+
+Timing information for the request.
 
 ### Properties
 
@@ -534,6 +574,8 @@ _**receiveHeadersEnd ( number )**_<br>
 
 _Type: object_
 
+HTTP request data.
+
 ### Properties
 
 _**url ( string )**_<br>
@@ -553,6 +595,8 @@ _**postData ( optional string )**_<br>
 ### Class: Response
 
 _Type: object_
+
+HTTP response data.
 
 ### Properties
 
@@ -598,6 +642,8 @@ _**timing ( optional [ResourceTiming](#class-resourcetiming) )**_<br>
 
 _Type: object_
 
+WebSocket request data.
+
 ### Properties
 
 _**requestKey3 ( string )**_<br>
@@ -611,6 +657,8 @@ _**headers ( [Headers](#class-headers) )**_<br>
 ### Class: WebSocketResponse
 
 _Type: object_
+
+WebSocket response data.
 
 ### Properties
 
@@ -632,6 +680,8 @@ _**challengeResponse ( string )**_<br>
 
 _Type: object_
 
+WebSocket frame data.
+
 ### Properties
 
 _**opcode ( number )**_<br>
@@ -648,6 +698,8 @@ _**payloadData ( string )**_<br>
 ### Class: CachedResource
 
 _Type: object_
+
+Information about the cached resource.
 
 ### Properties
 
@@ -668,6 +720,8 @@ _**bodySize ( number )**_<br>
 ### Class: Initiator
 
 _Type: object_
+
+Information about the request initiator.
 
 ### Properties
 

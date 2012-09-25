@@ -115,6 +115,8 @@ _**isNowOnline ( boolean )**_<br>
 
 _Type: object_
 
+Detailed application cache resource information.
+
 ### Properties
 
 _**url ( string )**_<br>
@@ -131,6 +133,8 @@ _**type ( string )**_<br>
 ### Class: ApplicationCache
 
 _Type: object_
+
+Detailed application cache information.
 
 ### Properties
 
@@ -154,6 +158,8 @@ _**resources ( array of [ApplicationCacheResource](#class-applicationcacheresour
 ### Class: FrameWithManifest
 
 _Type: object_
+
+Frame identifier - manifest URL pair.
 
 ### Properties
 

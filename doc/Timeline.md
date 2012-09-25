@@ -83,6 +83,8 @@ _**result ( boolean )**_<br>
 
 ### Event: eventRecorded
 
+Fired for every instrumentation event while timeline is started.
+
 ### Results
 
 _**record ( [TimelineEvent](#class-timelineevent) )**_<br>
@@ -95,6 +97,8 @@ _**record ( [TimelineEvent](#class-timelineevent) )**_<br>
 ### Class: TimelineEvent
 
 _Type: object_
+
+Timeline record contains information about the recorded activity.
 
 ### Properties
 

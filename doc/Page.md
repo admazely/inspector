@@ -515,6 +515,8 @@ _**timestamp ( number )**_<br>
 
 ### Event: frameNavigated
 
+Fired once navigation of the frame has completed. Frame is now associated with the new loader.
+
 ### Results
 
 _**frame ( [Frame](#class-frame) )**_<br>
@@ -523,6 +525,8 @@ _**frame ( [Frame](#class-frame) )**_<br>
 
 
 ### Event: frameDetached
+
+Fired when frame has been detached from its parent.
 
 ### Results
 
@@ -537,10 +541,14 @@ _**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 
 _Type: string_
 
+Resource type as it was perceived by the rendering engine.
+
 
 ### Class: Frame
 
 _Type: object_
+
+Information about the Frame on the page.
 
 ### Properties
 
@@ -571,6 +579,8 @@ _**mimeType ( string )**_<br>
 
 _Type: object_
 
+Information about the Frame hierarchy along with their cached resources.
+
 ### Properties
 
 _**frame ( [Frame](#class-frame) )**_<br>
@@ -588,6 +598,8 @@ _**resources ( array )**_<br>
 
 _Type: object_
 
+Search match for resource.
+
 ### Properties
 
 _**lineNumber ( number )**_<br>
@@ -601,6 +613,8 @@ _**lineContent ( string )**_<br>
 ### Class: SearchResult
 
 _Type: object_
+
+Search result for resource.
 
 ### Properties
 
@@ -618,6 +632,8 @@ _**matchesCount ( number )**_<br>
 ### Class: Cookie
 
 _Type: object_
+
+Cookie object
 
 ### Properties
 
@@ -653,6 +669,8 @@ _**session ( boolean )**_<br>
 ### Class: ScriptIdentifier
 
 _Type: string_
+
+Unique script identifier.
 
 
 

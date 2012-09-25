@@ -109,10 +109,14 @@ _**storageId ( [StorageId](#class-storageid) )**_<br>
 
 _Type: string_
 
+Unique identifier of DOM storage entry.
+
 
 ### Class: Entry
 
 _Type: object_
+
+DOM Storage entry.
 
 ### Properties
 
@@ -130,6 +134,8 @@ _**id ( [StorageId](#class-storageid) )**_<br>
 ### Class: Item
 
 _Type: array_
+
+DOM Storage item.
 
 
 

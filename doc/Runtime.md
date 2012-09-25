@@ -186,6 +186,8 @@ _**error ( error )**_<br>
 
 ### Event: executionContextCreated
 
+Issued when new execution context is created.
+
 ### Results
 
 _**context ( [ExecutionContextDescription](#class-executioncontextdescription) )**_<br>
@@ -199,10 +201,14 @@ _**context ( [ExecutionContextDescription](#class-executioncontextdescription) )
 
 _Type: string_
 
+Unique object identifier.
+
 
 ### Class: RemoteObject
 
 _Type: object_
+
+Mirror object referencing original JavaScript object.
 
 ### Properties
 
@@ -232,6 +238,8 @@ _**preview ( optional [ObjectPreview](#class-objectpreview) )**_<br>
 ### Class: ObjectPreview
 
 _Type: object_
+
+Object containing abbreviated remote object value.
 
 ### Properties
 
@@ -270,6 +278,8 @@ _**subtype ( optional string enumerated ["array","null","node","regexp","date"] 
 
 _Type: object_
 
+Object property descriptor.
+
 ### Properties
 
 _**name ( string )**_<br>
@@ -302,6 +312,8 @@ _**wasThrown ( optional boolean )**_<br>
 
 _Type: object_
 
+Represents function call argument. Either remote object id `objectId` or primitive `value` or neither of (for undefined) them should be specified.
+
 ### Properties
 
 _**value ( optional any )**_<br>
@@ -316,10 +328,14 @@ _**objectId ( optional [RemoteObjectId](#class-remoteobjectid) )**_<br>
 
 _Type: integer_
 
+Id of an execution context.
+
 
 ### Class: ExecutionContextDescription
 
 _Type: object_
+
+Description of an isolated world.
 
 ### Properties
 

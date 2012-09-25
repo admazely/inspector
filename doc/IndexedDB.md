@@ -134,6 +134,8 @@ _**hasMore ( boolean )**_<br>
 
 _Type: object_
 
+Security origin with database names.
+
 ### Properties
 
 _**securityOrigin ( string )**_<br>
@@ -147,6 +149,8 @@ _**databaseNames ( array )**_<br>
 ### Class: DatabaseWithObjectStores
 
 _Type: object_
+
+Database with an array of object stores.
 
 ### Properties
 
@@ -164,6 +168,8 @@ _**objectStores ( array of [ObjectStore](#class-objectstore) )**_<br>
 ### Class: ObjectStore
 
 _Type: object_
+
+Object store.
 
 ### Properties
 
@@ -185,6 +191,8 @@ _**indexes ( array of [ObjectStoreIndex](#class-objectstoreindex) )**_<br>
 
 _Type: object_
 
+Object store index.
+
 ### Properties
 
 _**name ( string )**_<br>
@@ -204,6 +212,8 @@ _**multiEntry ( boolean )**_<br>
 ### Class: Key
 
 _Type: object_
+
+Key.
 
 ### Properties
 
@@ -228,6 +238,8 @@ _**array ( optional array of [Key](#class-key) )**_<br>
 
 _Type: object_
 
+Key range.
+
 ### Properties
 
 _**lower ( optional [Key](#class-key) )**_<br>
@@ -248,6 +260,8 @@ _**upperOpen ( boolean )**_<br>
 
 _Type: object_
 
+Data entry.
+
 ### Properties
 
 _**key ( [Key](#class-key) )**_<br>
@@ -264,6 +278,8 @@ _**value ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 ### Class: KeyPath
 
 _Type: object_
+
+Key path.
 
 ### Properties
 
