@@ -28,6 +28,8 @@ function WebKitInspector(port, host, href, callback) {
     this._callbacks = {};
     this._id = 0;
 
+    this.debug = false;
+
     // Add library domains
     var domains = Object.keys(library);
     for (var i = 0, l = domains.length; i < l; i++) {
@@ -148,6 +150,13 @@ WebKitInspector.prototype._request = function (method, params, callback) {
     };
 
     this._callbacks[newId] = callback;
+
+    if (this.debug) {
+        console.log('=== Send request #' + newId + ' ===');
+        console.log(util.inspect(request, false, Infinity, true));
+        console.log('=== message end ===');
+    }
+
     this._ws.send(JSON.stringify(request), function (err) {
         if (err) {
             delete self._callbacks[newId];
@@ -161,6 +170,12 @@ WebKitInspector.prototype._respond = function (message) {
 
     // respond from a request
     if (message.id) {
+        if (this.debug) {
+            console.log('=== Got response #' + message.id + ' ===');
+            console.log(util.inspect(message, false, Infinity, true));
+            console.log('=== message end ===');
+        }
+
         var callback = this._callbacks[message.id];
 
         // Emit error if callback isn't defined
@@ -180,6 +195,12 @@ WebKitInspector.prototype._respond = function (message) {
 
     // respond from a notification
     else {
+        if (this.debug) {
+            console.log('=== Got event ::' + message.method + ' ===');
+            console.log(util.inspect(message, false, Infinity, true));
+            console.log('=== message end ===');
+        }
+
         var method = message.method.split('.');
         this[ method[0] ].emit(method[1], message.params);
     }
