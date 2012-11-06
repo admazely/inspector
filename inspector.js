@@ -92,6 +92,7 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
             self._ws.on('message', self._respond.bind(self));
             self._ws.on('error', self.emit.bind(self, 'error'));
             self._ws.once('open', self.emit.bind(self, 'connect'));
+            self._ws.once('close', self.close.bind(self));
         });
     });
 
@@ -213,10 +214,10 @@ WebKitInspector.prototype.close = function (callback) {
     this._closed = true;
 
     // Execute callback one close event emits
-    if (callback) this.once('close', callback);
+    if (typeof callback === 'function') this.once('close', callback);
 
     // Close WebSocket or just emit close
-    if (this._ws) {
+    if (this._ws && this._ws.readyState !== WebSocket.CLOSED) {
         this._ws.once('close', function () {
             // the ws module do sometimes return an exit code as a argument
             self.emit('close');
