@@ -125,7 +125,12 @@ test("native WebKit inspector binding", function (t) {
             var inspect;
 
             inspect = inspector(9222, '127.0.0.1', 'about:blank', function () {
-                inspect.once('close', t.end.bind(t));
+                inspect.once('close', function (nothing) {
+                    // the ws exit code is not relayed
+                    t.equal(nothing, undefined);
+
+                    t.end();
+                });
                 inspect.close();
             });
         });

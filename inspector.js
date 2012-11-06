@@ -217,7 +217,10 @@ WebKitInspector.prototype.close = function (callback) {
 
     // Close WebSocket or just emit close
     if (this._ws) {
-        this._ws.once('close', self.emit.bind(self, 'close'));
+        this._ws.once('close', function () {
+            // the ws module do sometimes return an exit code as a argument
+            self.emit('close');
+        });
         this._ws.close();
     } else {
         this.emit('close');
