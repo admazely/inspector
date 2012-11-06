@@ -23,7 +23,7 @@ function Browser(port, href, callback) {
 
     // create a tempory file
     temp.mkdir('inspector-test-profile', function(err, userDir) {
-        if (err) self.emit('error', err);
+        if (err) return self.emit('error', err);
 
         self.userDir = userDir;
 
@@ -48,7 +48,7 @@ function Browser(port, href, callback) {
             self.browser = null;
             if (self.closed === false) {
                 rimraf(userDir, function (err) {
-                    if (err) self.emit('error', err);
+                    if (err) return self.emit('error', err);
                 });
             }
         });
