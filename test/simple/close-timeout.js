@@ -30,6 +30,7 @@ test("close timeout fallback", function (t) {
         });
 
         inspect.once('close', function () {
+            t.equal(inspect.closed, true);
             t.end();
         });
     });

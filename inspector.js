@@ -24,7 +24,7 @@ function WebKitInspector(port, host, href, callback) {
         return new WebKitInspector(port, host, href, callback);
     }
 
-    this._closed = false;
+    this.closed = false;
     this._callbacks = {};
     this._id = 0;
 
@@ -65,7 +65,7 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
             if (err) return self.emit('error', err);
 
             // Check that .close wasn't executed
-            if (self._closed) return;
+            if (self.closed) return;
 
             // Find the websocket url pointing to the given url
             var wsUrl = null;
@@ -103,7 +103,7 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
         // and there is time left,
         // and .close hasn't been called
         var timeUse = (time - Date.now()) + use;
-        if (err.code === 'ECONNREFUSED' && (timeUse + 100) < timeout && self._closed === false) {
+        if (err.code === 'ECONNREFUSED' && (timeUse + 100) < timeout && self.closed === false) {
 
             // Try to connect again after 100 ms
             setTimeout(function() {
@@ -210,8 +210,8 @@ WebKitInspector.prototype._respond = function (message) {
 WebKitInspector.prototype.close = function (callback) {
     var self = this;
 
-    if (this._closed) return;
-    this._closed = true;
+    if (this.closed) return;
+    this.closed = true;
 
     // Execute callback one close event emits
     if (typeof callback === 'function') this.once('close', callback);

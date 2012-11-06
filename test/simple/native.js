@@ -53,9 +53,12 @@ test("native WebKit inspector binding", function (t) {
                 ping(inspect, function (err, pong) {
                     t.equal(err, null);
                     t.equal(pong, true);
+                    t.equal(inspect.closed, false);
 
                     // Close inspector
                     inspect.close(function () {
+                        t.equal(inspect.closed, true);
+
                         ping(inspect, function (err, pong) {
                             t.equal(err.message, 'not opened');
                             t.equal(pong, null);

@@ -121,7 +121,10 @@ Emitted once a connection is successfully established.
 
 ### Event: close
 
-Emitted once all connections are closed, after `inspect.close()` is called.
+Emitted once all connections are closed. This is usually after `inspect.close()`
+is called, but if the server closed the connection this event will also emit.
+
+Once the `close` event has emitted the `inspect.closed` flag becomes `true`.
 
 ### Event: error
 
