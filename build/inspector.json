@@ -28,6 +28,13 @@
                     { "name": "object", "$ref": "Runtime.RemoteObject" },
                     { "name": "hints", "type": "object" }
                 ]
+            },
+            {
+                "name": "detached",
+                "description": "Fired when remote debugging connection is about to be terminated. Contains detach reason.",
+                "parameters": [
+                    { "name": "reason", "type": "string", "description": "The reason why connection has been terminated." }
+                ]
             }
         ]
     },
@@ -404,6 +411,22 @@
                 ],
                 "description": "Toggles mouse event-based touch event emulation.",
                 "hidden": true
+            },
+            {
+                "name": "getCompositingBordersVisible",
+                "description": "Indicates the visibility of compositing borders.",
+                "returns": [
+                    { "name": "result", "type": "boolean", "description": "If true, compositing borders are visible." }
+                ],
+                "hidden": true
+            },
+            {
+                "name": "setCompositingBordersVisible",
+                "description": "Controls the visibility of compositing borders.",
+                "parameters": [
+                    { "name": "visible", "type": "boolean", "description": "True for showing compositing borders." }
+                ],
+                "hidden": true
             }
         ],
         "events": [
@@ -494,7 +517,18 @@
                     { "name": "set", "$ref": "RemoteObject", "optional": true, "description": "A function which serves as a setter for the property, or <code>undefined</code> if there is no setter (accessor descriptors only)." },
                     { "name": "configurable", "type": "boolean", "description": "True if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object." },
                     { "name": "enumerable", "type": "boolean", "description": "True if this property shows up during enumeration of the properties on the corresponding object." },
-                    { "name": "wasThrown", "type": "boolean", "optional": true, "description": "True if the result was thrown during the evaluation." }
+                    { "name": "wasThrown", "type": "boolean", "optional": true, "description": "True if the result was thrown during the evaluation." },
+                    { "name": "isOwn", "optional": true, "type": "boolean", "description": "True if the property is owned for the object." }
+
+                ]
+            },
+            {
+                "id": "InternalPropertyDescriptor",
+                "type": "object",
+                "description": "Object internal property descriptor. This property isn't normally visible in JavaScript code.",
+                "properties": [
+                    { "name": "name", "type": "string", "description": "Conventional property name." },
+                    { "name": "value", "$ref": "RemoteObject", "optional": true, "description": "The value associated with the property." }
                 ]
             },
             {
@@ -535,7 +569,8 @@
                     { "name": "includeCommandLineAPI", "type": "boolean", "optional": true, "description": "Determines whether Command Line API should be available during the evaluation.", "hidden": true },
                     { "name": "doNotPauseOnExceptionsAndMuteConsole", "type": "boolean", "optional": true, "description": "Specifies whether evaluation should stop on exceptions and mute console. Overrides setPauseOnException state.", "hidden": true },
                     { "name": "contextId", "$ref": "Runtime.ExecutionContextId", "optional": true, "description": "Specifies in which isolated context to perform evaluation. Each content script lives in an isolated context and this parameter may be used to specify one of those contexts. If the parameter is omitted or 0 the evaluation will be performed in the context of the inspected page.", "hidden": true },
-                    { "name": "returnByValue", "type": "boolean", "optional": true, "description": "Whether the result is expected to be a JSON object that should be sent by value." }
+                    { "name": "returnByValue", "type": "boolean", "optional": true, "description": "Whether the result is expected to be a JSON object that should be sent by value." },
+                    { "name": "generatePreview", "type": "boolean", "optional": true, "hidden": true, "description": "Whether preview should be generated for the result." }
                 ],
                 "returns": [
                     { "name": "result", "$ref": "RemoteObject", "description": "Evaluation result." },
@@ -550,7 +585,8 @@
                     { "name": "functionDeclaration", "type": "string", "description": "Declaration of the function to call." },
                     { "name": "arguments", "type": "array", "items": { "$ref": "CallArgument", "description": "Call argument." }, "optional": true, "description": "Call arguments. All call arguments must belong to the same JavaScript world as the target object." },
                     { "name": "doNotPauseOnExceptionsAndMuteConsole", "type": "boolean", "optional": true, "description": "Specifies whether function call should stop on exceptions and mute console. Overrides setPauseOnException state.", "hidden": true },
-                    { "name": "returnByValue", "type": "boolean", "optional": true, "description": "Whether the result is expected to be a JSON object which should be sent by value." }
+                    { "name": "returnByValue", "type": "boolean", "optional": true, "description": "Whether the result is expected to be a JSON object which should be sent by value." },
+                    { "name": "generatePreview", "type": "boolean", "optional": true, "hidden": true, "description": "Whether preview should be generated for the result." }
                 ],
                 "returns": [
                     { "name": "result", "$ref": "RemoteObject", "description": "Call result." },
@@ -565,7 +601,8 @@
                     { "name": "ownProperties", "optional": true, "type": "boolean", "description": "If true, returns properties belonging only to the element itself, not to its prototype chain." }
                 ],
                 "returns": [
-                    { "name": "result", "type": "array", "items": { "$ref": "PropertyDescriptor"}, "description": "Object properties." }
+                    { "name": "result", "type": "array", "items": { "$ref": "PropertyDescriptor"}, "description": "Object properties." },
+                    { "name": "internalProperties", "optional": true, "type": "array", "items": { "$ref": "InternalPropertyDescriptor"}, "description": "Internal object properties." }
                 ],
                 "description": "Returns properties of a given object. Object group of the result is inherited from the target object."
             },
@@ -589,14 +626,15 @@
                 "description": "Tells inspected instance(worker or page) that it can run in case it was started paused."
             },
             {
-                "name": "setReportExecutionContextCreation",
-                "parameters": [
-                    { "name": "enabled", "type": "boolean", "description": "Reporting enabled state." }
-                ],
+                "name": "enable",
                 "hidden": true,
-                "description": "Enables reporting about creation of execution contexts by means of <code>executionContextCreated</code> event. When the reporting gets enabled the event will be sent immediately for each existing execution context."
+                "description": "Enables reporting of execution contexts creation by means of <code>executionContextCreated</code> event. When the reporting gets enabled the event will be sent immediately for each existing execution context."
+            },
+            {
+                "name": "disable",
+                "hidden": true,
+                "description": "Disables reporting of execution contexts creation."
             }
-
         ],
         "events": [
             {
@@ -621,7 +659,7 @@
                     { "name": "source", "type": "string", "enum": ["html", "wml", "xml", "javascript", "network", "console-api", "other"], "description": "Message source." },
                     { "name": "level", "type": "string", "enum": ["tip", "log", "warning", "error", "debug"], "description": "Message severity." },
                     { "name": "text", "type": "string", "description": "Message text." },
-                    { "name": "type", "type": "string", "optional": true, "enum": ["log", "dir", "dirxml", "trace", "startGroup", "startGroupCollapsed", "endGroup", "assert"], "description": "Console message type." },
+                    { "name": "type", "type": "string", "optional": true, "enum": ["log", "dir", "dirxml", "trace", "clear", "startGroup", "startGroupCollapsed", "endGroup", "assert"], "description": "Console message type." },
                     { "name": "url", "type": "string", "optional": true, "description": "URL of the message origin." },
                     { "name": "line", "type": "integer", "optional": true, "description": "Line number in the resource that generated this message." },
                     { "name": "repeatCount", "type": "integer", "optional": true, "description": "Repeat count for repeated messages." },
@@ -651,22 +689,22 @@
         "commands": [
             {
                 "name": "enable",
-                "description": "Enables console domain, sends the messages collected so far to the client by means of the <code>messageAdded</code> notification."
+                "description": "Enables console domain, sends the messages collected so far to the client by means of the <code>messageAdded</code> notification." 
             },
             {
                 "name": "disable",
-                "description": "Disables console domain, prevents further console messages from being reported to the client."
+                "description": "Disables console domain, prevents further console messages from being reported to the client." 
             },
             {
                 "name": "clearMessages",
-                "description": "Clears console messages collected in the browser."
+                "description": "Clears console messages collected in the browser." 
             },
             {
                 "name": "setMonitoringXHREnabled",
                 "parameters": [
                     { "name": "enabled", "type": "boolean", "description": "Monitoring enabled state." }
                 ],
-                "description": "Toggles monitoring of XMLHttpRequest. If <code>true</code>, console will receive messages upon each XHR issued.",
+                "description": "Toggles monitoring of XMLHttpRequest. If <code>true</code>, console will receive messages upon each XHR issued.", 
                 "hidden": true
             },
             {
@@ -770,7 +808,7 @@
                 "type": "object",
                 "description": "HTTP response data.",
                 "properties": [
-                    { "name": "url", "type": "string", "description": "Response URL." },
+                    { "name": "url", "type": "string", "description": "Response URL. This URL can be different from CachedResource.url in case of redirect." },
                     { "name": "status", "type": "number", "description": "HTTP response status code." },
                     { "name": "statusText", "type": "string", "description": "HTTP response status text." },
                     { "name": "headers", "$ref": "Headers", "description": "HTTP response headers." },
@@ -822,7 +860,7 @@
                 "type": "object",
                 "description": "Information about the cached resource.",
                 "properties": [
-                    { "name": "url", "type": "string", "description": "Resource URL." },
+                    { "name": "url", "type": "string", "description": "Resource URL. This is the url of the original network request." },
                     { "name": "type", "$ref": "Page.ResourceType", "description": "Type of this resource." },
                     { "name": "response", "$ref": "Response", "optional": true, "description": "Cached response data." },
                     { "name": "bodySize", "type": "number", "description": "Cached response body size." }
@@ -909,7 +947,7 @@
                 "parameters": [
                     { "name": "cacheDisabled", "type": "boolean", "description": "Cache disabled state." }
                 ],
-                "description": "Toggles ignoring cache for each request. If <code>true</code>, cache will not be used."
+                "description": "Toggles ignoring cache for each request. If <code>true</code>, cache will not be used." 
             }
         ],
         "events": [
@@ -1149,7 +1187,8 @@
                 "description": "Database with an array of object stores.",
                 "properties": [
                     { "name": "name", "type": "string", "description": "Database name." },
-                    { "name": "version", "type": "string", "description": "Database version." },
+                    { "name": "version", "type": "string", "description": "Deprecated string database version." },
+                    { "name": "intVersion", "type": "integer", "description": "Integer database version." },
                     { "name": "objectStores", "type": "array", "items": { "$ref": "ObjectStore" }, "description": "Object stores in this database." }
                 ]
             },
@@ -1203,8 +1242,8 @@
                 "type": "object",
                 "description": "Data entry.",
                 "properties": [
-                    { "name": "key", "$ref": "Key", "description": "Key." },
-                    { "name": "primaryKey", "$ref": "Key", "description": "Primary key." },
+                    { "name": "key", "$ref": "Runtime.RemoteObject", "description": "Key." },
+                    { "name": "primaryKey", "$ref": "Runtime.RemoteObject", "description": "Primary key." },
                     { "name": "value", "$ref": "Runtime.RemoteObject", "description": "Value." }
                 ]
             },
@@ -1567,6 +1606,7 @@
                     { "name": "children", "type": "array", "optional": true, "items": { "$ref": "Node" }, "description": "Child nodes of this node when requested with children." },
                     { "name": "attributes", "type": "array", "optional": true, "items": { "type": "string" }, "description": "Attributes of the <code>Element</code> node in the form of flat array <code>[name1, value1, name2, value2]</code>." },
                     { "name": "documentURL", "type": "string", "optional": true, "description": "Document URL that <code>Document</code> or <code>FrameOwner</code> node points to." },
+                    { "name": "baseURL", "type": "string", "optional": true, "description": "Base URL that <code>Document</code> or <code>FrameOwner</code> node uses for URL completion." },
                     { "name": "publicId", "type": "string", "optional": true, "description": "<code>DocumentType</code>'s publicId." },
                     { "name": "systemId", "type": "string", "optional": true, "description": "<code>DocumentType</code>'s systemId." },
                     { "name": "internalSubset", "type": "string", "optional": true, "description": "<code>DocumentType</code>'s internalSubset." },
@@ -2006,11 +2046,11 @@
                 "description": "This object identifies a CSS rule in a unique way."
             },
             {
-                "id": "PseudoIdRules",
+                "id": "PseudoIdMatches",
                 "type": "object",
                 "properties": [
                     { "name": "pseudoId", "type": "integer", "description": "Pseudo style identifier (see <code>enum PseudoId</code> in <code>RenderStyleConstants.h</code>)."},
-                    { "name": "rules", "type": "array", "items": { "$ref": "CSSRule" }, "description": "CSS rules applicable to the pseudo style."}
+                    { "name": "matches", "type": "array", "items": { "$ref": "RuleMatch" }, "description": "Matches of CSS rules applicable to the pseudo style."}
                 ],
                 "description": "CSS rule collection for a single pseudo style."
             },
@@ -2019,9 +2059,28 @@
                 "type": "object",
                 "properties": [
                     { "name": "inlineStyle", "$ref": "CSSStyle", "optional": true, "description": "The ancestor node's inline style, if any, in the style inheritance chain." },
-                    { "name": "matchedCSSRules", "type": "array", "items": { "$ref": "CSSRule" }, "description": "CSS rules matching the ancestor node in the style inheritance chain." }
+                    { "name": "matchedCSSRules", "type": "array", "items": { "$ref": "RuleMatch" }, "description": "Matches of CSS rules matching the ancestor node in the style inheritance chain." }
                 ],
                 "description": "CSS rule collection for a single pseudo style."
+            },
+            {
+                "id": "RuleMatch",
+                "type": "object",
+                "properties": [
+                    { "name": "rule", "$ref": "CSSRule", "description": "CSS rule in the match." },
+                    { "name": "matchingSelectors", "type": "array", "items": { "type": "integer" }, "description": "Matching selector indices in the rule's selectorList selectors (0-based)." }
+                ],
+                "description": "Match data for a CSS rule."
+            },
+            {
+                "id": "SelectorList",
+                "type": "object",
+                "properties": [
+                    { "name": "selectors", "type": "array", "items": { "type": "string" }, "description": "Selectors in the list." },
+                    { "name": "text", "type": "string", "description": "Rule selector text." },
+                    { "name": "range", "$ref": "SourceRange", "optional": true, "description": "Rule selector range in the underlying resource (if available)." }
+                ],
+                "description": "Selector list data."
             },
             {
                 "id": "CSSStyleAttribute",
@@ -2060,12 +2119,11 @@
                 "type": "object",
                 "properties": [
                     { "name": "ruleId", "$ref": "CSSRuleId", "optional": true, "description": "The CSS rule identifier (absent for user agent stylesheet and user-specified stylesheet rules)."},
-                    { "name": "selectorText", "type": "string", "description": "Rule selector."},
+                    { "name": "selectorList", "$ref": "SelectorList", "description": "Rule selector data." },
                     { "name": "sourceURL", "type": "string", "optional": true, "description": "Parent stylesheet resource URL (for regular rules)."},
                     { "name": "sourceLine", "type": "integer", "description": "Line ordinal of the rule selector start character in the resource."},
                     { "name": "origin", "$ref": "StyleSheetOrigin", "description": "Parent stylesheet's origin."},
                     { "name": "style", "$ref": "CSSStyle", "description": "Associated style declaration." },
-                    { "name": "selectorRange", "$ref": "SourceRange", "optional": true, "description": "The rule selector range in the underlying resource (if available)." },
                     { "name": "media", "type": "array", "items": { "$ref": "CSSMedia" }, "optional": true, "description": "Media list array (for rules involving media queries). The array enumerates media queries starting with the innermost one, going outwards." }
                 ],
                 "description": "CSS rule representation."
@@ -2205,8 +2263,8 @@
                     { "name": "includeInherited", "type": "boolean", "optional": true, "description": "Whether to include inherited styles (default: true)." }
                 ],
                 "returns": [
-                    { "name": "matchedCSSRules", "type": "array", "items": { "$ref": "CSSRule" }, "optional": true, "description": "CSS rules matching this node, from all applicable stylesheets." },
-                    { "name": "pseudoElements", "type": "array", "items": { "$ref": "PseudoIdRules" }, "optional": true, "description": "Pseudo style rules for this node." },
+                    { "name": "matchedCSSRules", "type": "array", "items": { "$ref": "RuleMatch" }, "optional": true, "description": "CSS rules matching this node, from all applicable stylesheets." },
+                    { "name": "pseudoElements", "type": "array", "items": { "$ref": "PseudoIdMatches" }, "optional": true, "description": "Pseudo style matches for this node." },
                     { "name": "inherited", "type": "array", "items": { "$ref": "InheritedStyleEntry" }, "optional": true, "description": "A chain of inherited styles (from the immediate node parent up to the DOM tree root)." }
                 ],
                 "description": "Returns requested styles for a DOM node identified by <code>nodeId</code>."
@@ -2431,6 +2489,14 @@
                 ],
                 "hidden": true,
                 "description": "Tells whether timeline agent supports frame instrumentation."
+            },
+            {
+                "name": "canMonitorMainThread",
+                "returns": [
+                    { "name": "result", "type": "boolean", "description": "True if timeline supports main thread CPU utilization instrumentation." }
+                ],
+                "hidden": true,
+                "description": "Tells whether timeline agent supports main thread CPU utilization instrumentation."
             }
         ],
         "events": [
@@ -2681,7 +2747,8 @@
                     { "name": "objectGroup", "type": "string", "optional": true, "description": "String object group name to put result into (allows rapid releasing resulting object handles using <code>releaseObjectGroup</code>)." },
                     { "name": "includeCommandLineAPI", "type": "boolean", "optional": true, "description": "Specifies whether command line API should be available to the evaluated expression, defaults to false.", "hidden": true },
                     { "name": "doNotPauseOnExceptionsAndMuteConsole", "type": "boolean", "optional": true, "description": "Specifies whether evaluation should stop on exceptions and mute console. Overrides setPauseOnException state.", "hidden": true },
-                    { "name": "returnByValue", "type": "boolean", "optional": true, "description": "Whether the result is expected to be a JSON object that should be sent by value." }
+                    { "name": "returnByValue", "type": "boolean", "optional": true, "description": "Whether the result is expected to be a JSON object that should be sent by value." },
+                    { "name": "generatePreview", "type": "boolean", "optional": true, "hidden": true, "description": "Whether preview should be generated for the result." }
                 ],
                 "returns": [
                     { "name": "result", "$ref": "Runtime.RemoteObject", "description": "Object wrapper for the evaluation result." },
@@ -2741,7 +2808,8 @@
                     { "name": "endLine", "type": "integer", "description": "Last line of the script." },
                     { "name": "endColumn", "type": "integer", "description": "Length of the last line of the script." },
                     { "name": "isContentScript", "type": "boolean", "optional": true, "description": "Determines whether this script is a user extension script." },
-                    { "name": "sourceMapURL", "type": "string", "optional": true, "description": "URL of source map associated with script (if any)." }
+                    { "name": "sourceMapURL", "type": "string", "optional": true, "description": "URL of source map associated with script (if any)." },
+                    { "name": "hasSourceURL", "type": "boolean", "optional": true, "description": "True, if this script has sourceURL." }
                 ],
                 "description": "Fired when virtual machine parses script. This event is also fired for all known and uncollected scripts upon enabling debugger."
             },
@@ -3081,8 +3149,10 @@
                 "id": "Call",
                 "type": "object",
                 "properties": [
-                    { "name": "functionName", "type": "string" },
-                    { "name": "arguments", "type": "array", "items": { "type": "string" } },
+                    { "name": "functionName", "type": "string", "optional": true },
+                    { "name": "arguments", "type": "array", "items": { "type": "string" }, "optional": true },
+                    { "name": "property", "type": "string", "optional": true },
+                    { "name": "value", "type": "string", "optional": true },
                     { "name": "result", "type": "string", "optional": true },
                     { "name": "sourceURL", "type": "string", "optional": true },
                     { "name": "lineNumber", "type": "integer", "optional": true },
