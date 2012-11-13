@@ -155,7 +155,7 @@ _**level ( string enumerated ["tip","log","warning","error","debug"] )**_<br>
 _**text ( string )**_<br>
 > Message text.
 
-_**type ( optional string enumerated ["log","dir","dirxml","trace","startGroup","startGroupCollapsed","endGroup","assert"] )**_<br>
+_**type ( optional string enumerated ["log","dir","dirxml","trace","clear","startGroup","startGroupCollapsed","endGroup","assert"] )**_<br>
 > Console message type.
 
 _**url ( optional string )**_<br>

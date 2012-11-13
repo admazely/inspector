@@ -814,6 +814,9 @@ _**attributes ( optional array )**_<br>
 _**documentURL ( optional string )**_<br>
 > Document URL that <code>Document</code> or <code>FrameOwner</code> node points to.
 
+_**baseURL ( optional string )**_<br>
+> Base URL that <code>Document</code> or <code>FrameOwner</code> node uses for URL completion.
+
 _**publicId ( optional string )**_<br>
 > <code>DocumentType</code>'s publicId.
 

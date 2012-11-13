@@ -6,13 +6,14 @@ Runtime domain exposes JavaScript runtime by means of remote evaluation and mirr
 
 
 * Commands
- * [evaluate](#runtimeevaluateexpression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-runtimeexecutioncontextid-returnbyvalue-callback)
- * [callFunctionOn](#runtimecallfunctiononremoteobjectid-functiondeclaration-callargument-donotpauseonexceptionsandmuteconsole-returnbyvalue-callback)
+ * [evaluate](#runtimeevaluateexpression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-runtimeexecutioncontextid-returnbyvalue-generatepreview-callback)
+ * [callFunctionOn](#runtimecallfunctiononremoteobjectid-functiondeclaration-callargument-donotpauseonexceptionsandmuteconsole-returnbyvalue-generatepreview-callback)
  * [getProperties](#runtimegetpropertiesremoteobjectid-ownproperties-callback)
  * [releaseObject](#runtimereleaseobjectremoteobjectid-callback)
  * [releaseObjectGroup](#runtimereleaseobjectgroupobjectgroup-callback)
  * [run](#runtimeruncallback)
- * [setReportExecutionContextCreation](#runtimesetreportexecutioncontextcreationenabled-callback)
+ * [enable](#runtimeenablecallback)
+ * [disable](#runtimedisablecallback)
 * Events
  * [executionContextCreated](#event-executioncontextcreated)
 * Types
@@ -21,6 +22,7 @@ Runtime domain exposes JavaScript runtime by means of remote evaluation and mirr
  * [ObjectPreview](#class-objectpreview)
  * [PropertyPreview](#class-propertypreview)
  * [PropertyDescriptor](#class-propertydescriptor)
+ * [InternalPropertyDescriptor](#class-internalpropertydescriptor)
  * [CallArgument](#class-callargument)
  * [ExecutionContextId](#class-executioncontextid)
  * [ExecutionContextDescription](#class-executioncontextdescription)
@@ -28,7 +30,7 @@ Runtime domain exposes JavaScript runtime by means of remote evaluation and mirr
 
 ## Commands
 
-### Runtime.evaluate(expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [[Runtime.ExecutionContextId](Runtime.md#class-executioncontextid)], [returnByValue], callback)
+### Runtime.evaluate(expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [[Runtime.ExecutionContextId](Runtime.md#class-executioncontextid)], [returnByValue], [generatePreview], callback)
 
 Evaluates expression on global object.
 
@@ -52,6 +54,9 @@ _**contextId ( optional [Runtime.ExecutionContextId](Runtime.md#class-executionc
 _**returnByValue ( optional boolean )**_<br>
 > Whether the result is expected to be a JSON object that should be sent by value.
 
+_**generatePreview ( optional boolean )**_<br>
+> Whether preview should be generated for the result.
+
 _**callback ( function )**_<br>
 
 ### Results
@@ -65,7 +70,7 @@ _**wasThrown ( optional boolean )**_<br>
 
 
 
-### Runtime.callFunctionOn([RemoteObjectId](#class-remoteobjectid), functionDeclaration, [[CallArgument](#class-callargument)], [doNotPauseOnExceptionsAndMuteConsole], [returnByValue], callback)
+### Runtime.callFunctionOn([RemoteObjectId](#class-remoteobjectid), functionDeclaration, [[CallArgument](#class-callargument)], [doNotPauseOnExceptionsAndMuteConsole], [returnByValue], [generatePreview], callback)
 
 Calls function with given declaration on the given object. Object group of the result is inherited from the target object.
 
@@ -85,6 +90,9 @@ _**doNotPauseOnExceptionsAndMuteConsole ( optional boolean )**_<br>
 
 _**returnByValue ( optional boolean )**_<br>
 > Whether the result is expected to be a JSON object which should be sent by value.
+
+_**generatePreview ( optional boolean )**_<br>
+> Whether preview should be generated for the result.
 
 _**callback ( function )**_<br>
 
@@ -118,6 +126,9 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 _**result ( array of [PropertyDescriptor](#class-propertydescriptor) )**_<br>
 > Object properties.
+
+_**internalProperties ( optional array of [InternalPropertyDescriptor](#class-internalpropertydescriptor) )**_<br>
+> Internal object properties.
 
 
 
@@ -166,14 +177,24 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Runtime.setReportExecutionContextCreation(enabled, callback)
+### Runtime.enable(callback)
 
-Enables reporting about creation of execution contexts by means of `executionContextCreated` event. When the reporting gets enabled the event will be sent immediately for each existing execution context.
+Enables reporting of execution contexts creation by means of `executionContextCreated` event. When the reporting gets enabled the event will be sent immediately for each existing execution context.
 
 ### Parameters
 
-_**enabled ( boolean )**_<br>
-> Reporting enabled state.
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Runtime.disable(callback)
+
+Disables reporting of execution contexts creation.
+
+### Parameters
 
 _**callback ( function )**_<br>
 
@@ -305,6 +326,25 @@ _**enumerable ( boolean )**_<br>
 
 _**wasThrown ( optional boolean )**_<br>
 > True if the result was thrown during the evaluation.
+
+_**isOwn ( optional boolean )**_<br>
+> True if the property is owned for the object.
+
+
+
+### Class: InternalPropertyDescriptor
+
+_Type: object_
+
+Object internal property descriptor. This property isn't normally visible in JavaScript code.
+
+### Properties
+
+_**name ( string )**_<br>
+> Conventional property name.
+
+_**value ( optional [RemoteObject](#class-remoteobject) )**_<br>
+> The value associated with the property.
 
 
 

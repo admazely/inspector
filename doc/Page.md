@@ -31,6 +31,8 @@ Actions and events related to the inspected page belong to the page domain.
  * [clearDeviceOrientationOverride](#pagecleardeviceorientationoverridecallback)
  * [canOverrideDeviceOrientation](#pagecanoverridedeviceorientationcallback)
  * [setTouchEmulationEnabled](#pagesettouchemulationenabledenabled-callback)
+ * [getCompositingBordersVisible](#pagegetcompositingbordersvisiblecallback)
+ * [setCompositingBordersVisible](#pagesetcompositingbordersvisiblevisible-callback)
 * Events
  * [domContentEventFired](#event-domcontenteventfired)
  * [loadEventFired](#event-loadeventfired)
@@ -489,6 +491,38 @@ Toggles mouse event-based touch event emulation.
 
 _**enabled ( boolean )**_<br>
 > Whether the touch event emulation should be enabled.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Page.getCompositingBordersVisible(callback)
+
+Indicates the visibility of compositing borders.
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**result ( boolean )**_<br>
+> If true, compositing borders are visible.
+
+
+
+### Page.setCompositingBordersVisible(visible, callback)
+
+Controls the visibility of compositing borders.
+
+### Parameters
+
+_**visible ( boolean )**_<br>
+> True for showing compositing borders.
 
 _**callback ( function )**_<br>
 

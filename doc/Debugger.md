@@ -27,7 +27,7 @@ Debugger domain exposes JavaScript debugging capabilities. It allows setting and
  * [getScriptSource](#debuggergetscriptsourcescriptid-callback)
  * [getFunctionDetails](#debuggergetfunctiondetailsruntimeremoteobjectid-callback)
  * [setPauseOnExceptions](#debuggersetpauseonexceptionsstate-callback)
- * [evaluateOnCallFrame](#debuggerevaluateoncallframecallframeid-expression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-returnbyvalue-callback)
+ * [evaluateOnCallFrame](#debuggerevaluateoncallframecallframeid-expression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-returnbyvalue-generatepreview-callback)
  * [compileScript](#debuggercompilescriptexpression-sourceurl-callback)
  * [runScript](#debuggerrunscriptscriptid-runtimeexecutioncontextid-objectgroup-donotpauseonexceptionsandmuteconsole-callback)
  * [setOverlayMessage](#debuggersetoverlaymessagemessage-callback)
@@ -426,7 +426,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Debugger.evaluateOnCallFrame([CallFrameId](#class-callframeid), expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [returnByValue], callback)
+### Debugger.evaluateOnCallFrame([CallFrameId](#class-callframeid), expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [returnByValue], [generatePreview], callback)
 
 Evaluates expression on a given call frame.
 
@@ -449,6 +449,9 @@ _**doNotPauseOnExceptionsAndMuteConsole ( optional boolean )**_<br>
 
 _**returnByValue ( optional boolean )**_<br>
 > Whether the result is expected to be a JSON object that should be sent by value.
+
+_**generatePreview ( optional boolean )**_<br>
+> Whether preview should be generated for the result.
 
 _**callback ( function )**_<br>
 
@@ -571,6 +574,9 @@ _**isContentScript ( optional boolean )**_<br>
 
 _**sourceMapURL ( optional string )**_<br>
 > URL of source map associated with script (if any).
+
+_**hasSourceURL ( optional boolean )**_<br>
+> True, if this script has sourceURL.
 
 
 

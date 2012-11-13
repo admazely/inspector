@@ -35,8 +35,10 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [CSSStyleId](#class-cssstyleid)
  * [StyleSheetOrigin](#class-stylesheetorigin)
  * [CSSRuleId](#class-cssruleid)
- * [PseudoIdRules](#class-pseudoidrules)
+ * [PseudoIdMatches](#class-pseudoidmatches)
  * [InheritedStyleEntry](#class-inheritedstyleentry)
+ * [RuleMatch](#class-rulematch)
+ * [SelectorList](#class-selectorlist)
  * [CSSStyleAttribute](#class-cssstyleattribute)
  * [CSSStyleSheetHeader](#class-cssstylesheetheader)
  * [CSSStyleSheetBody](#class-cssstylesheetbody)
@@ -100,11 +102,11 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**matchedCSSRules ( optional array of [CSSRule](#class-cssrule) )**_<br>
+_**matchedCSSRules ( optional array of [RuleMatch](#class-rulematch) )**_<br>
 > CSS rules matching this node, from all applicable stylesheets.
 
-_**pseudoElements ( optional array of [PseudoIdRules](#class-pseudoidrules) )**_<br>
-> Pseudo style rules for this node.
+_**pseudoElements ( optional array of [PseudoIdMatches](#class-pseudoidmatches) )**_<br>
+> Pseudo style matches for this node.
 
 _**inherited ( optional array of [InheritedStyleEntry](#class-inheritedstyleentry) )**_<br>
 > A chain of inherited styles (from the immediate node parent up to the DOM tree root).
@@ -463,7 +465,7 @@ _**ordinal ( integer )**_<br>
 
 
 
-### Class: PseudoIdRules
+### Class: PseudoIdMatches
 
 _Type: object_
 
@@ -474,8 +476,8 @@ CSS rule collection for a single pseudo style.
 _**pseudoId ( integer )**_<br>
 > Pseudo style identifier (see <code>enum PseudoId</code> in <code>RenderStyleConstants.h</code>).
 
-_**rules ( array of [CSSRule](#class-cssrule) )**_<br>
-> CSS rules applicable to the pseudo style.
+_**matches ( array of [RuleMatch](#class-rulematch) )**_<br>
+> Matches of CSS rules applicable to the pseudo style.
 
 
 
@@ -490,8 +492,43 @@ CSS rule collection for a single pseudo style.
 _**inlineStyle ( optional [CSSStyle](#class-cssstyle) )**_<br>
 > The ancestor node's inline style, if any, in the style inheritance chain.
 
-_**matchedCSSRules ( array of [CSSRule](#class-cssrule) )**_<br>
-> CSS rules matching the ancestor node in the style inheritance chain.
+_**matchedCSSRules ( array of [RuleMatch](#class-rulematch) )**_<br>
+> Matches of CSS rules matching the ancestor node in the style inheritance chain.
+
+
+
+### Class: RuleMatch
+
+_Type: object_
+
+Match data for a CSS rule.
+
+### Properties
+
+_**rule ( [CSSRule](#class-cssrule) )**_<br>
+> CSS rule in the match.
+
+_**matchingSelectors ( array )**_<br>
+> Matching selector indices in the rule's selectorList selectors (0-based).
+
+
+
+### Class: SelectorList
+
+_Type: object_
+
+Selector list data.
+
+### Properties
+
+_**selectors ( array )**_<br>
+> Selectors in the list.
+
+_**text ( string )**_<br>
+> Rule selector text.
+
+_**range ( optional [SourceRange](#class-sourcerange) )**_<br>
+> Rule selector range in the underlying resource (if available).
 
 
 
@@ -569,8 +606,8 @@ CSS rule representation.
 _**ruleId ( optional [CSSRuleId](#class-cssruleid) )**_<br>
 > The CSS rule identifier (absent for user agent stylesheet and user-specified stylesheet rules).
 
-_**selectorText ( string )**_<br>
-> Rule selector.
+_**selectorList ( [SelectorList](#class-selectorlist) )**_<br>
+> Rule selector data.
 
 _**sourceURL ( optional string )**_<br>
 > Parent stylesheet resource URL (for regular rules).
@@ -583,9 +620,6 @@ _**origin ( [StyleSheetOrigin](#class-stylesheetorigin) )**_<br>
 
 _**style ( [CSSStyle](#class-cssstyle) )**_<br>
 > Associated style declaration.
-
-_**selectorRange ( optional [SourceRange](#class-sourcerange) )**_<br>
-> The rule selector range in the underlying resource (if available).
 
 _**media ( optional array of [CSSMedia](#class-cssmedia) )**_<br>
 > Media list array (for rules involving media queries). The array enumerates media queries starting with the innermost one, going outwards.

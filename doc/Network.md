@@ -601,7 +601,7 @@ HTTP response data.
 ### Properties
 
 _**url ( string )**_<br>
-> Response URL.
+> Response URL. This URL can be different from CachedResource.url in case of redirect.
 
 _**status ( number )**_<br>
 > HTTP response status code.
@@ -704,7 +704,7 @@ Information about the cached resource.
 ### Properties
 
 _**url ( string )**_<br>
-> Resource URL.
+> Resource URL. This is the url of the original network request.
 
 _**type ( [Page.ResourceType](Page.md#class-resourcetype) )**_<br>
 > Type of this resource.

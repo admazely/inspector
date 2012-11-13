@@ -10,6 +10,7 @@ Timeline provides its clients with instrumentation records that are generated du
  * [stop](#timelinestopcallback)
  * [setIncludeMemoryDetails](#timelinesetincludememorydetailsenabled-callback)
  * [supportsFrameInstrumentation](#timelinesupportsframeinstrumentationcallback)
+ * [canMonitorMainThread](#timelinecanmonitormainthreadcallback)
 * Events
  * [eventRecorded](#event-eventrecorded)
 * Types
@@ -76,6 +77,22 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 _**result ( boolean )**_<br>
 > True if timeline supports frame instrumentation.
+
+
+
+### Timeline.canMonitorMainThread(callback)
+
+Tells whether timeline agent supports main thread CPU utilization instrumentation.
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**result ( boolean )**_<br>
+> True if timeline supports main thread CPU utilization instrumentation.
 
 
 

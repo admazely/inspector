@@ -109,8 +109,10 @@ _Type: object_
 
 ### Properties
 
-_**functionName ( string )**_<br>
-_**arguments ( array )**_<br>
+_**functionName ( optional string )**_<br>
+_**arguments ( optional array )**_<br>
+_**property ( optional string )**_<br>
+_**value ( optional string )**_<br>
 _**result ( optional string )**_<br>
 _**sourceURL ( optional string )**_<br>
 _**lineNumber ( optional integer )**_<br>

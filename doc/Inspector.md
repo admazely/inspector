@@ -8,6 +8,7 @@ _Auto generated documentation for WebKit inspector `1.0`_
 * Events
  * [evaluateForTestInFrontend](#event-evaluatefortestinfrontend)
  * [inspect](#event-inspect)
+ * [detached](#event-detached)
 
 
 ## Commands
@@ -54,6 +55,17 @@ _**script ( string )**_<br>
 
 _**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 _**hints ( object )**_<br>
+
+
+### Event: detached
+
+Fired when remote debugging connection is about to be terminated. Contains detach reason.
+
+### Results
+
+_**reason ( string )**_<br>
+> The reason why connection has been terminated.
+
 
 
 

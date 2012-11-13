@@ -158,7 +158,10 @@ _**name ( string )**_<br>
 > Database name.
 
 _**version ( string )**_<br>
-> Database version.
+> Deprecated string database version.
+
+_**intVersion ( integer )**_<br>
+> Integer database version.
 
 _**objectStores ( array of [ObjectStore](#class-objectstore) )**_<br>
 > Object stores in this database.
@@ -264,10 +267,10 @@ Data entry.
 
 ### Properties
 
-_**key ( [Key](#class-key) )**_<br>
+_**key ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Key.
 
-_**primaryKey ( [Key](#class-key) )**_<br>
+_**primaryKey ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Primary key.
 
 _**value ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
