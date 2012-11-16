@@ -111,6 +111,19 @@ test("native WebKit inspector binding", function (t) {
             });
         });
 
+        t.test('true error objects callback', function (t) {
+            var inspect;
+
+            inspect = inspector(9222, '127.0.0.1', 'about:blank', function () {
+                inspect.Debugger.resume(function (err) {
+                    t.equal(err.message, 'Can only perform operation while paused.');
+                    t.equal(err.code, -32000);
+
+                    inspect.close(t.end.bind(t));
+                });
+            });
+        });
+
         t.test('constructor callback', function (t) {
             var inspect;
 

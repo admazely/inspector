@@ -188,7 +188,9 @@ WebKitInspector.prototype._respond = function (message) {
         delete this._callbacks[message.id];
 
         if (message.error) {
-            callback.call(null, message.error, null);
+            var err = new Error(message.error.message);
+                err.code = message.error.code;
+            callback.call(null, err, null);
         } else {
             callback.call(null, null, message.result);
         }
