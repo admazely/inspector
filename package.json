@@ -1,8 +1,11 @@
 {
     "name": "inspector",
     "description": "Node.js binding for WebKit Inspector API",
-    "version": "0.1.0",
-    "author": "Andreas Madsen <amwebdk@gmail.com>",
+    "version": "0.2.0",
+    "author": "Admazely <dev@admaze.ly>",
+    "maintainers": [
+        "AndreasMadsen <andreas@admaze.ly>"
+    ],
     "main": "./inspector.js",
     "scripts": {
       "test": "tap ./test/simple"
