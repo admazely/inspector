@@ -67,14 +67,14 @@ inspect.close(function () {
 The WebKit Inspector is splited up intro subparts (called domains).
 
 All WebKit Inspector domains are documented in the
-[doc](https://github.com/AndreasMadsen/inspector/blob/master/doc/README.md)
+[doc](https://github.com/Admazely/inspector/blob/master/doc/README.md)
 directory.
 
 #### inspect\[domain\]\[command\]\(parameters [...], callback\)
 
 Commands are executed by by adding a `[command]` to the domain object, and then
 call it by adding parameters and `callback` as descibed in the
-[documentation](https://github.com/AndreasMadsen/inspector/blob/master/doc/README.md).
+[documentation](https://github.com/Admazely/inspector/blob/master/doc/README.md).
 
 The callback is executed with an `error` argument there is either `null` or an
 `Error` type. The second argument is a response object.
@@ -99,7 +99,7 @@ The WebKit Inspector emits a lot of events, all events are associated with a
 
 The event handler is only emitted with a single parameter, there is a object
 containing properties as described in the
-[documentation](https://github.com/AndreasMadsen/inspector/blob/master/doc/README.md).
+[documentation](https://github.com/Admazely/inspector/blob/master/doc/README.md).
 
 Example on how to listen on the `loadEventFired`, note that you must call
 `Page.enable()` first.
