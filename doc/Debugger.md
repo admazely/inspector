@@ -31,6 +31,7 @@ Debugger domain exposes JavaScript debugging capabilities. It allows setting and
  * [compileScript](#debuggercompilescriptexpression-sourceurl-callback)
  * [runScript](#debuggerrunscriptscriptid-runtimeexecutioncontextid-objectgroup-donotpauseonexceptionsandmuteconsole-callback)
  * [setOverlayMessage](#debuggersetoverlaymessagemessage-callback)
+ * [setVariableValue](#debuggersetvariablevaluecallframeid-runtimeremoteobjectid-scopenumber-variablename-runtimecallargument-callback)
 * Events
  * [globalObjectCleared](#event-globalobjectcleared)
  * [scriptParsed](#event-scriptparsed)
@@ -530,6 +531,34 @@ Sets overlay message.
 
 _**message ( optional string )**_<br>
 > Overlay message to display when paused in debugger.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Debugger.setVariableValue([[CallFrameId](#class-callframeid)], [[Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid)], scopeNumber, variableName, [Runtime.CallArgument](Runtime.md#class-callargument), callback)
+
+Changes value of variable in a callframe or a closure. Either callframe or function must be specified. Object-based scopes are not supported and must be mutated manually.
+
+### Parameters
+
+_**callFrameId ( optional [CallFrameId](#class-callframeid) )**_<br>
+> Id of callframe that holds variable.
+
+_**functionObjectId ( optional [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
+> Object id of closure (function) that holds variable.
+
+_**scopeNumber ( integer )**_<br>
+> 0-based number of scope as was listed in scope chain. Only 'local', 'closure' and 'catch' scope types are allowed. Other scopes could be manipulated manually.
+
+_**variableName ( string )**_<br>
+> Variable name.
+
+_**newValue ( [Runtime.CallArgument](Runtime.md#class-callargument) )**_<br>
+> New variable value.
 
 _**callback ( function )**_<br>
 

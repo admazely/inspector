@@ -10,7 +10,10 @@ _Auto generated documentation for WebKit inspector `1.0`_
  * [removeDOMStorageItem](#domstorageremovedomstorageitemstorageid-key-callback)
 * Events
  * [addDOMStorage](#event-adddomstorage)
- * [domStorageUpdated](#event-domstorageupdated)
+ * [domStorageItemsCleared](#event-domstorageitemscleared)
+ * [domStorageItemRemoved](#event-domstorageitemremoved)
+ * [domStorageItemAdded](#event-domstorageitemadded)
+ * [domStorageItemUpdated](#event-domstorageitemupdated)
 * Types
  * [StorageId](#class-storageid)
  * [Entry](#class-entry)
@@ -96,11 +99,38 @@ _**success ( boolean )**_<br>
 _**storage ( [Entry](#class-entry) )**_<br>
 
 
-### Event: domStorageUpdated
+### Event: domStorageItemsCleared
 
 ### Results
 
 _**storageId ( [StorageId](#class-storageid) )**_<br>
+
+
+### Event: domStorageItemRemoved
+
+### Results
+
+_**storageId ( [StorageId](#class-storageid) )**_<br>
+_**key ( string )**_<br>
+
+
+### Event: domStorageItemAdded
+
+### Results
+
+_**storageId ( [StorageId](#class-storageid) )**_<br>
+_**key ( string )**_<br>
+_**newValue ( string )**_<br>
+
+
+### Event: domStorageItemUpdated
+
+### Results
+
+_**storageId ( [StorageId](#class-storageid) )**_<br>
+_**key ( string )**_<br>
+_**oldValue ( string )**_<br>
+_**newValue ( string )**_<br>
 
 
 ## Types

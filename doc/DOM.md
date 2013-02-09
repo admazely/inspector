@@ -7,7 +7,7 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
 
 * Commands
  * [getDocument](#domgetdocumentcallback)
- * [requestChildNodes](#domrequestchildnodesnodeid-callback)
+ * [requestChildNodes](#domrequestchildnodesnodeid-depth-callback)
  * [querySelector](#domqueryselectornodeid-selector-callback)
  * [querySelectorAll](#domqueryselectorallnodeid-selector-callback)
  * [setNodeName](#domsetnodenamenodeid-name-callback)
@@ -25,7 +25,7 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
  * [requestNode](#domrequestnoderuntimeremoteobjectid-callback)
  * [setInspectModeEnabled](#domsetinspectmodeenabledenabled-highlightconfig-callback)
  * [highlightRect](#domhighlightrectx-y-width-height-rgba-rgba-callback)
- * [highlightNode](#domhighlightnodenodeid-highlightconfig-callback)
+ * [highlightNode](#domhighlightnodehighlightconfig-nodeid-runtimeremoteobjectid-callback)
  * [hideHighlight](#domhidehighlightcallback)
  * [highlightFrame](#domhighlightframenetworkframeid-rgba-rgba-callback)
  * [pushNodeByPathToFrontend](#dompushnodebypathtofrontendpath-callback)
@@ -35,6 +35,7 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
  * [undo](#domundocallback)
  * [redo](#domredocallback)
  * [markUndoableState](#dommarkundoablestatecallback)
+ * [focus](#domfocusdomnodeid-callback)
 * Events
  * [documentUpdated](#event-documentupdated)
  * [setChildNodes](#event-setchildnodes)
@@ -73,14 +74,17 @@ _**root ( [Node](#class-node) )**_<br>
 
 
 
-### DOM.requestChildNodes([NodeId](#class-nodeid), callback)
+### DOM.requestChildNodes([NodeId](#class-nodeid), [depth], callback)
 
-Requests that children of the node with given id are returned to the caller in form of `setChildNodes` events.
+Requests that children of the node with given id are returned to the caller in form of `setChildNodes` events where not only immediate children are retrieved, but all children down to the specified depth.
 
 ### Parameters
 
 _**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to get children for.
+
+_**depth ( optional integer )**_<br>
+> The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the entire subtree or provide an integer larger than 0.
 
 _**callback ( function )**_<br>
 
@@ -442,17 +446,20 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.highlightNode([NodeId](#class-nodeid), [HighlightConfig](#class-highlightconfig), callback)
+### DOM.highlightNode([HighlightConfig](#class-highlightconfig), [[NodeId](#class-nodeid)], [[Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid)], callback)
 
-Highlights DOM node with given id.
+Highlights DOM node with given id or with the given JavaScript object wrapper. Either nodeId or objectId must be specified.
 
 ### Parameters
 
-_**nodeId ( [NodeId](#class-nodeid) )**_<br>
-> Identifier of the node to highlight.
-
 _**highlightConfig ( [HighlightConfig](#class-highlightconfig) )**_<br>
 > A descriptor for the highlight appearance.
+
+_**nodeId ( optional [NodeId](#class-nodeid) )**_<br>
+> Identifier of the node to highlight.
+
+_**objectId ( optional [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
+> JavaScript object id of the node to be highlighted.
 
 _**callback ( function )**_<br>
 
@@ -612,6 +619,22 @@ _**error ( error )**_<br>
 Marks last undoable state.
 
 ### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### DOM.focus([DOM.NodeId](DOM.md#class-nodeid), callback)
+
+Focuses the given element.
+
+### Parameters
+
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> Id of the node to focus.
 
 _**callback ( function )**_<br>
 
@@ -835,11 +858,17 @@ _**name ( optional string )**_<br>
 _**value ( optional string )**_<br>
 > <code>Attr</code>'s value.
 
+_**frameId ( optional [Network.FrameId](Network.md#class-frameid) )**_<br>
+> Frame ID for frame owner elements.
+
 _**contentDocument ( optional [Node](#class-node) )**_<br>
 > Content document for frame owner elements.
 
 _**shadowRoots ( optional array of [Node](#class-node) )**_<br>
 > Shadow root list for given element host.
+
+_**templateContent ( optional [Node](#class-node) )**_<br>
+> Content document fragment for template elements
 
 
 

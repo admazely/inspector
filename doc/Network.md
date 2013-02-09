@@ -646,9 +646,6 @@ WebSocket request data.
 
 ### Properties
 
-_**requestKey3 ( string )**_<br>
-> HTTP response status text.
-
 _**headers ( [Headers](#class-headers) )**_<br>
 > HTTP response headers.
 
@@ -670,9 +667,6 @@ _**statusText ( string )**_<br>
 
 _**headers ( [Headers](#class-headers) )**_<br>
 > HTTP response headers.
-
-_**challengeResponse ( string )**_<br>
-> Challenge response.
 
 
 

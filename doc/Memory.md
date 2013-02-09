@@ -3,19 +3,18 @@
 _Auto generated documentation for WebKit inspector `1.0`_
 
 * Commands
- * [getDOMNodeCount](#memorygetdomnodecountcallback)
- * [getProcessMemoryDistribution](#memorygetprocessmemorydistributioncallback)
+ * [getDOMCounters](#memorygetdomcounterscallback)
+ * [getProcessMemoryDistribution](#memorygetprocessmemorydistributionreportgraph-callback)
+* Events
+ * [addNativeSnapshotChunk](#event-addnativesnapshotchunk)
 * Types
- * [NodeCount](#class-nodecount)
- * [ListenerCount](#class-listenercount)
- * [StringStatistics](#class-stringstatistics)
- * [DOMGroup](#class-domgroup)
  * [MemoryBlock](#class-memoryblock)
+ * [HeapSnapshotChunk](#class-heapsnapshotchunk)
 
 
 ## Commands
 
-### Memory.getDOMNodeCount(callback)
+### Memory.getDOMCounters(callback)
 
 ### Parameters
 
@@ -24,13 +23,17 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**domGroups ( array of [DOMGroup](#class-domgroup) )**_<br>
-_**strings ( [StringStatistics](#class-stringstatistics) )**_<br>
+_**documents ( integer )**_<br>
+_**nodes ( integer )**_<br>
+_**jsEventListeners ( integer )**_<br>
 
 
-### Memory.getProcessMemoryDistribution(callback)
+### Memory.getProcessMemoryDistribution([reportGraph], callback)
 
 ### Parameters
+
+_**reportGraph ( optional boolean )**_<br>
+> Whether native memory graph should be reported in addition to aggregated statistics.
 
 _**callback ( function )**_<br>
 
@@ -42,57 +45,18 @@ _**distribution ( [MemoryBlock](#class-memoryblock) )**_<br>
 
 
 
+## Events
+
+### Event: addNativeSnapshotChunk
+
+### Results
+
+_**chunk ( [HeapSnapshotChunk](#class-heapsnapshotchunk) )**_<br>
+> A chunk of the serialized the snapshot.
+
+
+
 ## Types
-
-### Class: NodeCount
-
-_Type: object_
-
-Number of nodes with given name.
-
-### Properties
-
-_**nodeName ( string )**_<br>
-_**count ( integer )**_<br>
-
-
-### Class: ListenerCount
-
-_Type: object_
-
-Number of JS event listeners by event type.
-
-### Properties
-
-_**type ( string )**_<br>
-_**count ( integer )**_<br>
-
-
-### Class: StringStatistics
-
-_Type: object_
-
-Character data statistics for the page.
-
-### Properties
-
-_**dom ( integer )**_<br>
-_**js ( integer )**_<br>
-_**shared ( integer )**_<br>
-
-
-### Class: DOMGroup
-
-_Type: object_
-
-### Properties
-
-_**size ( integer )**_<br>
-_**title ( string )**_<br>
-_**documentURI ( optional string )**_<br>
-_**nodeCount ( array of [NodeCount](#class-nodecount) )**_<br>
-_**listenerCount ( array of [ListenerCount](#class-listenercount) )**_<br>
-
 
 ### Class: MemoryBlock
 
@@ -107,6 +71,26 @@ _**name ( string )**_<br>
 > Unique name used to identify the component that allocated this block
 
 _**children ( optional array of [MemoryBlock](#class-memoryblock) )**_<br>
+
+
+### Class: HeapSnapshotChunk
+
+_Type: object_
+
+### Properties
+
+_**strings ( array )**_<br>
+> An array of strings that were found since last update.
+
+_**nodes ( array )**_<br>
+> An array of nodes that were found since last update.
+
+_**edges ( array )**_<br>
+> An array of edges that were found since last update.
+
+_**baseToRealNodeId ( array )**_<br>
+> An array of integers for nodeId remapping. Even nodeId has to be mapped to the following odd nodeId.
+
 
 
 

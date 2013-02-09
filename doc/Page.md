@@ -10,10 +10,10 @@ Actions and events related to the inspected page belong to the page domain.
  * [disable](#pagedisablecallback)
  * [addScriptToEvaluateOnLoad](#pageaddscripttoevaluateonloadscriptsource-callback)
  * [removeScriptToEvaluateOnLoad](#pageremovescripttoevaluateonloadscriptidentifier-callback)
- * [reload](#pagereloadignorecache-scripttoevaluateonload-callback)
+ * [reload](#pagereloadignorecache-scripttoevaluateonload-scriptpreprocessor-callback)
  * [navigate](#pagenavigateurl-callback)
  * [getCookies](#pagegetcookiescallback)
- * [deleteCookie](#pagedeletecookiecookiename-domain-callback)
+ * [deleteCookie](#pagedeletecookiecookiename-url-callback)
  * [getResourceTree](#pagegetresourcetreecallback)
  * [getResourceContent](#pagegetresourcecontentnetworkframeid-url-callback)
  * [searchInResource](#pagesearchinresourcenetworkframeid-url-query-casesensitive-isregex-callback)
@@ -22,6 +22,12 @@ Actions and events related to the inspected page belong to the page domain.
  * [canOverrideDeviceMetrics](#pagecanoverridedevicemetricscallback)
  * [setDeviceMetricsOverride](#pagesetdevicemetricsoverridewidth-height-fontscalefactor-fitwindow-callback)
  * [setShowPaintRects](#pagesetshowpaintrectsresult-callback)
+ * [canShowDebugBorders](#pagecanshowdebugborderscallback)
+ * [setShowDebugBorders](#pagesetshowdebugbordersshow-callback)
+ * [canShowFPSCounter](#pagecanshowfpscountercallback)
+ * [setShowFPSCounter](#pagesetshowfpscountershow-callback)
+ * [canContinuouslyPaint](#pagecancontinuouslypaintcallback)
+ * [setContinuousPaintingEnabled](#pagesetcontinuouspaintingenabledenabled-callback)
  * [getScriptExecutionStatus](#pagegetscriptexecutionstatuscallback)
  * [setScriptExecutionDisabled](#pagesetscriptexecutiondisabledvalue-callback)
  * [setGeolocationOverride](#pagesetgeolocationoverridelatitude-longitude-accuracy-callback)
@@ -31,13 +37,22 @@ Actions and events related to the inspected page belong to the page domain.
  * [clearDeviceOrientationOverride](#pagecleardeviceorientationoverridecallback)
  * [canOverrideDeviceOrientation](#pagecanoverridedeviceorientationcallback)
  * [setTouchEmulationEnabled](#pagesettouchemulationenabledenabled-callback)
+ * [setEmulatedMedia](#pagesetemulatedmediamedia-callback)
  * [getCompositingBordersVisible](#pagegetcompositingbordersvisiblecallback)
  * [setCompositingBordersVisible](#pagesetcompositingbordersvisiblevisible-callback)
+ * [captureScreenshot](#pagecapturescreenshotcallback)
+ * [handleJavaScriptDialog](#pagehandlejavascriptdialogaccept-callback)
 * Events
  * [domContentEventFired](#event-domcontenteventfired)
  * [loadEventFired](#event-loadeventfired)
  * [frameNavigated](#event-framenavigated)
  * [frameDetached](#event-framedetached)
+ * [frameStartedLoading](#event-framestartedloading)
+ * [frameStoppedLoading](#event-framestoppedloading)
+ * [frameScheduledNavigation](#event-frameschedulednavigation)
+ * [frameClearedScheduledNavigation](#event-frameclearedschedulednavigation)
+ * [javascriptDialogOpening](#event-javascriptdialogopening)
+ * [javascriptDialogClosed](#event-javascriptdialogclosed)
 * Types
  * [ResourceType](#class-resourcetype)
  * [Frame](#class-frame)
@@ -103,7 +118,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Page.reload([ignoreCache], [scriptToEvaluateOnLoad], callback)
+### Page.reload([ignoreCache], [scriptToEvaluateOnLoad], [scriptPreprocessor], callback)
 
 Reloads given page optionally ignoring the cache.
 
@@ -114,6 +129,9 @@ _**ignoreCache ( optional boolean )**_<br>
 
 _**scriptToEvaluateOnLoad ( optional string )**_<br>
 > If set, the script will be injected into all frames of the inspected page after reload.
+
+_**scriptPreprocessor ( optional string )**_<br>
+> Script body that should evaluate to function that will preprocess all the scripts before their compilation.
 
 _**callback ( function )**_<br>
 
@@ -157,17 +175,17 @@ _**cookiesString ( string )**_<br>
 
 
 
-### Page.deleteCookie(cookieName, domain, callback)
+### Page.deleteCookie(cookieName, url, callback)
 
-Deletes browser cookie with given name for the given domain.
+Deletes browser cookie with given name, domain and path.
 
 ### Parameters
 
 _**cookieName ( string )**_<br>
 > Name of the cookie to remove.
 
-_**domain ( string )**_<br>
-> Domain of the cookie to remove.
+_**url ( string )**_<br>
+> URL to match cooke domain and path.
 
 _**callback ( function )**_<br>
 
@@ -349,6 +367,102 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
+### Page.canShowDebugBorders(callback)
+
+Tells if backend supports debug borders on layers
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**show ( boolean )**_<br>
+> True if the debug borders can be shown
+
+
+
+### Page.setShowDebugBorders(show, callback)
+
+Requests that backend shows debug borders on layers
+
+### Parameters
+
+_**show ( boolean )**_<br>
+> True for showing debug borders
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Page.canShowFPSCounter(callback)
+
+Tells if backend supports a FPS counter display
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**show ( boolean )**_<br>
+> True if the FPS count can be shown
+
+
+
+### Page.setShowFPSCounter(show, callback)
+
+Requests that backend shows the FPS counter
+
+### Parameters
+
+_**show ( boolean )**_<br>
+> True for showing the FPS counter
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Page.canContinuouslyPaint(callback)
+
+Tells if backend supports continuous painting
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**value ( boolean )**_<br>
+> True if continuous painting is available
+
+
+
+### Page.setContinuousPaintingEnabled(enabled, callback)
+
+Requests that backend enables continuous painting
+
+### Parameters
+
+_**enabled ( boolean )**_<br>
+> True for enabling cointinuous painting
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
 ### Page.getScriptExecutionStatus(callback)
 
 Determines if scripts can be executed in the page.
@@ -499,6 +613,22 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
+### Page.setEmulatedMedia(media, callback)
+
+Emulates the given media for CSS media queries.
+
+### Parameters
+
+_**media ( string )**_<br>
+> Media type to emulate. Empty string disables the override.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
 ### Page.getCompositingBordersVisible(callback)
 
 Indicates the visibility of compositing borders.
@@ -523,6 +653,38 @@ Controls the visibility of compositing borders.
 
 _**visible ( boolean )**_<br>
 > True for showing compositing borders.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Page.captureScreenshot(callback)
+
+Capture page screenshot.
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**data ( string )**_<br>
+> Base64-encoded image data (PNG).
+
+
+
+### Page.handleJavaScriptDialog(accept, callback)
+
+Accepts or dismisses a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload).
+
+### Parameters
+
+_**accept ( boolean )**_<br>
+> Whether to accept or dismiss the dialog.
 
 _**callback ( function )**_<br>
 
@@ -567,6 +729,69 @@ Fired when frame has been detached from its parent.
 _**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Id of the frame that has been detached.
 
+
+
+### Event: frameStartedLoading
+
+Fired when frame has started loading.
+
+### Results
+
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
+> Id of the frame that has started loading.
+
+
+
+### Event: frameStoppedLoading
+
+Fired when frame has stopped loading.
+
+### Results
+
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
+> Id of the frame that has stopped loading.
+
+
+
+### Event: frameScheduledNavigation
+
+Fired when frame schedules a potential navigation.
+
+### Results
+
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
+> Id of the frame that has scheduled a navigation.
+
+_**delay ( number )**_<br>
+> Delay (in seconds) until the navigation is scheduled to begin. The navigation is not guaranteed to start.
+
+
+
+### Event: frameClearedScheduledNavigation
+
+Fired when frame no longer has a scheduled navigation.
+
+### Results
+
+_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
+> Id of the frame that has cleared its scheduled navigation.
+
+
+
+### Event: javascriptDialogOpening
+
+Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to open.
+
+### Results
+
+_**message ( string )**_<br>
+> Message that will be displayed by the dialog.
+
+
+
+### Event: javascriptDialogClosed
+
+Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been closed.
 
 
 ## Types
