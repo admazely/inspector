@@ -11,10 +11,10 @@ var inspect = inspector(9222, '127.0.0.1', 'about:blank', function () {
     inspect.Page.enable(function (error) {
         if (error) throw error;
 
-        inspect.Page.once('loadEventFired', function (error) {
-            if (error) throw error;
-
-            // window.onload emitted
+        inspect.Page.once('loadEventFired', function (response) {
+            
+            // window.onload emitted at this time `timestamp`:
+            console.log(new Date(response.timestamp));
         });
     });
 });
@@ -105,9 +105,8 @@ Example on how to listen on the `loadEventFired`, note that you must call
 `Page.enable()` first.
 
 ```JavaScript
-inspect.Page.once('loadEventFired', function (error, response) {
-    if (error) throw error;
-
+inspect.Page.once('loadEventFired', function (response) {
+    
     // window.onload emitted at this time `timestamp`:
     console.log(new Date(response.timestamp));
 });
