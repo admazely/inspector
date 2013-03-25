@@ -38,7 +38,6 @@ function Browser(port, href, callback) {
             '--no-process-singleton-dialog',
             '--disable-prompt-on-repost',
             '--disable-plugins',
-            '--kiosk',
             '--safebrowsing-disable-auto-update'
         ];
 
