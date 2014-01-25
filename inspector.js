@@ -3,9 +3,9 @@ var fs = require('fs');
 var path = require('path');
 var util = require('util');
 var http = require('http');
-var flower = require('flower');
 var events = require('events');
 var WebSocket = require('ws');
+var endpoint = require('endpoint');
 
 // Load library
 var library = {};
@@ -61,7 +61,7 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
 
     var time = Date.now();
     var req = http.get('http://' + host + ':' + port + '/json', function (res) {
-        flower.stream2buffer(res, function (err, buffer) {
+        res.pipe(endpoint(function (err, buffer) {
             if (err) return self.emit('error', err);
 
             // Check that .close wasn't executed
@@ -93,7 +93,7 @@ WebKitInspector.prototype._tryConnect = function(port, host, href, use, timeout)
             self._ws.on('error', self.emit.bind(self, 'error'));
             self._ws.once('open', self.emit.bind(self, 'connect'));
             self._ws.once('close', self.close.bind(self));
-        });
+        }));
     });
 
     // Send request error to main object
