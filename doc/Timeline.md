@@ -1,25 +1,26 @@
 # Timeline
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 Timeline provides its clients with instrumentation records that are generated during the page runtime. Timeline instrumentation can be started and stopped using corresponding commands. While timeline is started, it is generating timeline event records.
 
 
 * Commands
- * [start](#timelinestartmaxcallstackdepth-callback)
+ * [start](#timelinestartmaxcallstackdepth-includedomcounters-callback)
  * [stop](#timelinestopcallback)
- * [setIncludeMemoryDetails](#timelinesetincludememorydetailsenabled-callback)
  * [supportsFrameInstrumentation](#timelinesupportsframeinstrumentationcallback)
  * [canMonitorMainThread](#timelinecanmonitormainthreadcallback)
 * Events
  * [eventRecorded](#event-eventrecorded)
 * Types
+ * [DOMCounters](#class-domcounters)
+ * [EventType](#class-eventtype)
  * [TimelineEvent](#class-timelineevent)
 
 
 ## Commands
 
-### Timeline.start([maxCallStackDepth], callback)
+### Timeline.start([maxCallStackDepth], [includeDomCounters], callback)
 
 Starts capturing instrumentation events.
 
@@ -27,6 +28,9 @@ Starts capturing instrumentation events.
 
 _**maxCallStackDepth ( optional integer )**_<br>
 > Samples JavaScript stack traces up to <code>maxCallStackDepth</code>, defaults to 5.
+
+_**includeDomCounters ( optional boolean )**_<br>
+> Whether DOM counters data should be included into timeline events.
 
 _**callback ( function )**_<br>
 
@@ -40,22 +44,6 @@ _**error ( error )**_<br>
 Stops capturing instrumentation events.
 
 ### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Timeline.setIncludeMemoryDetails(enabled, callback)
-
-Starts calculating various DOM statistics and sending them as part of timeline events.
-
-### Parameters
-
-_**enabled ( boolean )**_<br>
-> True to start collecting DOM counters.
 
 _**callback ( function )**_<br>
 
@@ -111,6 +99,26 @@ _**record ( [TimelineEvent](#class-timelineevent) )**_<br>
 
 ## Types
 
+### Class: DOMCounters
+
+_Type: object_
+
+Current values of DOM counters.
+
+### Properties
+
+_**documents ( integer )**_<br>
+_**nodes ( integer )**_<br>
+_**jsEventListeners ( integer )**_<br>
+
+
+### Class: EventType
+
+_Type: string_
+
+Timeline record type.
+
+
 ### Class: TimelineEvent
 
 _Type: object_
@@ -119,14 +127,23 @@ Timeline record contains information about the recorded activity.
 
 ### Properties
 
-_**type ( string )**_<br>
+_**type ( [EventType](#class-eventtype) )**_<br>
 > Event type.
+
+_**thread ( optional string )**_<br>
+> If present, identifies the thread that produced the event.
 
 _**data ( object )**_<br>
 > Event data.
 
 _**children ( optional array of [TimelineEvent](#class-timelineevent) )**_<br>
 > Nested records.
+
+_**counters ( optional [DOMCounters](#class-domcounters) )**_<br>
+> Current values of DOM counters.
+
+_**usedHeapSize ( optional integer )**_<br>
+> Current size of JS heap.
 
 
 

@@ -9,13 +9,13 @@ module.exports = function (api) {
     }
 
     // A domain is a collection of Methods, Classes and Events.
-    api.domains.forEach(function (domain) {
+    api.forEach(function (domain) {
         var doc = openScript(domain.domain);
 
         // Print domain title
         doc.write('//\n');
         doc.write('// Auto genereated script\n');
-        doc.write('// Web Inspector API ' + api.version.major + '.' + api.version.minor + '\n');
+        doc.write('// Web Inspector API\n');
         doc.write('//\n');
         doc.write('\n');
 

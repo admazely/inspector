@@ -1,22 +1,23 @@
 # DOMStorage
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
+
+Query and modify DOM storage.
+
 
 * Commands
  * [enable](#domstorageenablecallback)
  * [disable](#domstoragedisablecallback)
- * [getDOMStorageEntries](#domstoragegetdomstorageentriesstorageid-callback)
+ * [getDOMStorageItems](#domstoragegetdomstorageitemsstorageid-callback)
  * [setDOMStorageItem](#domstoragesetdomstorageitemstorageid-key-value-callback)
  * [removeDOMStorageItem](#domstorageremovedomstorageitemstorageid-key-callback)
 * Events
- * [addDOMStorage](#event-adddomstorage)
  * [domStorageItemsCleared](#event-domstorageitemscleared)
  * [domStorageItemRemoved](#event-domstorageitemremoved)
  * [domStorageItemAdded](#event-domstorageitemadded)
  * [domStorageItemUpdated](#event-domstorageitemupdated)
 * Types
  * [StorageId](#class-storageid)
- * [Entry](#class-entry)
  * [Item](#class-item)
 
 
@@ -48,7 +49,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOMStorage.getDOMStorageEntries([StorageId](#class-storageid), callback)
+### DOMStorage.getDOMStorageItems([StorageId](#class-storageid), callback)
 
 ### Parameters
 
@@ -73,7 +74,6 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**success ( boolean )**_<br>
 
 
 ### DOMStorage.removeDOMStorageItem([StorageId](#class-storageid), key, callback)
@@ -87,17 +87,9 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**success ( boolean )**_<br>
 
 
 ## Events
-
-### Event: addDOMStorage
-
-### Results
-
-_**storage ( [Entry](#class-entry) )**_<br>
-
 
 ### Event: domStorageItemsCleared
 
@@ -137,27 +129,17 @@ _**newValue ( string )**_<br>
 
 ### Class: StorageId
 
-_Type: string_
-
-Unique identifier of DOM storage entry.
-
-
-### Class: Entry
-
 _Type: object_
 
-DOM Storage entry.
+DOM Storage identifier.
 
 ### Properties
 
-_**origin ( string )**_<br>
-> Document origin.
+_**securityOrigin ( string )**_<br>
+> Security origin for the storage.
 
 _**isLocalStorage ( boolean )**_<br>
-> True for local storage.
-
-_**id ( [StorageId](#class-storageid) )**_<br>
-> Entry id for further reference.
+> Whether the storage is local storage (not session storage).
 
 
 

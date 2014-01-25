@@ -1,6 +1,6 @@
 # Canvas
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 * Commands
  * [enable](#canvasenablecallback)
@@ -266,6 +266,7 @@ _**functionName ( optional string )**_<br>
 _**arguments ( optional array of [CallArgument](#class-callargument) )**_<br>
 _**result ( optional [CallArgument](#class-callargument) )**_<br>
 _**isDrawingCall ( optional boolean )**_<br>
+_**isFrameEndCall ( optional boolean )**_<br>
 _**property ( optional string )**_<br>
 _**value ( optional [CallArgument](#class-callargument) )**_<br>
 _**sourceURL ( optional string )**_<br>

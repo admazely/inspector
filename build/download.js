@@ -1,8 +1,37 @@
 
+var endpoint = require('endpoint');
 var https = require('https');
+var async = require('async');
 var path = require('path');
 var fs = require('fs');
 
-https.get('https://raw.github.com/WebKit/webkit/master/Source/WebCore/inspector/Inspector.json', function (res) {
-    res.pipe( fs.createWriteStream(path.resolve(__dirname, 'inspector.json')) );
+var domainNames = [
+    'ApplicationCache', 'CSS', 'Canvas', 'Console',
+    'DOM', 'DOMDebugger', 'DOMStorage', 'Database',
+    'HeapProfiler', 'IndexedDB', 'Input', 'LayerTree',
+    'Memory', 'Network', 'Page', 'Profiler', 'Timeline',
+    'Worker'
+];
+
+async.map(domainNames, fetch, function (err, domains) {
+    if (err) throw err;
+
+    fs.writeFile(
+        path.resolve(__dirname, 'inspector.json'),
+        JSON.stringify(domains, null, '\t'),
+        function (err) {
+            if (err) throw err;
+            console.log('fetched and build inspector.json');
+        }
+    );
 });
+
+function fetch(name, done) {
+    var href = 'https://raw.github.com/WebKit/webkit/master/Source/WebCore/inspector/protocol/' + name + '.json';
+    https.get(href, function (res) {
+        res.pipe(endpoint(function (err, body) {
+            if (err) return done(err, null);
+            else return done(null, JSON.parse(body.toString()));
+        }));
+    });
+}

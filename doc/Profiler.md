@@ -1,9 +1,8 @@
 # Profiler
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 * Commands
- * [causesRecompilation](#profilercausesrecompilationcallback)
  * [isSampling](#profilerissamplingcallback)
  * [hasHeapProfiler](#profilerhasheapprofilercallback)
  * [enable](#profilerenablecallback)
@@ -34,18 +33,6 @@ _Auto generated documentation for WebKit inspector `1.0`_
 
 
 ## Commands
-
-### Profiler.causesRecompilation(callback)
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-
 
 ### Profiler.isSampling(callback)
 
@@ -337,6 +324,9 @@ _**callUID ( number )**_<br>
 _**children ( array of [CPUProfileNode](#class-cpuprofilenode) )**_<br>
 > Child nodes.
 
+_**id ( optional integer )**_<br>
+> Unique id of the node.
+
 
 
 ### Class: CPUProfile
@@ -348,8 +338,10 @@ Profile.
 ### Properties
 
 _**head ( optional [CPUProfileNode](#class-cpuprofilenode) )**_<br>
-_**bottomUpHead ( optional [CPUProfileNode](#class-cpuprofilenode) )**_<br>
 _**idleTime ( optional number )**_<br>
+_**samples ( optional array )**_<br>
+> Ids of samples top nodes.
+
 
 
 ### Class: HeapSnapshotObjectId

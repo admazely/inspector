@@ -1,6 +1,6 @@
 # Page
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 Actions and events related to the inspected page belong to the page domain.
 
@@ -10,7 +10,7 @@ Actions and events related to the inspected page belong to the page domain.
  * [disable](#pagedisablecallback)
  * [addScriptToEvaluateOnLoad](#pageaddscripttoevaluateonloadscriptsource-callback)
  * [removeScriptToEvaluateOnLoad](#pageremovescripttoevaluateonloadscriptidentifier-callback)
- * [reload](#pagereloadignorecache-scripttoevaluateonload-scriptpreprocessor-callback)
+ * [reload](#pagereloadignorecache-scripttoevaluateonload-callback)
  * [navigate](#pagenavigateurl-callback)
  * [getCookies](#pagegetcookiescallback)
  * [deleteCookie](#pagedeletecookiecookiename-url-callback)
@@ -19,8 +19,6 @@ Actions and events related to the inspected page belong to the page domain.
  * [searchInResource](#pagesearchinresourcenetworkframeid-url-query-casesensitive-isregex-callback)
  * [searchInResources](#pagesearchinresourcestext-casesensitive-isregex-callback)
  * [setDocumentContent](#pagesetdocumentcontentnetworkframeid-html-callback)
- * [canOverrideDeviceMetrics](#pagecanoverridedevicemetricscallback)
- * [setDeviceMetricsOverride](#pagesetdevicemetricsoverridewidth-height-fontscalefactor-fitwindow-callback)
  * [setShowPaintRects](#pagesetshowpaintrectsresult-callback)
  * [canShowDebugBorders](#pagecanshowdebugborderscallback)
  * [setShowDebugBorders](#pagesetshowdebugbordersshow-callback)
@@ -30,18 +28,14 @@ Actions and events related to the inspected page belong to the page domain.
  * [setContinuousPaintingEnabled](#pagesetcontinuouspaintingenabledenabled-callback)
  * [getScriptExecutionStatus](#pagegetscriptexecutionstatuscallback)
  * [setScriptExecutionDisabled](#pagesetscriptexecutiondisabledvalue-callback)
- * [setGeolocationOverride](#pagesetgeolocationoverridelatitude-longitude-accuracy-callback)
- * [clearGeolocationOverride](#pagecleargeolocationoverridecallback)
- * [canOverrideGeolocation](#pagecanoverridegeolocationcallback)
- * [setDeviceOrientationOverride](#pagesetdeviceorientationoverridealpha-beta-gamma-callback)
- * [clearDeviceOrientationOverride](#pagecleardeviceorientationoverridecallback)
- * [canOverrideDeviceOrientation](#pagecanoverridedeviceorientationcallback)
  * [setTouchEmulationEnabled](#pagesettouchemulationenabledenabled-callback)
  * [setEmulatedMedia](#pagesetemulatedmediamedia-callback)
  * [getCompositingBordersVisible](#pagegetcompositingbordersvisiblecallback)
  * [setCompositingBordersVisible](#pagesetcompositingbordersvisiblevisible-callback)
- * [captureScreenshot](#pagecapturescreenshotcallback)
- * [handleJavaScriptDialog](#pagehandlejavascriptdialogaccept-callback)
+ * [snapshotNode](#pagesnapshotnodedomnodeid-callback)
+ * [snapshotRect](#pagesnapshotrectx-y-width-height-coordinatesystem-callback)
+ * [handleJavaScriptDialog](#pagehandlejavascriptdialogaccept-prompttext-callback)
+ * [archive](#pagearchivecallback)
 * Events
  * [domContentEventFired](#event-domcontenteventfired)
  * [loadEventFired](#event-loadeventfired)
@@ -53,11 +47,12 @@ Actions and events related to the inspected page belong to the page domain.
  * [frameClearedScheduledNavigation](#event-frameclearedschedulednavigation)
  * [javascriptDialogOpening](#event-javascriptdialogopening)
  * [javascriptDialogClosed](#event-javascriptdialogclosed)
+ * [scriptsEnabled](#event-scriptsenabled)
 * Types
  * [ResourceType](#class-resourcetype)
+ * [CoordinateSystem](#class-coordinatesystem)
  * [Frame](#class-frame)
  * [FrameResourceTree](#class-frameresourcetree)
- * [SearchMatch](#class-searchmatch)
  * [SearchResult](#class-searchresult)
  * [Cookie](#class-cookie)
  * [ScriptIdentifier](#class-scriptidentifier)
@@ -118,7 +113,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Page.reload([ignoreCache], [scriptToEvaluateOnLoad], [scriptPreprocessor], callback)
+### Page.reload([ignoreCache], [scriptToEvaluateOnLoad], callback)
 
 Reloads given page optionally ignoring the cache.
 
@@ -129,9 +124,6 @@ _**ignoreCache ( optional boolean )**_<br>
 
 _**scriptToEvaluateOnLoad ( optional string )**_<br>
 > If set, the script will be injected into all frames of the inspected page after reload.
-
-_**scriptPreprocessor ( optional string )**_<br>
-> Script body that should evaluate to function that will preprocess all the scripts before their compilation.
 
 _**callback ( function )**_<br>
 
@@ -158,7 +150,7 @@ _**error ( error )**_<br>
 
 ### Page.getCookies(callback)
 
-Returns all browser cookies. Depending on the backend support, will either return detailed cookie information in the `cookie` field or string cookie representation using `cookieString`.
+Returns all browser cookies. Depending on the backend support, will return detailed cookie information in the `cookies` field.
 
 ### Parameters
 
@@ -169,9 +161,6 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 _**cookies ( array of [Cookie](#class-cookie) )**_<br>
 > Array of cookie objects.
-
-_**cookiesString ( string )**_<br>
-> document.cookie string representation of the cookies.
 
 
 
@@ -261,7 +250,7 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( array of [SearchMatch](#class-searchmatch) )**_<br>
+_**result ( array of [GenericTypes.SearchMatch](GenericTypes.md#class-searchmatch) )**_<br>
 > List of search matches.
 
 
@@ -302,47 +291,6 @@ _**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 
 _**html ( string )**_<br>
 > HTML content to set.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.canOverrideDeviceMetrics(callback)
-
-Checks whether `setDeviceMetricsOverride` can be invoked.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> If true, <code>setDeviceMetricsOverride</code> can safely be invoked on the agent.
-
-
-
-### Page.setDeviceMetricsOverride(width, height, fontScaleFactor, fitWindow, callback)
-
-Overrides the values of device screen dimensions (window.screen.width, window.screen.height, window.innerWidth, window.innerHeight, and "device-width"/"device-height"-related CSS media query results) and the font scale factor.
-
-### Parameters
-
-_**width ( integer )**_<br>
-> Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
-
-_**height ( integer )**_<br>
-> Overriding height value in pixels (minimum 0, maximum 10000000). 0 disables the override.
-
-_**fontScaleFactor ( number )**_<br>
-> Overriding font scale factor value (must be positive). 1 disables the override.
-
-_**fitWindow ( boolean )**_<br>
-> Whether a view that exceeds the available browser window area should be scaled down to fit.
 
 _**callback ( function )**_<br>
 
@@ -495,108 +443,6 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Page.setGeolocationOverride([latitude], [longitude], [accuracy], callback)
-
-Overrides the Geolocation Position or Error.
-
-### Parameters
-
-_**latitude ( optional number )**_<br>
-> Mock longitude
-
-_**longitude ( optional number )**_<br>
-> Mock latitude
-
-_**accuracy ( optional number )**_<br>
-> Mock accuracy
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.clearGeolocationOverride(callback)
-
-Clears the overriden Geolocation Position and Error.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.canOverrideGeolocation(callback)
-
-Checks if Geolocation can be overridden.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> True if browser can ovrride Geolocation.
-
-
-
-### Page.setDeviceOrientationOverride(alpha, beta, gamma, callback)
-
-Overrides the Device Orientation.
-
-### Parameters
-
-_**alpha ( number )**_<br>
-> Mock alpha
-
-_**beta ( number )**_<br>
-> Mock beta
-
-_**gamma ( number )**_<br>
-> Mock gamma
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.clearDeviceOrientationOverride(callback)
-
-Clears the overridden Device Orientation.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.canOverrideDeviceOrientation(callback)
-
-Check the backend if Web Inspector can override the device orientation.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> If true, <code>setDeviceOrientationOverride</code> can safely be invoked on the agent.
-
-
-
 ### Page.setTouchEmulationEnabled(enabled, callback)
 
 Toggles mouse event-based touch event emulation.
@@ -661,9 +507,78 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Page.captureScreenshot(callback)
+### Page.snapshotNode([DOM.NodeId](DOM.md#class-nodeid), callback)
 
-Capture page screenshot.
+Capture a snapshot of the specified node that does not include unrelated layers.
+
+### Parameters
+
+_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> Id of the node to snapshot.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**dataURL ( string )**_<br>
+> Base64-encoded image data (PNG).
+
+
+
+### Page.snapshotRect(x, y, width, height, [CoordinateSystem](#class-coordinatesystem), callback)
+
+Capture a snapshot of the page within the specified rectangle and coordinate system.
+
+### Parameters
+
+_**x ( integer )**_<br>
+> X coordinate
+
+_**y ( integer )**_<br>
+> Y coordinate
+
+_**width ( integer )**_<br>
+> Rectangle width
+
+_**height ( integer )**_<br>
+> Rectangle height
+
+_**coordinateSystem ( [CoordinateSystem](#class-coordinatesystem) )**_<br>
+> Indicates the coordinate system of the supplied rectangle.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**dataURL ( string )**_<br>
+> Base64-encoded image data (PNG).
+
+
+
+### Page.handleJavaScriptDialog(accept, [promptText], callback)
+
+Accepts or dismisses a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload).
+
+### Parameters
+
+_**accept ( boolean )**_<br>
+> Whether to accept or dismiss the dialog.
+
+_**promptText ( optional string )**_<br>
+> The text to enter into the dialog prompt before accepting. Used only if this is a prompt dialog.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Page.archive(callback)
+
+Grab an archive of the page.
 
 ### Parameters
 
@@ -673,24 +588,8 @@ _**callback ( function )**_<br>
 
 _**error ( error )**_<br>
 _**data ( string )**_<br>
-> Base64-encoded image data (PNG).
+> Base64-encoded web archive.
 
-
-
-### Page.handleJavaScriptDialog(accept, callback)
-
-Accepts or dismisses a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload).
-
-### Parameters
-
-_**accept ( boolean )**_<br>
-> Whether to accept or dismiss the dialog.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
 
 
 ## Events
@@ -794,6 +693,17 @@ _**message ( string )**_<br>
 Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been closed.
 
 
+### Event: scriptsEnabled
+
+Fired when the JavaScript is enabled/disabled on the page
+
+### Results
+
+_**isEnabled ( boolean )**_<br>
+> Whether script execution is enabled or disabled on the page.
+
+
+
 ## Types
 
 ### Class: ResourceType
@@ -801,6 +711,13 @@ Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunl
 _Type: string_
 
 Resource type as it was perceived by the rendering engine.
+
+
+### Class: CoordinateSystem
+
+_Type: string_
+
+Coordinate system used by supplied coordinates.
 
 
 ### Class: Frame
@@ -826,7 +743,7 @@ _**name ( optional string )**_<br>
 _**url ( string )**_<br>
 > Frame document's URL.
 
-_**securityOrigin ( optional string )**_<br>
+_**securityOrigin ( string )**_<br>
 > Frame document's security origin.
 
 _**mimeType ( string )**_<br>
@@ -850,22 +767,6 @@ _**childFrames ( optional array of [FrameResourceTree](#class-frameresourcetree)
 
 _**resources ( array )**_<br>
 > Information about frame resources.
-
-
-
-### Class: SearchMatch
-
-_Type: object_
-
-Search match for resource.
-
-### Properties
-
-_**lineNumber ( number )**_<br>
-> Line number in resource content.
-
-_**lineContent ( string )**_<br>
-> Line with match content.
 
 
 

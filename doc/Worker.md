@@ -1,11 +1,12 @@
 # Worker
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 * Commands
  * [enable](#workerenablecallback)
  * [disable](#workerdisablecallback)
  * [sendMessageToWorker](#workersendmessagetoworkerworkerid-message-callback)
+ * [canInspectWorkers](#workercaninspectworkerscallback)
  * [connectToWorker](#workerconnecttoworkerworkerid-callback)
  * [disconnectFromWorker](#workerdisconnectfromworkerworkerid-callback)
  * [setAutoconnectToWorkers](#workersetautoconnecttoworkersvalue-callback)
@@ -51,6 +52,22 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
+
+
+### Worker.canInspectWorkers(callback)
+
+Tells whether browser supports workers inspection.
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**result ( boolean )**_<br>
+> True if browser has workers support.
+
 
 
 ### Worker.connectToWorker(workerId, callback)

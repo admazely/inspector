@@ -1,6 +1,6 @@
 # CSS
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 This domain exposes CSS read/write operations. All CSS objects, like stylesheets, rules, and styles, have an associated <code>id</code> used in subsequent operations on the related object. Each object type has a specific <code>id</code> structure, and those are not interchangeable between objects of different kinds. CSS objects can be loaded using the <code>get*ForNode()</code> calls (which accept a DOM node id). Alternatively, a client can discover all the existing stylesheets with the <code>getAllStyleSheets()</code> method and subsequently load the required stylesheet contents using the <code>getStyleSheet[Text]()</code> methods.
 
@@ -15,14 +15,13 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [getStyleSheet](#cssgetstylesheetstylesheetid-callback)
  * [getStyleSheetText](#cssgetstylesheettextstylesheetid-callback)
  * [setStyleSheetText](#csssetstylesheettextstylesheetid-text-callback)
+ * [setStyleText](#csssetstyletextcssstyleid-text-callback)
  * [setPropertyText](#csssetpropertytextcssstyleid-propertyindex-text-overwrite-callback)
  * [toggleProperty](#csstogglepropertycssstyleid-propertyindex-disable-callback)
  * [setRuleSelector](#csssetruleselectorcssruleid-selector-callback)
  * [addRule](#cssaddruledomnodeid-selector-callback)
  * [getSupportedCSSProperties](#cssgetsupportedcsspropertiescallback)
  * [forcePseudoState](#cssforcepseudostatedomnodeid-forcedpseudoclasses-callback)
- * [startSelectorProfiler](#cssstartselectorprofilercallback)
- * [stopSelectorProfiler](#cssstopselectorprofilercallback)
  * [getNamedFlowCollection](#cssgetnamedflowcollectiondomnodeid-callback)
 * Events
  * [mediaQueryResultChanged](#event-mediaqueryresultchanged)
@@ -30,6 +29,9 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [namedFlowCreated](#event-namedflowcreated)
  * [namedFlowRemoved](#event-namedflowremoved)
  * [regionLayoutUpdated](#event-regionlayoutupdated)
+ * [regionOversetChanged](#event-regionoversetchanged)
+ * [registeredNamedFlowContentElement](#event-registerednamedflowcontentelement)
+ * [unregisteredNamedFlowContentElement](#event-unregisterednamedflowcontentelement)
 * Types
  * [StyleSheetId](#class-stylesheetid)
  * [CSSStyleId](#class-cssstyleid)
@@ -50,8 +52,6 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [CSSStyle](#class-cssstyle)
  * [CSSProperty](#class-cssproperty)
  * [CSSMedia](#class-cssmedia)
- * [SelectorProfileEntry](#class-selectorprofileentry)
- * [SelectorProfile](#class-selectorprofile)
  * [Region](#class-region)
  * [NamedFlow](#class-namedflow)
 
@@ -215,6 +215,24 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
+### CSS.setStyleText([CSSStyleId](#class-cssstyleid), text, callback)
+
+Sets the new `text` for the respective style.
+
+### Parameters
+
+_**styleId ( [CSSStyleId](#class-cssstyleid) )**_<br>
+_**text ( string )**_<br>
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**style ( [CSSStyle](#class-cssstyle) )**_<br>
+> The resulting style after the text modification.
+
+
+
 ### CSS.setPropertyText([CSSStyleId](#class-cssstyleid), propertyIndex, text, overwrite, callback)
 
 Sets the new `text` for a property in the respective style, at offset `propertyIndex`. If `overwrite` is `true`, a property at the given offset is overwritten, otherwise inserted. `text` entirely replaces the property `name: value`.
@@ -325,29 +343,6 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### CSS.startSelectorProfiler(callback)
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### CSS.stopSelectorProfiler(callback)
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**profile ( [SelectorProfile](#class-selectorprofile) )**_<br>
-
-
 ### CSS.getNamedFlowCollection([DOM.NodeId](DOM.md#class-nodeid), callback)
 
 Returns the Named Flows from the document.
@@ -416,6 +411,54 @@ Fires when a Named Flow's layout may have changed.
 
 _**namedFlow ( [NamedFlow](#class-namedflow) )**_<br>
 > The Named Flow whose layout may have changed.
+
+
+
+### Event: regionOversetChanged
+
+Fires if any of the regionOverset values changed in a Named Flow's region chain.
+
+### Results
+
+_**namedFlow ( [NamedFlow](#class-namedflow) )**_<br>
+> The Named Flow containing the regions whose regionOverset values changed.
+
+
+
+### Event: registeredNamedFlowContentElement
+
+Fires when a Named Flow's has been registered with a new content node.
+
+### Results
+
+_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> The document node id.
+
+_**flowName ( string )**_<br>
+> Named Flow identifier for which the new content element was registered.
+
+_**contentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> The node id of the registered content node.
+
+_**nextContentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> The node id of the element following the registered content node.
+
+
+
+### Event: unregisteredNamedFlowContentElement
+
+Fires when a Named Flow's has been registered with a new content node.
+
+### Results
+
+_**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> The document node id.
+
+_**flowName ( string )**_<br>
+> Named Flow identifier for which the new content element was unregistered.
+
+_**contentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+> The node id of the unregistered content node.
 
 
 
@@ -634,11 +677,17 @@ Text range within a resource.
 
 ### Properties
 
-_**start ( integer )**_<br>
-> Start of range (inclusive).
+_**startLine ( integer )**_<br>
+> Start line of range.
 
-_**end ( integer )**_<br>
-> End of range (exclusive).
+_**startColumn ( integer )**_<br>
+> Start column of range (inclusive).
+
+_**endLine ( integer )**_<br>
+> End line of range
+
+_**endColumn ( integer )**_<br>
+> End column of range (exclusive).
 
 
 
@@ -742,7 +791,7 @@ _**parsedOk ( optional boolean )**_<br>
 > Whether the property is understood by the browser (implies <code>true</code> if absent).
 
 _**status ( optional string enumerated ["active","inactive","disabled","style"] )**_<br>
-> The property status: "active" (implied if absent) if the property is effective in the style, "inactive" if the property is overridden by a same-named property in this style later on, "disabled" if the property is disabled by the user, "style" if the property is reported by the browser rather than by the CSS source parser.
+> The property status: "active" if the property is effective in the style, "inactive" if the property is overridden by a same-named property in this style later on, "disabled" if the property is disabled by the user, "style" (implied if absent) if the property is reported by the browser rather than by the CSS source parser.
 
 _**range ( optional [SourceRange](#class-sourcerange) )**_<br>
 > The entire property range in the enclosing style declaration (if available).
@@ -768,48 +817,6 @@ _**sourceURL ( optional string )**_<br>
 
 _**sourceLine ( optional integer )**_<br>
 > Line in the document containing the media query (not defined for the "stylesheet" source).
-
-
-
-### Class: SelectorProfileEntry
-
-_Type: object_
-
-CSS selector profile entry.
-
-### Properties
-
-_**selector ( string )**_<br>
-> CSS selector of the corresponding rule.
-
-_**url ( string )**_<br>
-> URL of the resource containing the corresponding rule.
-
-_**lineNumber ( integer )**_<br>
-> Selector line number in the resource for the corresponding rule.
-
-_**time ( number )**_<br>
-> Total time this rule handling contributed to the browser running time during profiling (in milliseconds.)
-
-_**hitCount ( integer )**_<br>
-> Number of times this rule was considered a candidate for matching against DOM elements.
-
-_**matchCount ( integer )**_<br>
-> Number of times this rule actually matched a DOM element.
-
-
-
-### Class: SelectorProfile
-
-_Type: object_
-
-### Properties
-
-_**totalTime ( number )**_<br>
-> Total processing time for all selectors in the profile (in milliseconds.)
-
-_**data ( array of [SelectorProfileEntry](#class-selectorprofileentry) )**_<br>
-> CSS selector profile entries.
 
 
 

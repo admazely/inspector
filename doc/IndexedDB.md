@@ -1,15 +1,15 @@
 # IndexedDB
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 * Commands
  * [enable](#indexeddbenablecallback)
  * [disable](#indexeddbdisablecallback)
- * [requestDatabaseNamesForFrame](#indexeddbrequestdatabasenamesforframenetworkframeid-callback)
- * [requestDatabase](#indexeddbrequestdatabasenetworkframeid-databasename-callback)
- * [requestData](#indexeddbrequestdatanetworkframeid-databasename-objectstorename-indexname-skipcount-pagesize-keyrange-callback)
+ * [requestDatabaseNames](#indexeddbrequestdatabasenamessecurityorigin-callback)
+ * [requestDatabase](#indexeddbrequestdatabasesecurityorigin-databasename-callback)
+ * [requestData](#indexeddbrequestdatasecurityorigin-databasename-objectstorename-indexname-skipcount-pagesize-keyrange-callback)
+ * [clearObjectStore](#indexeddbclearobjectstoresecurityorigin-databasename-objectstorename-callback)
 * Types
- * [SecurityOriginWithDatabaseNames](#class-securityoriginwithdatabasenames)
  * [DatabaseWithObjectStores](#class-databasewithobjectstores)
  * [ObjectStore](#class-objectstore)
  * [ObjectStoreIndex](#class-objectstoreindex)
@@ -47,33 +47,33 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### IndexedDB.requestDatabaseNamesForFrame([Network.FrameId](Network.md#class-frameid), callback)
+### IndexedDB.requestDatabaseNames(securityOrigin, callback)
 
-Requests database names for given frame's security origin.
+Requests database names for given security origin.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
-> Frame id.
+_**securityOrigin ( string )**_<br>
+> Security origin.
 
 _**callback ( function )**_<br>
 
 ### Results
 
 _**error ( error )**_<br>
-_**securityOriginWithDatabaseNames ( [SecurityOriginWithDatabaseNames](#class-securityoriginwithdatabasenames) )**_<br>
-> Frame with database names.
+_**databaseNames ( array )**_<br>
+> Database names for origin.
 
 
 
-### IndexedDB.requestDatabase([Network.FrameId](Network.md#class-frameid), databaseName, callback)
+### IndexedDB.requestDatabase(securityOrigin, databaseName, callback)
 
 Requests database with given name in given frame.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
-> Frame id.
+_**securityOrigin ( string )**_<br>
+> Security origin.
 
 _**databaseName ( string )**_<br>
 > Database name.
@@ -88,14 +88,14 @@ _**databaseWithObjectStores ( [DatabaseWithObjectStores](#class-databasewithobje
 
 
 
-### IndexedDB.requestData([Network.FrameId](Network.md#class-frameid), databaseName, objectStoreName, indexName, skipCount, pageSize, [[KeyRange](#class-keyrange)], callback)
+### IndexedDB.requestData(securityOrigin, databaseName, objectStoreName, indexName, skipCount, pageSize, [[KeyRange](#class-keyrange)], callback)
 
 Requests data from object store or index.
 
 ### Parameters
 
-_**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
-> Frame id.
+_**securityOrigin ( string )**_<br>
+> Security origin.
 
 _**databaseName ( string )**_<br>
 > Database name.
@@ -128,23 +128,29 @@ _**hasMore ( boolean )**_<br>
 
 
 
-## Types
+### IndexedDB.clearObjectStore(securityOrigin, databaseName, objectStoreName, callback)
 
-### Class: SecurityOriginWithDatabaseNames
+Clears all entries from an object store.
 
-_Type: object_
-
-Security origin with database names.
-
-### Properties
+### Parameters
 
 _**securityOrigin ( string )**_<br>
 > Security origin.
 
-_**databaseNames ( array )**_<br>
-> Database names for this origin.
+_**databaseName ( string )**_<br>
+> Database name.
+
+_**objectStoreName ( string )**_<br>
+> Object store name.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
 
 
+## Types
 
 ### Class: DatabaseWithObjectStores
 

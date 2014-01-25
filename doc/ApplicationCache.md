@@ -1,6 +1,6 @@
 # ApplicationCache
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 * Commands
  * [getFramesWithManifests](#applicationcachegetframeswithmanifestscallback)

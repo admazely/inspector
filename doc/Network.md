@@ -1,6 +1,6 @@
 # Network
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 Network domain allows tracking network activities of the page. It exposes information about http, file, data and other requests and responses, their headers, bodies, timing, etc.
 
@@ -8,7 +8,6 @@ Network domain allows tracking network activities of the page. It exposes inform
 * Commands
  * [enable](#networkenablecallback)
  * [disable](#networkdisablecallback)
- * [setUserAgentOverride](#networksetuseragentoverrideuseragent-callback)
  * [setExtraHTTPHeaders](#networksetextrahttpheadersheaders-callback)
  * [getResponseBody](#networkgetresponsebodyrequestid-callback)
  * [replayXHR](#networkreplayxhrrequestid-callback)
@@ -68,22 +67,6 @@ _**error ( error )**_<br>
 Disables network tracking, prevents network events from being sent to the client.
 
 ### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Network.setUserAgentOverride(userAgent, callback)
-
-Allows overriding user agent with the given string.
-
-### Parameters
-
-_**userAgent ( string )**_<br>
-> User agent to use.
 
 _**callback ( function )**_<br>
 
@@ -252,6 +235,9 @@ _**initiator ( [Initiator](#class-initiator) )**_<br>
 _**redirectResponse ( optional [Response](#class-response) )**_<br>
 > Redirect response data.
 
+_**type ( optional [Page.ResourceType](Page.md#class-resourcetype) )**_<br>
+> Resource type.
+
 
 
 ### Event: requestServedFromCache
@@ -322,6 +308,9 @@ _**requestId ( [RequestId](#class-requestid) )**_<br>
 
 _**timestamp ( [Timestamp](#class-timestamp) )**_<br>
 > Timestamp.
+
+_**sourceMapURL ( optional string )**_<br>
+> URL of source map associated with this resource (if any).
 
 
 
@@ -682,10 +671,10 @@ _**opcode ( number )**_<br>
 > WebSocket frame opcode.
 
 _**mask ( boolean )**_<br>
-> WebSocke frame mask.
+> WebSocket frame mask.
 
 _**payloadData ( string )**_<br>
-> WebSocke frame payload data.
+> WebSocket frame payload data.
 
 
 
@@ -708,6 +697,9 @@ _**response ( optional [Response](#class-response) )**_<br>
 
 _**bodySize ( number )**_<br>
 > Cached response body size.
+
+_**sourceMapURL ( optional string )**_<br>
+> URL of source map associated with this resource (if any).
 
 
 

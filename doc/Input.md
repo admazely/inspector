@@ -1,6 +1,6 @@
 # Input
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 * Commands
  * [dispatchKeyEvent](#inputdispatchkeyeventtype-modifiers-timestamp-text-unmodifiedtext-keyidentifier-windowsvirtualkeycode-nativevirtualkeycode-maccharcode-autorepeat-iskeypad-issystemkey-callback)

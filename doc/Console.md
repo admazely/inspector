@@ -1,6 +1,6 @@
 # Console
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 Console domain defines methods and events for interaction with the JavaScript console. Console collects messages created by means of the <a href='http://getfirebug.com/wiki/index.php/Console_API'>JavaScript Console API</a>. One needs to enable this domain using <code>enable</code> command in order to start receiving the console messages. Browser collects messages issued while console domain is not enabled as well and reports them using <code>messageAdded</code> notification upon enabling.
 
@@ -146,16 +146,16 @@ Console message.
 
 ### Properties
 
-_**source ( string enumerated ["html","wml","xml","javascript","network","console-api","other"] )**_<br>
+_**source ( string enumerated ["xml","javascript","network","console-api","storage","appcache","rendering","css","security","other"] )**_<br>
 > Message source.
 
-_**level ( string enumerated ["tip","log","warning","error","debug"] )**_<br>
+_**level ( string enumerated ["log","warning","error","debug"] )**_<br>
 > Message severity.
 
 _**text ( string )**_<br>
 > Message text.
 
-_**type ( optional string enumerated ["log","dir","dirxml","trace","clear","startGroup","startGroupCollapsed","endGroup","assert","timing"] )**_<br>
+_**type ( optional string enumerated ["log","dir","dirxml","table","trace","clear","startGroup","startGroupCollapsed","endGroup","assert","timing","profile","profileEnd"] )**_<br>
 > Console message type.
 
 _**url ( optional string )**_<br>
@@ -163,6 +163,9 @@ _**url ( optional string )**_<br>
 
 _**line ( optional integer )**_<br>
 > Line number in the resource that generated this message.
+
+_**column ( optional integer )**_<br>
+> Column number on the line in the resource that generated this message.
 
 _**repeatCount ( optional integer )**_<br>
 > Repeat count for repeated messages.

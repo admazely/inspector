@@ -1,6 +1,6 @@
 # DOM
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 This domain exposes DOM read/write operations. Each DOM Node is represented with its mirror object that has an <code>id</code>. This <code>id</code> can be used to get additional information on the Node, resolve it into the JavaScript object wrapper, etc. It is important that client receives DOM events only for the nodes that are known to the client. Backend keeps track of the nodes that were sent to the client and never sends the same node twice. It is client's responsibility to collect information about the nodes that were sent to the client.<p>Note that <code>iframe</code> owner elements will return corresponding document elements as their child nodes.</p>
 
@@ -16,26 +16,29 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
  * [setAttributeValue](#domsetattributevaluenodeid-name-value-callback)
  * [setAttributesAsText](#domsetattributesastextnodeid-text-name-callback)
  * [removeAttribute](#domremoveattributenodeid-name-callback)
- * [getEventListenersForNode](#domgeteventlistenersfornodenodeid-callback)
+ * [getEventListenersForNode](#domgeteventlistenersfornodenodeid-objectgroup-callback)
  * [getOuterHTML](#domgetouterhtmlnodeid-callback)
  * [setOuterHTML](#domsetouterhtmlnodeid-outerhtml-callback)
- * [performSearch](#domperformsearchquery-callback)
+ * [performSearch](#domperformsearchquery-nodeid-callback)
  * [getSearchResults](#domgetsearchresultssearchid-fromindex-toindex-callback)
  * [discardSearchResults](#domdiscardsearchresultssearchid-callback)
  * [requestNode](#domrequestnoderuntimeremoteobjectid-callback)
  * [setInspectModeEnabled](#domsetinspectmodeenabledenabled-highlightconfig-callback)
- * [highlightRect](#domhighlightrectx-y-width-height-rgba-rgba-callback)
+ * [highlightRect](#domhighlightrectx-y-width-height-rgba-rgba-usepagecoordinates-callback)
+ * [highlightQuad](#domhighlightquadquad-rgba-rgba-usepagecoordinates-callback)
  * [highlightNode](#domhighlightnodehighlightconfig-nodeid-runtimeremoteobjectid-callback)
  * [hideHighlight](#domhidehighlightcallback)
  * [highlightFrame](#domhighlightframenetworkframeid-rgba-rgba-callback)
  * [pushNodeByPathToFrontend](#dompushnodebypathtofrontendpath-callback)
+ * [pushNodeByBackendIdToFrontend](#dompushnodebybackendidtofrontendbackendnodeid-callback)
+ * [releaseBackendNodeIds](#domreleasebackendnodeidsnodegroup-callback)
  * [resolveNode](#domresolvenodenodeid-objectgroup-callback)
  * [getAttributes](#domgetattributesnodeid-callback)
  * [moveTo](#dommovetonodeid-nodeid-nodeid-callback)
  * [undo](#domundocallback)
  * [redo](#domredocallback)
  * [markUndoableState](#dommarkundoablestatecallback)
- * [focus](#domfocusdomnodeid-callback)
+ * [focus](#domfocusnodeid-callback)
 * Events
  * [documentUpdated](#event-documentupdated)
  * [setChildNodes](#event-setchildnodes)
@@ -50,9 +53,11 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
  * [shadowRootPopped](#event-shadowrootpopped)
 * Types
  * [NodeId](#class-nodeid)
+ * [BackendNodeId](#class-backendnodeid)
  * [Node](#class-node)
  * [EventListener](#class-eventlistener)
  * [RGBA](#class-rgba)
+ * [Quad](#class-quad)
  * [HighlightConfig](#class-highlightconfig)
 
 
@@ -257,7 +262,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.getEventListenersForNode([NodeId](#class-nodeid), callback)
+### DOM.getEventListenersForNode([NodeId](#class-nodeid), [objectGroup], callback)
 
 Returns event listeners relevant to the node.
 
@@ -265,6 +270,9 @@ Returns event listeners relevant to the node.
 
 _**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to get listeners for.
+
+_**objectGroup ( optional string )**_<br>
+> Symbolic group name for handler value. Handler value is not returned without this parameter specified.
 
 _**callback ( function )**_<br>
 
@@ -314,7 +322,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.performSearch(query, callback)
+### DOM.performSearch(query, [[NodeId](#class-nodeid)], callback)
 
 Searches for a given string in the DOM tree. Use `getSearchResults` to access search results or `cancelSearch` to end this search session.
 
@@ -322,6 +330,9 @@ Searches for a given string in the DOM tree. Use `getSearchResults` to access se
 
 _**query ( string )**_<br>
 > Plain text or query selector or XPath search query.
+
+_**nodeIds ( optional array of [NodeId](#class-nodeid) )**_<br>
+> Ids of nodes to use as starting points for the search.
 
 _**callback ( function )**_<br>
 
@@ -415,7 +426,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.highlightRect(x, y, width, height, [[RGBA](#class-rgba)], [[RGBA](#class-rgba)], callback)
+### DOM.highlightRect(x, y, width, height, [[RGBA](#class-rgba)], [[RGBA](#class-rgba)], [usePageCoordinates], callback)
 
 Highlights given rectangle. Coordinates are absolute with respect to the main frame viewport.
 
@@ -438,6 +449,34 @@ _**color ( optional [RGBA](#class-rgba) )**_<br>
 
 _**outlineColor ( optional [RGBA](#class-rgba) )**_<br>
 > The highlight outline color (default: transparent).
+
+_**usePageCoordinates ( optional boolean )**_<br>
+> Indicates whether the provided parameters are in page coordinates or in viewport coordinates (the default).
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### DOM.highlightQuad([Quad](#class-quad), [[RGBA](#class-rgba)], [[RGBA](#class-rgba)], [usePageCoordinates], callback)
+
+Highlights given quad. Coordinates are absolute with respect to the main frame viewport.
+
+### Parameters
+
+_**quad ( [Quad](#class-quad) )**_<br>
+> Quad to highlight
+
+_**color ( optional [RGBA](#class-rgba) )**_<br>
+> The highlight fill color (default: transparent).
+
+_**outlineColor ( optional [RGBA](#class-rgba) )**_<br>
+> The highlight outline color (default: transparent).
+
+_**usePageCoordinates ( optional boolean )**_<br>
+> Indicates whether the provided parameters are in page coordinates or in viewport coordinates (the default).
 
 _**callback ( function )**_<br>
 
@@ -520,6 +559,41 @@ _**error ( error )**_<br>
 _**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node for given path.
 
+
+
+### DOM.pushNodeByBackendIdToFrontend([BackendNodeId](#class-backendnodeid), callback)
+
+Requests that the node is sent to the caller given its backend node id.
+
+### Parameters
+
+_**backendNodeId ( [BackendNodeId](#class-backendnodeid) )**_<br>
+> The backend node id of the node.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
+> The pushed node's id.
+
+
+
+### DOM.releaseBackendNodeIds(nodeGroup, callback)
+
+Requests that group of `BackendNodeIds` is released.
+
+### Parameters
+
+_**nodeGroup ( string )**_<br>
+> The backend node ids group name.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
 
 
 ### DOM.resolveNode([NodeId](#class-nodeid), [objectGroup], callback)
@@ -627,13 +701,13 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.focus([DOM.NodeId](DOM.md#class-nodeid), callback)
+### DOM.focus([NodeId](#class-nodeid), callback)
 
 Focuses the given element.
 
 ### Parameters
 
-_**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
 > Id of the node to focus.
 
 _**callback ( function )**_<br>
@@ -802,6 +876,13 @@ _Type: integer_
 Unique DOM node identifier.
 
 
+### Class: BackendNodeId
+
+_Type: integer_
+
+Unique DOM node identifier used to reference a node that may not have been pushed to the front-end.
+
+
 ### Class: Node
 
 _Type: object_
@@ -901,6 +982,9 @@ _**location ( optional [Debugger.Location](Debugger.md#class-location) )**_<br>
 _**sourceName ( optional string )**_<br>
 > Source script URL.
 
+_**handler ( optional [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
+> Event handler function value.
+
 
 
 ### Class: RGBA
@@ -923,6 +1007,13 @@ _**b ( integer )**_<br>
 _**a ( optional number )**_<br>
 > The alpha component, in the [0-1] range (default: 1).
 
+
+
+### Class: Quad
+
+_Type: array_
+
+An array of quad vertices, x immediately followed by y for each point, points clock-wise.
 
 
 ### Class: HighlightConfig
