@@ -27,7 +27,7 @@ async.map(domainNames, fetch, function (err, domains) {
 });
 
 function fetch(name, done) {
-    var href = 'https://raw.github.com/WebKit/webkit/master/Source/WebCore/inspector/protocol/' + name + '.json';
+    var href = 'https://raw.githubusercontent.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/'+name+'.json';
     https.get(href, function (res) {
         res.pipe(endpoint(function (err, body) {
             if (err) return done(err, null);
