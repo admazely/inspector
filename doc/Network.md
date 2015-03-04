@@ -10,12 +10,12 @@ Network domain allows tracking network activities of the page. It exposes inform
  * [disable](#networkdisablecallback)
  * [setExtraHTTPHeaders](#networksetextrahttpheadersheaders-callback)
  * [getResponseBody](#networkgetresponsebodyrequestid-callback)
- * [replayXHR](#networkreplayxhrrequestid-callback)
  * [canClearBrowserCache](#networkcanclearbrowsercachecallback)
  * [clearBrowserCache](#networkclearbrowsercachecallback)
  * [canClearBrowserCookies](#networkcanclearbrowsercookiescallback)
  * [clearBrowserCookies](#networkclearbrowsercookiescallback)
  * [setCacheDisabled](#networksetcachedisabledcachedisabled-callback)
+ * [loadResource](#networkloadresourceframeid-url-callback)
 * Events
  * [requestWillBeSent](#event-requestwillbesent)
  * [requestServedFromCache](#event-requestservedfromcache)
@@ -113,22 +113,6 @@ _**base64Encoded ( boolean )**_<br>
 
 
 
-### Network.replayXHR([RequestId](#class-requestid), callback)
-
-This method sends a new XMLHttpRequest which is identical to the original one. The following parameters should be identical: method, url, async, request body, extra headers, withCredentials attribute, user, password.
-
-### Parameters
-
-_**requestId ( [RequestId](#class-requestid) )**_<br>
-> Identifier of XHR to replay.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
 ### Network.canClearBrowserCache(callback)
 
 Tells whether clearing browser cache is supported.
@@ -201,6 +185,34 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
+
+
+### Network.loadResource([FrameId](#class-frameid), url, callback)
+
+Loads a resource in the context of a frame on the inspected page without cross origin checks.
+
+### Parameters
+
+_**frameId ( [FrameId](#class-frameid) )**_<br>
+> Frame to load the resource from.
+
+_**url ( string )**_<br>
+> URL of the resource to load.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**content ( string )**_<br>
+> Resource content.
+
+_**mimeType ( string )**_<br>
+> Resource mimeType.
+
+_**status ( number )**_<br>
+> HTTP response status code.
+
 
 
 ## Events
@@ -521,19 +533,13 @@ Timing information for the request.
 
 ### Properties
 
-_**requestTime ( number )**_<br>
-> Timing's requestTime is a baseline in seconds, while the other numbers are ticks in milliseconds relatively to this requestTime.
+_**navigationStart ( number )**_<br>
+> Timing's navigationStart is a baseline in seconds, while the other numbers are ticks in milliseconds relatively to this navigationStart.
 
-_**proxyStart ( number )**_<br>
-> Started resolving proxy.
-
-_**proxyEnd ( number )**_<br>
-> Finished resolving proxy.
-
-_**dnsStart ( number )**_<br>
+_**domainLookupStart ( number )**_<br>
 > Started DNS address resolve.
 
-_**dnsEnd ( number )**_<br>
+_**domainLookupEnd ( number )**_<br>
 > Finished DNS address resolve.
 
 _**connectStart ( number )**_<br>
@@ -542,20 +548,14 @@ _**connectStart ( number )**_<br>
 _**connectEnd ( number )**_<br>
 > Connected to the remote host.
 
-_**sslStart ( number )**_<br>
+_**secureConnectionStart ( number )**_<br>
 > Started SSL handshake.
 
-_**sslEnd ( number )**_<br>
-> Finished SSL handshake.
-
-_**sendStart ( number )**_<br>
+_**requestStart ( number )**_<br>
 > Started sending request.
 
-_**sendEnd ( number )**_<br>
-> Finished sending request.
-
-_**receiveHeadersEnd ( number )**_<br>
-> Finished receiving response headers.
+_**responseStart ( number )**_<br>
+> Started receiving response headers.
 
 
 
@@ -612,12 +612,6 @@ _**requestHeaders ( optional [Headers](#class-headers) )**_<br>
 
 _**requestHeadersText ( optional string )**_<br>
 > HTTP request headers text.
-
-_**connectionReused ( boolean )**_<br>
-> Specifies whether physical connection was actually reused for this request.
-
-_**connectionId ( number )**_<br>
-> Physical connection id that was actually used for this request.
 
 _**fromDiskCache ( optional boolean )**_<br>
 > Specifies that the request was served from the disk cache.

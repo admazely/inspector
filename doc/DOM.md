@@ -17,6 +17,7 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
  * [setAttributesAsText](#domsetattributesastextnodeid-text-name-callback)
  * [removeAttribute](#domremoveattributenodeid-name-callback)
  * [getEventListenersForNode](#domgeteventlistenersfornodenodeid-objectgroup-callback)
+ * [getAccessibilityPropertiesForNode](#domgetaccessibilitypropertiesfornodenodeid-callback)
  * [getOuterHTML](#domgetouterhtmlnodeid-callback)
  * [setOuterHTML](#domsetouterhtmlnodeid-outerhtml-callback)
  * [performSearch](#domperformsearchquery-nodeid-callback)
@@ -24,11 +25,11 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
  * [discardSearchResults](#domdiscardsearchresultssearchid-callback)
  * [requestNode](#domrequestnoderuntimeremoteobjectid-callback)
  * [setInspectModeEnabled](#domsetinspectmodeenabledenabled-highlightconfig-callback)
- * [highlightRect](#domhighlightrectx-y-width-height-rgba-rgba-usepagecoordinates-callback)
- * [highlightQuad](#domhighlightquadquad-rgba-rgba-usepagecoordinates-callback)
+ * [highlightRect](#domhighlightrectx-y-width-height-rgbacolor-rgbacolor-usepagecoordinates-callback)
+ * [highlightQuad](#domhighlightquadquad-rgbacolor-rgbacolor-usepagecoordinates-callback)
  * [highlightNode](#domhighlightnodehighlightconfig-nodeid-runtimeremoteobjectid-callback)
  * [hideHighlight](#domhidehighlightcallback)
- * [highlightFrame](#domhighlightframenetworkframeid-rgba-rgba-callback)
+ * [highlightFrame](#domhighlightframenetworkframeid-rgbacolor-rgbacolor-callback)
  * [pushNodeByPathToFrontend](#dompushnodebypathtofrontendpath-callback)
  * [pushNodeByBackendIdToFrontend](#dompushnodebybackendidtofrontendbackendnodeid-callback)
  * [releaseBackendNodeIds](#domreleasebackendnodeidsnodegroup-callback)
@@ -54,9 +55,11 @@ This domain exposes DOM read/write operations. Each DOM Node is represented with
 * Types
  * [NodeId](#class-nodeid)
  * [BackendNodeId](#class-backendnodeid)
+ * [LiveRegionRelevant](#class-liveregionrelevant)
  * [Node](#class-node)
  * [EventListener](#class-eventlistener)
- * [RGBA](#class-rgba)
+ * [AccessibilityProperties](#class-accessibilityproperties)
+ * [RGBAColor](#class-rgbacolor)
  * [Quad](#class-quad)
  * [HighlightConfig](#class-highlightconfig)
 
@@ -284,6 +287,25 @@ _**listeners ( array of [EventListener](#class-eventlistener) )**_<br>
 
 
 
+### DOM.getAccessibilityPropertiesForNode([NodeId](#class-nodeid), callback)
+
+Returns a dictionary of accessibility properties for the node.
+
+### Parameters
+
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
+> Id of the node for which to get accessibility properties.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**properties ( [AccessibilityProperties](#class-accessibilityproperties) )**_<br>
+> Dictionary of relevant accessibility properties.
+
+
+
 ### DOM.getOuterHTML([NodeId](#class-nodeid), callback)
 
 Returns node's HTML markup.
@@ -426,7 +448,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.highlightRect(x, y, width, height, [[RGBA](#class-rgba)], [[RGBA](#class-rgba)], [usePageCoordinates], callback)
+### DOM.highlightRect(x, y, width, height, [[RGBAColor](#class-rgbacolor)], [[RGBAColor](#class-rgbacolor)], [usePageCoordinates], callback)
 
 Highlights given rectangle. Coordinates are absolute with respect to the main frame viewport.
 
@@ -444,10 +466,10 @@ _**width ( integer )**_<br>
 _**height ( integer )**_<br>
 > Rectangle height
 
-_**color ( optional [RGBA](#class-rgba) )**_<br>
+_**color ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The highlight fill color (default: transparent).
 
-_**outlineColor ( optional [RGBA](#class-rgba) )**_<br>
+_**outlineColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The highlight outline color (default: transparent).
 
 _**usePageCoordinates ( optional boolean )**_<br>
@@ -460,7 +482,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.highlightQuad([Quad](#class-quad), [[RGBA](#class-rgba)], [[RGBA](#class-rgba)], [usePageCoordinates], callback)
+### DOM.highlightQuad([Quad](#class-quad), [[RGBAColor](#class-rgbacolor)], [[RGBAColor](#class-rgbacolor)], [usePageCoordinates], callback)
 
 Highlights given quad. Coordinates are absolute with respect to the main frame viewport.
 
@@ -469,10 +491,10 @@ Highlights given quad. Coordinates are absolute with respect to the main frame v
 _**quad ( [Quad](#class-quad) )**_<br>
 > Quad to highlight
 
-_**color ( optional [RGBA](#class-rgba) )**_<br>
+_**color ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The highlight fill color (default: transparent).
 
-_**outlineColor ( optional [RGBA](#class-rgba) )**_<br>
+_**outlineColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The highlight outline color (default: transparent).
 
 _**usePageCoordinates ( optional boolean )**_<br>
@@ -520,7 +542,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### DOM.highlightFrame([Network.FrameId](Network.md#class-frameid), [[RGBA](#class-rgba)], [[RGBA](#class-rgba)], callback)
+### DOM.highlightFrame([Network.FrameId](Network.md#class-frameid), [[RGBAColor](#class-rgbacolor)], [[RGBAColor](#class-rgbacolor)], callback)
 
 Highlights owner element of the frame with given id.
 
@@ -529,10 +551,10 @@ Highlights owner element of the frame with given id.
 _**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Identifier of the frame to highlight.
 
-_**contentColor ( optional [RGBA](#class-rgba) )**_<br>
+_**contentColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The content box highlight fill color (default: transparent).
 
-_**contentOutlineColor ( optional [RGBA](#class-rgba) )**_<br>
+_**contentOutlineColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The content box highlight outline color (default: transparent).
 
 _**callback ( function )**_<br>
@@ -883,6 +905,13 @@ _Type: integer_
 Unique DOM node identifier used to reference a node that may not have been pushed to the front-end.
 
 
+### Class: LiveRegionRelevant
+
+_Type: string_
+
+Token values of @aria-relevant attribute.
+
+
 ### Class: Node
 
 _Type: object_
@@ -951,13 +980,16 @@ _**shadowRoots ( optional array of [Node](#class-node) )**_<br>
 _**templateContent ( optional [Node](#class-node) )**_<br>
 > Content document fragment for template elements
 
+_**role ( optional string )**_<br>
+> Computed value for first recognized role token, default role per element, or overridden role.
+
 
 
 ### Class: EventListener
 
 _Type: object_
 
-DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes. DOMNode is a base node mirror type.
+A structure holding event listener properties.
 
 ### Properties
 
@@ -987,7 +1019,101 @@ _**handler ( optional [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_
 
 
 
-### Class: RGBA
+### Class: AccessibilityProperties
+
+_Type: object_
+
+A structure holding accessibility properties.
+
+### Properties
+
+_**activeDescendantNodeId ( optional [NodeId](#class-nodeid) )**_<br>
+> <code>DOMNode</code> id of the accessibility object referenced by aria-activedescendant.
+
+_**busy ( optional boolean )**_<br>
+> Value of @aria-busy on current or ancestor node.
+
+_**checked ( optional string enumerated ["true","false","mixed"] )**_<br>
+> Checked state of certain form controls.
+
+_**childNodeIds ( optional array of [NodeId](#class-nodeid) )**_<br>
+> Array of <code>DOMNode</code> ids of the accessibility tree children if available.
+
+_**controlledNodeIds ( optional array of [NodeId](#class-nodeid) )**_<br>
+> Array of <code>DOMNode</code> ids of any nodes referenced via @aria-controls.
+
+_**disabled ( optional boolean )**_<br>
+> Disabled state of form controls.
+
+_**exists ( boolean )**_<br>
+> Indicates whether there is an existing AX object for the DOM node. If this is false, all the other properties will be default values.
+
+_**expanded ( optional boolean )**_<br>
+> Expanded state.
+
+_**flowedNodeIds ( optional array of [NodeId](#class-nodeid) )**_<br>
+> Array of <code>DOMNode</code> ids of any nodes referenced via @aria-flowto.
+
+_**focused ( optional boolean )**_<br>
+> Focused state. Only defined on focusable elements.
+
+_**ignored ( optional boolean )**_<br>
+> Indicates whether the accessibility of the associated AX object node is ignored, whether heuristically or explicitly.
+
+_**ignoredByDefault ( optional boolean )**_<br>
+> State indicating whether the accessibility of the associated AX object node is ignored by default for node type.
+
+_**invalid ( optional string enumerated ["true","false","grammar","spelling"] )**_<br>
+> Invalid status of form controls.
+
+_**hidden ( optional boolean )**_<br>
+> Hidden state. True if node or an ancestor is hidden via CSS or explicit @aria-hidden, to clarify why the element is ignored.
+
+_**label ( string )**_<br>
+> Computed label value for the node, sometimes calculated by referencing other nodes.
+
+_**liveRegionAtomic ( optional boolean )**_<br>
+> Value of @aria-atomic.
+
+_**liveRegionRelevant ( optional array )**_<br>
+> Token value(s) of element's @aria-relevant attribute. Array of string values matching $ref LiveRegionRelevant. FIXME: Enum values blocked by http://webkit.org/b/133711
+
+_**liveRegionStatus ( optional string enumerated ["assertive","polite","off"] )**_<br>
+> Value of element's @aria-live attribute.
+
+_**mouseEventNodeId ( optional [NodeId](#class-nodeid) )**_<br>
+> <code>DOMNode</code> id of node or closest ancestor node that has a mousedown, mouseup, or click event handler.
+
+_**nodeId ( [NodeId](#class-nodeid) )**_<br>
+> Target <code>DOMNode</code> id.
+
+_**ownedNodeIds ( optional array of [NodeId](#class-nodeid) )**_<br>
+> Array of <code>DOMNode</code> ids of any nodes referenced via @aria-owns.
+
+_**parentNodeId ( optional [NodeId](#class-nodeid) )**_<br>
+> <code>DOMNode</code> id of the accessibility tree parent object if available.
+
+_**pressed ( optional boolean )**_<br>
+> Pressed state for toggle buttons.
+
+_**readonly ( optional boolean )**_<br>
+> Readonly state of text controls.
+
+_**required ( optional boolean )**_<br>
+> Required state of form controls.
+
+_**role ( string )**_<br>
+> Computed value for first recognized role token, default role per element, or overridden role.
+
+_**selected ( optional boolean )**_<br>
+> Selected state of certain form controls.
+
+_**selectedChildNodeIds ( optional array of [NodeId](#class-nodeid) )**_<br>
+> Array of <code>DOMNode</code> ids of any children marked as selected.
+
+
+
+### Class: RGBAColor
 
 _Type: object_
 
@@ -1027,16 +1153,16 @@ Configuration data for the highlighting of page elements.
 _**showInfo ( optional boolean )**_<br>
 > Whether the node info tooltip should be shown (default: false).
 
-_**contentColor ( optional [RGBA](#class-rgba) )**_<br>
+_**contentColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The content box highlight fill color (default: transparent).
 
-_**paddingColor ( optional [RGBA](#class-rgba) )**_<br>
+_**paddingColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The padding highlight fill color (default: transparent).
 
-_**borderColor ( optional [RGBA](#class-rgba) )**_<br>
+_**borderColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The border highlight fill color (default: transparent).
 
-_**marginColor ( optional [RGBA](#class-rgba) )**_<br>
+_**marginColor ( optional [RGBAColor](#class-rgbacolor) )**_<br>
 > The margin highlight fill color (default: transparent).
 
 

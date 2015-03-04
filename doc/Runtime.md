@@ -1,19 +1,27 @@
 # Runtime
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 Runtime domain exposes JavaScript runtime by means of remote evaluation and mirror objects. Evaluation results are returned as mirror object that expose object type, string representation and unique identifier that can be used for further object reference. Original objects are maintained in memory unless they are either explicitly released or are released along with the other objects in their object group.
 
 
 * Commands
- * [evaluate](#runtimeevaluateexpression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-runtimeexecutioncontextid-returnbyvalue-generatepreview-callback)
+ * [parse](#runtimeparsesource-callback)
+ * [evaluate](#runtimeevaluateexpression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-runtimeexecutioncontextid-returnbyvalue-generatepreview-saveresult-callback)
  * [callFunctionOn](#runtimecallfunctiononremoteobjectid-functiondeclaration-callargument-donotpauseonexceptionsandmuteconsole-returnbyvalue-generatepreview-callback)
- * [getProperties](#runtimegetpropertiesremoteobjectid-ownproperties-callback)
+ * [getProperties](#runtimegetpropertiesremoteobjectid-ownproperties-generatepreview-callback)
+ * [getDisplayableProperties](#runtimegetdisplayablepropertiesremoteobjectid-generatepreview-callback)
+ * [getCollectionEntries](#runtimegetcollectionentriesruntimeremoteobjectid-objectgroup-startindex-numbertofetch-callback)
+ * [saveResult](#runtimesaveresultcallargument-executioncontextid-callback)
  * [releaseObject](#runtimereleaseobjectremoteobjectid-callback)
  * [releaseObjectGroup](#runtimereleaseobjectgroupobjectgroup-callback)
  * [run](#runtimeruncallback)
  * [enable](#runtimeenablecallback)
  * [disable](#runtimedisablecallback)
+ * [getRuntimeTypesForVariablesAtOffsets](#runtimegetruntimetypesforvariablesatoffsetstypelocation-callback)
+ * [enableTypeProfiler](#runtimeenabletypeprofilercallback)
+ * [disableTypeProfiler](#runtimedisabletypeprofilercallback)
+ * [getBasicBlocks](#runtimegetbasicblockssourceid-callback)
 * Events
  * [executionContextCreated](#event-executioncontextcreated)
 * Types
@@ -21,16 +29,50 @@ Runtime domain exposes JavaScript runtime by means of remote evaluation and mirr
  * [RemoteObject](#class-remoteobject)
  * [ObjectPreview](#class-objectpreview)
  * [PropertyPreview](#class-propertypreview)
+ * [EntryPreview](#class-entrypreview)
+ * [CollectionEntry](#class-collectionentry)
  * [PropertyDescriptor](#class-propertydescriptor)
  * [InternalPropertyDescriptor](#class-internalpropertydescriptor)
  * [CallArgument](#class-callargument)
  * [ExecutionContextId](#class-executioncontextid)
  * [ExecutionContextDescription](#class-executioncontextdescription)
+ * [SyntaxErrorType](#class-syntaxerrortype)
+ * [ErrorRange](#class-errorrange)
+ * [StructureDescription](#class-structuredescription)
+ * [TypeSet](#class-typeset)
+ * [TypeDescription](#class-typedescription)
+ * [TypeLocation](#class-typelocation)
+ * [BasicBlock](#class-basicblock)
 
 
 ## Commands
 
-### Runtime.evaluate(expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [[Runtime.ExecutionContextId](Runtime.md#class-executioncontextid)], [returnByValue], [generatePreview], callback)
+### Runtime.parse(source, callback)
+
+Parses JavaScript source code for errors.
+
+### Parameters
+
+_**source ( string )**_<br>
+> Source code to parse.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**result ( [SyntaxErrorType](#class-syntaxerrortype) )**_<br>
+> Parse result.
+
+_**message ( optional string )**_<br>
+> Parse error message.
+
+_**range ( optional [ErrorRange](#class-errorrange) )**_<br>
+> Range in the source where the error occurred.
+
+
+
+### Runtime.evaluate(expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [[Runtime.ExecutionContextId](Runtime.md#class-executioncontextid)], [returnByValue], [generatePreview], [saveResult], callback)
 
 Evaluates expression on global object.
 
@@ -57,6 +99,9 @@ _**returnByValue ( optional boolean )**_<br>
 _**generatePreview ( optional boolean )**_<br>
 > Whether preview should be generated for the result.
 
+_**saveResult ( optional boolean )**_<br>
+> Whether the resulting value should be considered for saving in the $n history.
+
 _**callback ( function )**_<br>
 
 ### Results
@@ -67,6 +112,9 @@ _**result ( [RemoteObject](#class-remoteobject) )**_<br>
 
 _**wasThrown ( optional boolean )**_<br>
 > True if the result was thrown during the evaluation.
+
+_**savedResultIndex ( optional integer )**_<br>
+> If the result was saved, this is the $n index that can be used to access the value.
 
 
 
@@ -107,7 +155,7 @@ _**wasThrown ( optional boolean )**_<br>
 
 
 
-### Runtime.getProperties([RemoteObjectId](#class-remoteobjectid), [ownProperties], callback)
+### Runtime.getProperties([RemoteObjectId](#class-remoteobjectid), [ownProperties], [generatePreview], callback)
 
 Returns properties of a given object. Object group of the result is inherited from the target object.
 
@@ -117,7 +165,10 @@ _**objectId ( [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Identifier of the object to return properties for.
 
 _**ownProperties ( optional boolean )**_<br>
-> If true, returns properties belonging only to the element itself, not to its prototype chain.
+> If true, returns properties belonging only to the object itself, not to its prototype chain.
+
+_**generatePreview ( optional boolean )**_<br>
+> Whether preview should be generated for property values.
 
 _**callback ( function )**_<br>
 
@@ -129,6 +180,81 @@ _**result ( array of [PropertyDescriptor](#class-propertydescriptor) )**_<br>
 
 _**internalProperties ( optional array of [InternalPropertyDescriptor](#class-internalpropertydescriptor) )**_<br>
 > Internal object properties.
+
+
+
+### Runtime.getDisplayableProperties([RemoteObjectId](#class-remoteobjectid), [generatePreview], callback)
+
+Returns displayable properties of a given object. Object group of the result is inherited from the target object. Displayable properties are own properties, internal properties, and native getters in the prototype chain (assumed to be bindings and treated like own properties for the frontend).
+
+### Parameters
+
+_**objectId ( [RemoteObjectId](#class-remoteobjectid) )**_<br>
+> Identifier of the object to return properties for.
+
+_**generatePreview ( optional boolean )**_<br>
+> Whether preview should be generated for property values.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**properties ( array of [PropertyDescriptor](#class-propertydescriptor) )**_<br>
+> Object properties.
+
+_**internalProperties ( optional array of [InternalPropertyDescriptor](#class-internalpropertydescriptor) )**_<br>
+> Internal object properties.
+
+
+
+### Runtime.getCollectionEntries([Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid), [objectGroup], [startIndex], [numberToFetch], callback)
+
+Returns entries of given Map / Set collection.
+
+### Parameters
+
+_**objectId ( [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
+> Id of the collection to get entries for.
+
+_**objectGroup ( optional string )**_<br>
+> Symbolic group name that can be used to release multiple. If not provided, it will be the same objectGroup as the RemoteObject determined from <code>objectId</code>. This is useful for WeakMap to release the collection entries.
+
+_**startIndex ( optional integer )**_<br>
+> If provided skip to this index before collecting values. Otherwise, 0.
+
+_**numberToFetch ( optional integer )**_<br>
+> If provided only return <code>numberToFetch</code> values. Otherwise, return values all the way to the end.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**entries ( array of [CollectionEntry](#class-collectionentry) )**_<br>
+> Array of collection entries.
+
+
+
+### Runtime.saveResult([CallArgument](#class-callargument), [[ExecutionContextId](#class-executioncontextid)], callback)
+
+Assign a saved result index to this value.
+
+### Parameters
+
+_**value ( [CallArgument](#class-callargument) )**_<br>
+> Id or value of the object to save.
+
+_**contextId ( optional [ExecutionContextId](#class-executioncontextid) )**_<br>
+> Unique id of the execution context. To specify in which execution context script evaluation should be performed. If not provided, determine from the CallArgument's objectId.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**savedResultIndex ( optional integer )**_<br>
+> If the value was saved, this is the $n index that can be used to access the value.
 
 
 
@@ -203,6 +329,66 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
+### Runtime.getRuntimeTypesForVariablesAtOffsets([TypeLocation](#class-typelocation), callback)
+
+Returns detailed informtation on given function.
+
+### Parameters
+
+_**locations ( array of [TypeLocation](#class-typelocation) )**_<br>
+> An array of type locations we're requesting information for. Results are expected in the same order they're sent in.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**types ( array of [TypeDescription](#class-typedescription) )**_<br>
+
+
+### Runtime.enableTypeProfiler(callback)
+
+Enables type profiling on the VM.
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Runtime.disableTypeProfiler(callback)
+
+Disables type profiling on the VM.
+
+### Parameters
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+
+
+### Runtime.getBasicBlocks(sourceID, callback)
+
+Returns a list of basic blocks for the given sourceID with information about their text ranges and whether or not they have executed.
+
+### Parameters
+
+_**sourceID ( string )**_<br>
+> Indicates which sourceID information is requested for.
+
+_**callback ( function )**_<br>
+
+### Results
+
+_**error ( error )**_<br>
+_**basicBlocks ( array of [BasicBlock](#class-basicblock) )**_<br>
+
+
 ## Events
 
 ### Event: executionContextCreated
@@ -233,10 +419,10 @@ Mirror object referencing original JavaScript object.
 
 ### Properties
 
-_**type ( string enumerated ["object","function","undefined","string","number","boolean"] )**_<br>
+_**type ( string enumerated ["object","function","undefined","string","number","boolean","symbol"] )**_<br>
 > Object type.
 
-_**subtype ( optional string enumerated ["array","null","node","regexp","date"] )**_<br>
+_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap"] )**_<br>
 > Object subtype hint. Specified for <code>object</code> type values only.
 
 _**className ( optional string )**_<br>
@@ -252,7 +438,7 @@ _**objectId ( optional [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Unique object identifier (for non-primitive values).
 
 _**preview ( optional [ObjectPreview](#class-objectpreview) )**_<br>
-> Preview containsing abbreviated property values.
+> Preview containing abbreviated property values. Specified for <code>object</code> type values only.
 
 
 
@@ -264,14 +450,26 @@ Object containing abbreviated remote object value.
 
 ### Properties
 
+_**type ( string enumerated ["object","function","undefined","string","number","boolean","symbol"] )**_<br>
+> Object type.
+
+_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap"] )**_<br>
+> Object subtype hint. Specified for <code>object</code> type values only.
+
+_**description ( optional string )**_<br>
+> String representation of the object.
+
 _**lossless ( boolean )**_<br>
 > Determines whether preview is lossless (contains all information of the original object).
 
-_**overflow ( boolean )**_<br>
+_**overflow ( optional boolean )**_<br>
 > True iff some of the properties of the original did not fit.
 
-_**properties ( array of [PropertyPreview](#class-propertypreview) )**_<br>
+_**properties ( optional array of [PropertyPreview](#class-propertypreview) )**_<br>
 > List of the properties.
+
+_**entries ( optional array of [EntryPreview](#class-entrypreview) )**_<br>
+> List of the entries. Specified for <code>map</code> and <code>set</code> subtype values only.
 
 
 
@@ -284,14 +482,48 @@ _Type: object_
 _**name ( string )**_<br>
 > Property name.
 
-_**type ( string enumerated ["object","function","undefined","string","number","boolean"] )**_<br>
+_**type ( string enumerated ["object","function","undefined","string","number","boolean","symbol","accessor"] )**_<br>
 > Object type.
+
+_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap"] )**_<br>
+> Object subtype hint. Specified for <code>object</code> type values only.
 
 _**value ( optional string )**_<br>
 > User-friendly property value string.
 
-_**subtype ( optional string enumerated ["array","null","node","regexp","date"] )**_<br>
-> Object subtype hint. Specified for <code>object</code> type values only.
+_**valuePreview ( optional [ObjectPreview](#class-objectpreview) )**_<br>
+> Nested value preview.
+
+_**internal ( optional boolean )**_<br>
+> True if this is an internal property.
+
+
+
+### Class: EntryPreview
+
+_Type: object_
+
+### Properties
+
+_**key ( optional [ObjectPreview](#class-objectpreview) )**_<br>
+> Entry key. Specified for map-like collection entries.
+
+_**value ( [ObjectPreview](#class-objectpreview) )**_<br>
+> Entry value.
+
+
+
+### Class: CollectionEntry
+
+_Type: object_
+
+### Properties
+
+_**key ( optional [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
+> Entry key of a map-like collection, otherwise not provided.
+
+_**value ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
+> Entry value.
 
 
 
@@ -329,6 +561,9 @@ _**wasThrown ( optional boolean )**_<br>
 
 _**isOwn ( optional boolean )**_<br>
 > True if the property is owned for the object.
+
+_**nativeGetter ( optional boolean )**_<br>
+> True if the property value came from a native getter.
 
 
 
@@ -390,6 +625,147 @@ _**name ( string )**_<br>
 
 _**frameId ( [Network.FrameId](Network.md#class-frameid) )**_<br>
 > Id of the owning frame.
+
+
+
+### Class: SyntaxErrorType
+
+_Type: string_
+
+Syntax error type: "none" for no error, "irrecoverable" for unrecoverable errors, "unterminated-literal" for when there is an unterminated literal, "recoverable" for when the expression is unfinished but valid so far.
+
+
+### Class: ErrorRange
+
+_Type: object_
+
+Range of an error in source code.
+
+### Properties
+
+_**startOffset ( integer )**_<br>
+> Start offset of range (inclusive).
+
+_**endOffset ( integer )**_<br>
+> End offset of range (exclusive).
+
+
+
+### Class: StructureDescription
+
+_Type: object_
+
+### Properties
+
+_**fields ( optional array )**_<br>
+> Array of strings, where the strings represent object properties.
+
+_**optionalFields ( optional array )**_<br>
+> Array of strings, where the strings represent optional object properties.
+
+_**constructorName ( optional string )**_<br>
+> Name of the constructor.
+
+_**prototypeStructure ( optional [StructureDescription](#class-structuredescription) )**_<br>
+> Pointer to the StructureRepresentation of the protoype if one exists.
+
+_**isImprecise ( optional boolean )**_<br>
+> If true, it indicates that the fields in this StructureDescription may be inaccurate. I.e, there might have been fields that have been deleted before it was profiled or it has fields we haven't profiled.
+
+
+
+### Class: TypeSet
+
+_Type: object_
+
+### Properties
+
+_**isFunction ( boolean )**_<br>
+> Indicates if this type description has been type Function.
+
+_**isUndefined ( boolean )**_<br>
+> Indicates if this type description has been type Undefined.
+
+_**isNull ( boolean )**_<br>
+> Indicates if this type description has been type Null.
+
+_**isBoolean ( boolean )**_<br>
+> Indicates if this type description has been type Boolean.
+
+_**isInteger ( boolean )**_<br>
+> Indicates if this type description has been type Integer.
+
+_**isNumber ( boolean )**_<br>
+> Indicates if this type description has been type Number.
+
+_**isString ( boolean )**_<br>
+> Indicates if this type description has been type String.
+
+_**isObject ( boolean )**_<br>
+> Indicates if this type description has been type Object.
+
+
+
+### Class: TypeDescription
+
+_Type: object_
+
+Container for type information that has been gathered.
+
+### Properties
+
+_**isValid ( boolean )**_<br>
+> If true, we were able to correlate the offset successfuly with a program location. If false, the offset may be bogus or the offset may be from a CodeBlock that hasn't executed.
+
+_**leastCommonAncestor ( optional string )**_<br>
+> Least common ancestor of all Constructors if the TypeDescription has seen any structures. This string is the display name of the shared constructor function.
+
+_**typeSet ( optional [TypeSet](#class-typeset) )**_<br>
+> Set of booleans for determining the aggregate type of this type description.
+
+_**structures ( optional array of [StructureDescription](#class-structuredescription) )**_<br>
+> Array of descriptions for all structures seen for this variable.
+
+_**isTruncated ( optional boolean )**_<br>
+> If true, this indicates that no more structures are being profiled because some maximum threshold has been reached and profiling has stopped because of memory pressure.
+
+
+
+### Class: TypeLocation
+
+_Type: object_
+
+Describes the location of an expression we want type information for.
+
+### Properties
+
+_**typeInformationDescriptor ( integer )**_<br>
+> What kind of type information do we want (normal, function return values, 'this' statement).
+
+_**sourceID ( string )**_<br>
+> sourceID uniquely identifying a script
+
+_**divot ( integer )**_<br>
+> character offset for assignment range
+
+
+
+### Class: BasicBlock
+
+_Type: object_
+
+From Wikipedia: a basic block is a portion of the code within a program with only one entry point and only one exit point. This type gives the location of a basic block and if that basic block has executed.
+
+### Properties
+
+_**startOffset ( integer )**_<br>
+> Start offset of the basic block.
+
+_**endOffset ( integer )**_<br>
+> End offset of the basic block.
+
+_**hasExecuted ( boolean )**_<br>
+> Indicates if the basic block has executed before.
 
 
 

@@ -1,18 +1,16 @@
 # Debugger
 
-_Auto generated documentation for WebKit inspector `1.0`_
+_Auto generated documentation for WebKit inspector
 
 Debugger domain exposes JavaScript debugging capabilities. It allows setting and removing breakpoints, stepping through execution, exploring stack traces, etc.
 
 
 * Commands
- * [causesRecompilation](#debuggercausesrecompilationcallback)
- * [supportsSeparateScriptCompilationAndExecution](#debuggersupportsseparatescriptcompilationandexecutioncallback)
  * [enable](#debuggerenablecallback)
  * [disable](#debuggerdisablecallback)
  * [setBreakpointsActive](#debuggersetbreakpointsactiveactive-callback)
- * [setBreakpointByUrl](#debuggersetbreakpointbyurllinenumber-url-urlregex-columnnumber-condition-callback)
- * [setBreakpoint](#debuggersetbreakpointlocation-condition-callback)
+ * [setBreakpointByUrl](#debuggersetbreakpointbyurllinenumber-url-urlregex-columnnumber-breakpointoptions-callback)
+ * [setBreakpoint](#debuggersetbreakpointlocation-breakpointoptions-callback)
  * [removeBreakpoint](#debuggerremovebreakpointbreakpointid-callback)
  * [continueToLocation](#debuggercontinuetolocationlocation-callback)
  * [stepOver](#debuggerstepovercallback)
@@ -21,17 +19,11 @@ Debugger domain exposes JavaScript debugging capabilities. It allows setting and
  * [pause](#debuggerpausecallback)
  * [resume](#debuggerresumecallback)
  * [searchInContent](#debuggersearchincontentscriptid-query-casesensitive-isregex-callback)
- * [canSetScriptSource](#debuggercansetscriptsourcecallback)
- * [setScriptSource](#debuggersetscriptsourcescriptid-scriptsource-preview-callback)
- * [restartFrame](#debuggerrestartframecallframeid-callback)
  * [getScriptSource](#debuggergetscriptsourcescriptid-callback)
  * [getFunctionDetails](#debuggergetfunctiondetailsruntimeremoteobjectid-callback)
  * [setPauseOnExceptions](#debuggersetpauseonexceptionsstate-callback)
- * [evaluateOnCallFrame](#debuggerevaluateoncallframecallframeid-expression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-returnbyvalue-generatepreview-callback)
- * [compileScript](#debuggercompilescriptexpression-sourceurl-callback)
- * [runScript](#debuggerrunscriptscriptid-runtimeexecutioncontextid-objectgroup-donotpauseonexceptionsandmuteconsole-callback)
+ * [evaluateOnCallFrame](#debuggerevaluateoncallframecallframeid-expression-objectgroup-includecommandlineapi-donotpauseonexceptionsandmuteconsole-returnbyvalue-generatepreview-saveresult-callback)
  * [setOverlayMessage](#debuggersetoverlaymessagemessage-callback)
- * [setVariableValue](#debuggersetvariablevaluecallframeid-runtimeremoteobjectid-scopenumber-variablename-runtimecallargument-callback)
 * Events
  * [globalObjectCleared](#event-globalobjectcleared)
  * [scriptParsed](#event-scriptparsed)
@@ -39,49 +31,26 @@ Debugger domain exposes JavaScript debugging capabilities. It allows setting and
  * [breakpointResolved](#event-breakpointresolved)
  * [paused](#event-paused)
  * [resumed](#event-resumed)
+ * [didSampleProbe](#event-didsampleprobe)
+ * [playBreakpointActionSound](#event-playbreakpointactionsound)
 * Types
  * [BreakpointId](#class-breakpointid)
+ * [BreakpointActionIdentifier](#class-breakpointactionidentifier)
  * [ScriptId](#class-scriptid)
  * [CallFrameId](#class-callframeid)
  * [Location](#class-location)
+ * [BreakpointAction](#class-breakpointaction)
+ * [BreakpointOptions](#class-breakpointoptions)
  * [FunctionDetails](#class-functiondetails)
  * [CallFrame](#class-callframe)
  * [Scope](#class-scope)
+ * [ProbeSample](#class-probesample)
+ * [AssertPauseReason](#class-assertpausereason)
+ * [BreakpointPauseReason](#class-breakpointpausereason)
+ * [CSPViolationPauseReason](#class-cspviolationpausereason)
 
 
 ## Commands
-
-### Debugger.causesRecompilation(callback)
-
-Tells whether enabling debugger causes scripts recompilation.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> True if enabling debugger causes scripts recompilation.
-
-
-
-### Debugger.supportsSeparateScriptCompilationAndExecution(callback)
-
-Tells whether debugger supports separate script compilation and execution.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> True if debugger supports separate script compilation and execution.
-
-
 
 ### Debugger.enable(callback)
 
@@ -125,7 +94,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Debugger.setBreakpointByUrl(lineNumber, [url], [urlRegex], [columnNumber], [condition], callback)
+### Debugger.setBreakpointByUrl(lineNumber, [url], [urlRegex], [columnNumber], [[BreakpointOptions](#class-breakpointoptions)], callback)
 
 Sets JavaScript breakpoint at given location specified either by URL or URL regex. Once this command is issued, all existing parsed scripts will have breakpoints resolved and returned in `locations` property. Further matching script parsing will result in subsequent `breakpointResolved` events issued. This logical breakpoint will survive page reloads.
 
@@ -143,8 +112,8 @@ _**urlRegex ( optional string )**_<br>
 _**columnNumber ( optional integer )**_<br>
 > Offset in the line to set breakpoint at.
 
-_**condition ( optional string )**_<br>
-> Expression to use as a breakpoint condition. When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+_**options ( optional [BreakpointOptions](#class-breakpointoptions) )**_<br>
+> Options to apply to this breakpoint to modify its behavior.
 
 _**callback ( function )**_<br>
 
@@ -159,7 +128,7 @@ _**locations ( array of [Location](#class-location) )**_<br>
 
 
 
-### Debugger.setBreakpoint([Location](#class-location), [condition], callback)
+### Debugger.setBreakpoint([Location](#class-location), [[BreakpointOptions](#class-breakpointoptions)], callback)
 
 Sets JavaScript breakpoint at a given location.
 
@@ -168,8 +137,8 @@ Sets JavaScript breakpoint at a given location.
 _**location ( [Location](#class-location) )**_<br>
 > Location to set breakpoint in.
 
-_**condition ( optional string )**_<br>
-> Expression to use as a breakpoint condition. When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+_**options ( optional [BreakpointOptions](#class-breakpointoptions) )**_<br>
+> Options to apply to this breakpoint to modify its behavior.
 
 _**callback ( function )**_<br>
 
@@ -302,74 +271,8 @@ _**callback ( function )**_<br>
 ### Results
 
 _**error ( error )**_<br>
-_**result ( array of [Page.SearchMatch](Page.md#class-searchmatch) )**_<br>
+_**result ( array of [GenericTypes.SearchMatch](GenericTypes.md#class-searchmatch) )**_<br>
 > List of search matches.
-
-
-
-### Debugger.canSetScriptSource(callback)
-
-Tells whether `setScriptSource` is supported.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> True if <code>setScriptSource</code> is supported.
-
-
-
-### Debugger.setScriptSource([ScriptId](#class-scriptid), scriptSource, [preview], callback)
-
-Edits JavaScript source live.
-
-### Parameters
-
-_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
-> Id of the script to edit.
-
-_**scriptSource ( string )**_<br>
-> New content of the script.
-
-_**preview ( optional boolean )**_<br>
->  If true the change will not actually be applied. Preview mode may be used to get result description without actually modifying the code.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**callFrames ( optional array of [CallFrame](#class-callframe) )**_<br>
-> New stack trace in case editing has happened while VM was stopped.
-
-_**result ( optional object )**_<br>
-> VM-specific description of the changes applied.
-
-
-
-### Debugger.restartFrame([CallFrameId](#class-callframeid), callback)
-
-Restarts particular call frame from the beginning.
-
-### Parameters
-
-_**callFrameId ( [CallFrameId](#class-callframeid) )**_<br>
-> Call frame identifier to evaluate on.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**callFrames ( array of [CallFrame](#class-callframe) )**_<br>
-> New stack trace.
-
-_**result ( object )**_<br>
-> VM-specific description.
 
 
 
@@ -394,7 +297,7 @@ _**scriptSource ( string )**_<br>
 
 ### Debugger.getFunctionDetails([Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid), callback)
 
-Returns detailed informtation on given function.
+Returns detailed information on given function.
 
 ### Parameters
 
@@ -427,7 +330,7 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Debugger.evaluateOnCallFrame([CallFrameId](#class-callframeid), expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [returnByValue], [generatePreview], callback)
+### Debugger.evaluateOnCallFrame([CallFrameId](#class-callframeid), expression, [objectGroup], [includeCommandLineAPI], [doNotPauseOnExceptionsAndMuteConsole], [returnByValue], [generatePreview], [saveResult], callback)
 
 Evaluates expression on a given call frame.
 
@@ -454,6 +357,9 @@ _**returnByValue ( optional boolean )**_<br>
 _**generatePreview ( optional boolean )**_<br>
 > Whether preview should be generated for the result.
 
+_**saveResult ( optional boolean )**_<br>
+> Whether the resulting value should be considered for saving in the $n history.
+
 _**callback ( function )**_<br>
 
 ### Results
@@ -465,61 +371,8 @@ _**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 _**wasThrown ( optional boolean )**_<br>
 > True if the result was thrown during the evaluation.
 
-
-
-### Debugger.compileScript(expression, sourceURL, callback)
-
-Compiles expression.
-
-### Parameters
-
-_**expression ( string )**_<br>
-> Expression to compile.
-
-_**sourceURL ( string )**_<br>
-> Source url to be set for the script.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**scriptId ( optional [ScriptId](#class-scriptid) )**_<br>
-> Id of the script.
-
-_**syntaxErrorMessage ( optional string )**_<br>
-> Syntax error message if compilation failed.
-
-
-
-### Debugger.runScript([ScriptId](#class-scriptid), [[Runtime.ExecutionContextId](Runtime.md#class-executioncontextid)], [objectGroup], [doNotPauseOnExceptionsAndMuteConsole], callback)
-
-Runs script with given id in a given context.
-
-### Parameters
-
-_**scriptId ( [ScriptId](#class-scriptid) )**_<br>
-> Id of the script to run.
-
-_**contextId ( optional [Runtime.ExecutionContextId](Runtime.md#class-executioncontextid) )**_<br>
-> Specifies in which isolated context to perform script run. Each content script lives in an isolated context and this parameter may be used to specify one of those contexts. If the parameter is omitted or 0 the evaluation will be performed in the context of the inspected page.
-
-_**objectGroup ( optional string )**_<br>
-> Symbolic group name that can be used to release multiple objects.
-
-_**doNotPauseOnExceptionsAndMuteConsole ( optional boolean )**_<br>
-> Specifies whether script run should stop on exceptions and mute console. Overrides setPauseOnException state.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
-> Run result.
-
-_**wasThrown ( optional boolean )**_<br>
-> True if the result was thrown during the script run.
+_**savedResultIndex ( optional integer )**_<br>
+> If the result was saved, this is the $n index that can be used to access the value.
 
 
 
@@ -531,34 +384,6 @@ Sets overlay message.
 
 _**message ( optional string )**_<br>
 > Overlay message to display when paused in debugger.
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Debugger.setVariableValue([[CallFrameId](#class-callframeid)], [[Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid)], scopeNumber, variableName, [Runtime.CallArgument](Runtime.md#class-callargument), callback)
-
-Changes value of variable in a callframe or a closure. Either callframe or function must be specified. Object-based scopes are not supported and must be mutated manually.
-
-### Parameters
-
-_**callFrameId ( optional [CallFrameId](#class-callframeid) )**_<br>
-> Id of callframe that holds variable.
-
-_**functionObjectId ( optional [Runtime.RemoteObjectId](Runtime.md#class-remoteobjectid) )**_<br>
-> Object id of closure (function) that holds variable.
-
-_**scopeNumber ( integer )**_<br>
-> 0-based number of scope as was listed in scope chain. Only 'local', 'closure' and 'catch' scope types are allowed. Other scopes could be manipulated manually.
-
-_**variableName ( string )**_<br>
-> Variable name.
-
-_**newValue ( [Runtime.CallArgument](Runtime.md#class-callargument) )**_<br>
-> New variable value.
 
 _**callback ( function )**_<br>
 
@@ -655,7 +480,7 @@ Fired when the virtual machine stopped on breakpoint or exception or any other s
 _**callFrames ( array of [CallFrame](#class-callframe) )**_<br>
 > Call stack the virtual machine stopped on.
 
-_**reason ( string enumerated ["XHR","DOM","EventListener","exception","assert","CSPViolation","other"] )**_<br>
+_**reason ( string enumerated ["XHR","DOM","EventListener","exception","assert","CSPViolation","DebuggerStatement","Breakpoint","PauseOnNextStatement","other"] )**_<br>
 > Pause reason.
 
 _**data ( optional object )**_<br>
@@ -668,6 +493,28 @@ _**data ( optional object )**_<br>
 Fired when the virtual machine resumed execution.
 
 
+### Event: didSampleProbe
+
+Fires when a new probe sample is collected.
+
+### Results
+
+_**sample ( [ProbeSample](#class-probesample) )**_<br>
+> A collected probe sample.
+
+
+
+### Event: playBreakpointActionSound
+
+Fired when a "sound" breakpoint action is triggered on a breakpoint.
+
+### Results
+
+_**breakpointActionId ( [BreakpointActionIdentifier](#class-breakpointactionidentifier) )**_<br>
+> Breakpoint action identifier.
+
+
+
 ## Types
 
 ### Class: BreakpointId
@@ -675,6 +522,13 @@ Fired when the virtual machine resumed execution.
 _Type: string_
 
 Breakpoint identifier.
+
+
+### Class: BreakpointActionIdentifier
+
+_Type: integer_
+
+Breakpoint action identifier.
 
 
 ### Class: ScriptId
@@ -707,6 +561,44 @@ _**lineNumber ( integer )**_<br>
 
 _**columnNumber ( optional integer )**_<br>
 > Column number in the script.
+
+
+
+### Class: BreakpointAction
+
+_Type: object_
+
+Action to perform when a breakpoint is triggered.
+
+### Properties
+
+_**type ( string enumerated ["log","evaluate","sound","probe"] )**_<br>
+> Different kinds of breakpoint actions.
+
+_**data ( optional string )**_<br>
+> Data associated with this breakpoint type (e.g. for type "eval" this is the JavaScript string to evalulate).
+
+_**id ( optional [BreakpointActionIdentifier](#class-breakpointactionidentifier) )**_<br>
+> A frontend-assigned identifier for this breakpoint action.
+
+
+
+### Class: BreakpointOptions
+
+_Type: object_
+
+Extra options that modify breakpoint behavior.
+
+### Properties
+
+_**condition ( optional string )**_<br>
+> Expression to use as a breakpoint condition. When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+
+_**actions ( optional array of [BreakpointAction](#class-breakpointaction) )**_<br>
+> Actions to perform automatically when the breakpoint is triggered.
+
+_**autoContinue ( optional boolean )**_<br>
+> Automatically continue after hitting this breakpoint and running actions.
 
 
 
@@ -768,11 +660,75 @@ Scope description.
 
 ### Properties
 
-_**type ( string enumerated ["global","local","with","closure","catch"] )**_<br>
+_**type ( string enumerated ["global","local","with","closure","catch","functionName"] )**_<br>
 > Scope type.
 
 _**object ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
 > Object representing the scope. For <code>global</code> and <code>with</code> scopes it represents the actual object; for the rest of the scopes, it is artificial transient object enumerating scope variables as its properties.
+
+
+
+### Class: ProbeSample
+
+_Type: object_
+
+A sample collected by evaluating a probe breakpoint action.
+
+### Properties
+
+_**probeId ( [BreakpointActionIdentifier](#class-breakpointactionidentifier) )**_<br>
+> Identifier of the probe breakpoint action that created the sample.
+
+_**sampleId ( integer )**_<br>
+> Unique identifier for this sample.
+
+_**batchId ( integer )**_<br>
+> A batch identifier which is the same for all samples taken at the same breakpoint hit.
+
+_**timestamp ( number )**_<br>
+> Timestamp of when the sample was taken.
+
+_**payload ( [Runtime.RemoteObject](Runtime.md#class-remoteobject) )**_<br>
+> Contents of the sample.
+
+
+
+### Class: AssertPauseReason
+
+_Type: object_
+
+The pause reason auxiliary data when paused because of an assertion.
+
+### Properties
+
+_**message ( optional string )**_<br>
+> The console.assert message string if provided.
+
+
+
+### Class: BreakpointPauseReason
+
+_Type: object_
+
+The pause reason auxiliary data when paused because of hitting a breakpoint.
+
+### Properties
+
+_**breakpointId ( string )**_<br>
+> The identifier of the breakpoint causing the pause.
+
+
+
+### Class: CSPViolationPauseReason
+
+_Type: object_
+
+The pause reason auxiliary data when paused because of a Content Security Policy directive.
+
+### Properties
+
+_**directive ( string )**_<br>
+> The CSP directive that blocked script execution.
 
 
 

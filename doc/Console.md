@@ -11,7 +11,6 @@ Console domain defines methods and events for interaction with the JavaScript co
  * [clearMessages](#consoleclearmessagescallback)
  * [setMonitoringXHREnabled](#consolesetmonitoringxhrenabledenabled-callback)
  * [addInspectedNode](#consoleaddinspectednodedomnodeid-callback)
- * [addInspectedHeapObject](#consoleaddinspectedheapobjectheapobjectid-callback)
 * Events
  * [messageAdded](#event-messageadded)
  * [messageRepeatCountUpdated](#event-messagerepeatcountupdated)
@@ -88,18 +87,6 @@ Enables console to refer to the node with given id via $x (see Command Line API 
 _**nodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 > DOM node id to be accessible by means of $x command line API.
 
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Console.addInspectedHeapObject(heapObjectId, callback)
-
-### Parameters
-
-_**heapObjectId ( integer )**_<br>
 _**callback ( function )**_<br>
 
 ### Results

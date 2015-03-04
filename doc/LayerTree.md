@@ -243,6 +243,9 @@ _**filterWithCompositedDescendants ( optional boolean )**_<br>
 _**blendingWithCompositedDescendants ( optional boolean )**_<br>
 > Composition due to association with an element with CSS blending applied and composited descendants.
 
+_**isolatesCompositedBlendingDescendants ( optional boolean )**_<br>
+> Composition due to association with an element isolating compositing descendants having CSS blending applied.
+
 _**perspective ( optional boolean )**_<br>
 > Composition due to association with an element with perspective applied.
 
