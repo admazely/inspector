@@ -1,4 +1,6 @@
 # Inspector
+[![npm](http://img.shields.io/npm/v/inspector.svg?style=flat-square)](https://npmjs.com/inspector)
+[![npm downloads](http://img.shields.io/npm/dm/inspector.svg?style=flat-square)](https://npmjs.com/inspector)
 
 > Node.js binding for WebKit Inspector API
 
