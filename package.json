@@ -8,7 +8,8 @@
     ],
     "main": "./inspector.js",
     "scripts": {
-      "test": "tap ./test/simple"
+      "test": "tap ./test/simple",
+      "generate": "node build/download && node build/generate"
     },
     "repository" : {
         "type": "git",
