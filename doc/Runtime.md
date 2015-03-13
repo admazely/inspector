@@ -422,7 +422,7 @@ Mirror object referencing original JavaScript object.
 _**type ( string enumerated ["object","function","undefined","string","number","boolean","symbol"] )**_<br>
 > Object type.
 
-_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap"] )**_<br>
+_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap","iterator"] )**_<br>
 > Object subtype hint. Specified for <code>object</code> type values only.
 
 _**className ( optional string )**_<br>
@@ -436,6 +436,9 @@ _**description ( optional string )**_<br>
 
 _**objectId ( optional [RemoteObjectId](#class-remoteobjectid) )**_<br>
 > Unique object identifier (for non-primitive values).
+
+_**size ( optional integer )**_<br>
+> Size of the array/collection. Specified for array/map/set/weakmap object type values only.
 
 _**preview ( optional [ObjectPreview](#class-objectpreview) )**_<br>
 > Preview containing abbreviated property values. Specified for <code>object</code> type values only.
@@ -453,7 +456,7 @@ Object containing abbreviated remote object value.
 _**type ( string enumerated ["object","function","undefined","string","number","boolean","symbol"] )**_<br>
 > Object type.
 
-_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap"] )**_<br>
+_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap","iterator"] )**_<br>
 > Object subtype hint. Specified for <code>object</code> type values only.
 
 _**description ( optional string )**_<br>
@@ -471,6 +474,9 @@ _**properties ( optional array of [PropertyPreview](#class-propertypreview) )**_
 _**entries ( optional array of [EntryPreview](#class-entrypreview) )**_<br>
 > List of the entries. Specified for <code>map</code> and <code>set</code> subtype values only.
 
+_**size ( optional integer )**_<br>
+> Size of the array/collection. Specified for array/map/set/weakmap object type values only.
+
 
 
 ### Class: PropertyPreview
@@ -485,7 +491,7 @@ _**name ( string )**_<br>
 _**type ( string enumerated ["object","function","undefined","string","number","boolean","symbol","accessor"] )**_<br>
 > Object type.
 
-_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap"] )**_<br>
+_**subtype ( optional string enumerated ["array","null","node","regexp","date","error","map","set","weakmap","iterator"] )**_<br>
 > Object subtype hint. Specified for <code>object</code> type values only.
 
 _**value ( optional string )**_<br>

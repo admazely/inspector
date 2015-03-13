@@ -6894,7 +6894,8 @@
 							"error",
 							"map",
 							"set",
-							"weakmap"
+							"weakmap",
+							"iterator"
 						],
 						"description": "Object subtype hint. Specified for <code>object</code> type values only."
 					},
@@ -6921,6 +6922,12 @@
 						"$ref": "RemoteObjectId",
 						"optional": true,
 						"description": "Unique object identifier (for non-primitive values)."
+					},
+					{
+						"name": "size",
+						"type": "integer",
+						"optional": true,
+						"description": "Size of the array/collection. Specified for array/map/set/weakmap object type values only."
 					},
 					{
 						"name": "preview",
@@ -6962,7 +6969,8 @@
 							"error",
 							"map",
 							"set",
-							"weakmap"
+							"weakmap",
+							"iterator"
 						],
 						"description": "Object subtype hint. Specified for <code>object</code> type values only."
 					},
@@ -7000,6 +7008,12 @@
 						},
 						"optional": true,
 						"description": "List of the entries. Specified for <code>map</code> and <code>set</code> subtype values only."
+					},
+					{
+						"name": "size",
+						"type": "integer",
+						"optional": true,
+						"description": "Size of the array/collection. Specified for array/map/set/weakmap object type values only."
 					}
 				]
 			},
@@ -7040,7 +7054,8 @@
 							"error",
 							"map",
 							"set",
-							"weakmap"
+							"weakmap",
+							"iterator"
 						],
 						"description": "Object subtype hint. Specified for <code>object</code> type values only."
 					},
