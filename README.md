@@ -22,6 +22,16 @@ var inspect = inspector(9222, '127.0.0.1', 'about:blank', function () {
 });
 ```
 
+## Generating the Library & Documentation
+
+The code and documentation is generated from the [WebKit repository](https://github.com/WebKit/webkit/)'s debugger protocol specification files.
+**NOTE:** it's probably a good idea to remove the old files in `doc/` and `lib/` before regenerating them.
+To generate the code & docs, run:
+
+```sh
+$ npm run generate
+```
+
 ## API documetation
 
 ### inspect = inspector(port, host, href, [callback])
