@@ -21,7 +21,7 @@ test("close timeout fallback", function (t) {
 
             // check that chromium is online and working
             ping(inspect, function (err, pong) {
-                t.equal(err, null);
+                t.ifError(err);
                 t.equal(pong, true);
 
                 // kill the WebSocket server (chromium)

@@ -101,7 +101,7 @@ test("native WebKit inspector binding", function (t) {
                     ping.bind(null, inspect),
                     ping.bind(null, inspect)
                 ], function (err, result) {
-                    t.equal(err, null);
+                    t.ok(err == null);
                     t.equal(result[0], true);
                     t.equal(result[1], true);
 

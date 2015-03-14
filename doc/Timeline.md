@@ -6,21 +6,23 @@ Timeline provides its clients with instrumentation records that are generated du
 
 
 * Commands
- * [start](#timelinestartmaxcallstackdepth-includedomcounters-callback)
+ * [start](#timelinestartmaxcallstackdepth-callback)
  * [stop](#timelinestopcallback)
- * [supportsFrameInstrumentation](#timelinesupportsframeinstrumentationcallback)
- * [canMonitorMainThread](#timelinecanmonitormainthreadcallback)
 * Events
  * [eventRecorded](#event-eventrecorded)
+ * [recordingStarted](#event-recordingstarted)
+ * [recordingStopped](#event-recordingstopped)
 * Types
- * [DOMCounters](#class-domcounters)
  * [EventType](#class-eventtype)
  * [TimelineEvent](#class-timelineevent)
+ * [CPUProfileNodeCall](#class-cpuprofilenodecall)
+ * [CPUProfileNode](#class-cpuprofilenode)
+ * [CPUProfile](#class-cpuprofile)
 
 
 ## Commands
 
-### Timeline.start([maxCallStackDepth], [includeDomCounters], callback)
+### Timeline.start([maxCallStackDepth], callback)
 
 Starts capturing instrumentation events.
 
@@ -28,9 +30,6 @@ Starts capturing instrumentation events.
 
 _**maxCallStackDepth ( optional integer )**_<br>
 > Samples JavaScript stack traces up to <code>maxCallStackDepth</code>, defaults to 5.
-
-_**includeDomCounters ( optional boolean )**_<br>
-> Whether DOM counters data should be included into timeline events.
 
 _**callback ( function )**_<br>
 
@@ -52,38 +51,6 @@ _**callback ( function )**_<br>
 _**error ( error )**_<br>
 
 
-### Timeline.supportsFrameInstrumentation(callback)
-
-Tells whether timeline agent supports frame instrumentation.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> True if timeline supports frame instrumentation.
-
-
-
-### Timeline.canMonitorMainThread(callback)
-
-Tells whether timeline agent supports main thread CPU utilization instrumentation.
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**result ( boolean )**_<br>
-> True if timeline supports main thread CPU utilization instrumentation.
-
-
-
 ## Events
 
 ### Event: eventRecorded
@@ -97,20 +64,17 @@ _**record ( [TimelineEvent](#class-timelineevent) )**_<br>
 
 
 
+### Event: recordingStarted
+
+Fired when recording has started.
+
+
+### Event: recordingStopped
+
+Fired when recording has stopped.
+
+
 ## Types
-
-### Class: DOMCounters
-
-_Type: object_
-
-Current values of DOM counters.
-
-### Properties
-
-_**documents ( integer )**_<br>
-_**nodes ( integer )**_<br>
-_**jsEventListeners ( integer )**_<br>
-
 
 ### Class: EventType
 
@@ -130,21 +94,73 @@ Timeline record contains information about the recorded activity.
 _**type ( [EventType](#class-eventtype) )**_<br>
 > Event type.
 
-_**thread ( optional string )**_<br>
-> If present, identifies the thread that produced the event.
-
 _**data ( object )**_<br>
 > Event data.
 
 _**children ( optional array of [TimelineEvent](#class-timelineevent) )**_<br>
 > Nested records.
 
-_**counters ( optional [DOMCounters](#class-domcounters) )**_<br>
-> Current values of DOM counters.
 
-_**usedHeapSize ( optional integer )**_<br>
-> Current size of JS heap.
 
+### Class: CPUProfileNodeCall
+
+_Type: object_
+
+CPU Profile call info. Holds time information for a specific call that happened on a node.
+
+### Properties
+
+_**startTime ( number )**_<br>
+> Start time for the call.
+
+_**totalTime ( number )**_<br>
+> Total execution time for the call.
+
+
+
+### Class: CPUProfileNode
+
+_Type: object_
+
+CPU Profile node. Holds callsite information, execution statistics and child nodes.
+
+### Properties
+
+_**id ( integer )**_<br>
+> Unique identifier for this call site.
+
+_**calls ( array of [CPUProfileNodeCall](#class-cpuprofilenodecall) )**_<br>
+> Calls making up this node.
+
+_**functionName ( optional string )**_<br>
+> Function name.
+
+_**url ( optional string )**_<br>
+> URL.
+
+_**lineNumber ( optional integer )**_<br>
+> Line number.
+
+_**columnNumber ( optional integer )**_<br>
+> Column number.
+
+_**children ( optional array of [CPUProfileNode](#class-cpuprofilenode) )**_<br>
+> Child nodes.
+
+
+
+### Class: CPUProfile
+
+_Type: object_
+
+Profile.
+
+### Properties
+
+_**rootNodes ( array of [CPUProfileNode](#class-cpuprofilenode) )**_<br>
+> Top level nodes in the stack.
+
+_**idleTime ( optional number )**_<br>
 
 
 

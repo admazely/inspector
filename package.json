@@ -8,7 +8,8 @@
     ],
     "main": "./inspector.js",
     "scripts": {
-      "test": "tap ./test/simple"
+      "test": "tap ./test/simple",
+      "generate": "node build/download && node build/generate"
     },
     "repository" : {
         "type": "git",
@@ -22,14 +23,14 @@
         "binding"
     ],
     "dependencies": {
-        "ws": "0.4.x",
+        "ws": "0.7.x",
         "endpoint": "0.4.x"
     },
     "devDependencies": {
-        "tap": "0.4.x",
-        "temp": "0.6.x",
-        "async": "0.2.x",
-        "rimraf": "2.2.x"
+        "tap": "0.7.x",
+        "temp": "0.8.x",
+        "async": "0.9.x",
+        "rimraf": "2.3.x"
     },
     "license": "MIT"
 }

@@ -20,12 +20,6 @@ Actions and events related to the inspected page belong to the page domain.
  * [searchInResources](#pagesearchinresourcestext-casesensitive-isregex-callback)
  * [setDocumentContent](#pagesetdocumentcontentnetworkframeid-html-callback)
  * [setShowPaintRects](#pagesetshowpaintrectsresult-callback)
- * [canShowDebugBorders](#pagecanshowdebugborderscallback)
- * [setShowDebugBorders](#pagesetshowdebugbordersshow-callback)
- * [canShowFPSCounter](#pagecanshowfpscountercallback)
- * [setShowFPSCounter](#pagesetshowfpscountershow-callback)
- * [canContinuouslyPaint](#pagecancontinuouslypaintcallback)
- * [setContinuousPaintingEnabled](#pagesetcontinuouspaintingenabledenabled-callback)
  * [getScriptExecutionStatus](#pagegetscriptexecutionstatuscallback)
  * [setScriptExecutionDisabled](#pagesetscriptexecutiondisabledvalue-callback)
  * [setTouchEmulationEnabled](#pagesettouchemulationenabledenabled-callback)
@@ -52,6 +46,7 @@ Actions and events related to the inspected page belong to the page domain.
  * [ResourceType](#class-resourcetype)
  * [CoordinateSystem](#class-coordinatesystem)
  * [Frame](#class-frame)
+ * [FrameResource](#class-frameresource)
  * [FrameResourceTree](#class-frameresourcetree)
  * [SearchResult](#class-searchresult)
  * [Cookie](#class-cookie)
@@ -307,102 +302,6 @@ Requests that backend shows paint rectangles
 
 _**result ( boolean )**_<br>
 > True for showing paint rectangles
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.canShowDebugBorders(callback)
-
-Tells if backend supports debug borders on layers
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**show ( boolean )**_<br>
-> True if the debug borders can be shown
-
-
-
-### Page.setShowDebugBorders(show, callback)
-
-Requests that backend shows debug borders on layers
-
-### Parameters
-
-_**show ( boolean )**_<br>
-> True for showing debug borders
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.canShowFPSCounter(callback)
-
-Tells if backend supports a FPS counter display
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**show ( boolean )**_<br>
-> True if the FPS count can be shown
-
-
-
-### Page.setShowFPSCounter(show, callback)
-
-Requests that backend shows the FPS counter
-
-### Parameters
-
-_**show ( boolean )**_<br>
-> True for showing the FPS counter
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-
-
-### Page.canContinuouslyPaint(callback)
-
-Tells if backend supports continuous painting
-
-### Parameters
-
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**value ( boolean )**_<br>
-> True if continuous painting is available
-
-
-
-### Page.setContinuousPaintingEnabled(enabled, callback)
-
-Requests that backend enables continuous painting
-
-### Parameters
-
-_**enabled ( boolean )**_<br>
-> True for enabling cointinuous painting
 
 _**callback ( function )**_<br>
 
@@ -751,6 +650,32 @@ _**mimeType ( string )**_<br>
 
 
 
+### Class: FrameResource
+
+_Type: object_
+
+### Properties
+
+_**url ( string )**_<br>
+> Resource URL.
+
+_**type ( [ResourceType](#class-resourcetype) )**_<br>
+> Type of this resource.
+
+_**mimeType ( string )**_<br>
+> Resource mimeType as determined by the browser.
+
+_**failed ( optional boolean )**_<br>
+> True if the resource failed to load.
+
+_**canceled ( optional boolean )**_<br>
+> True if the resource was canceled during loading.
+
+_**sourceMapURL ( optional string )**_<br>
+> URL of source map associated with this resource (if any).
+
+
+
 ### Class: FrameResourceTree
 
 _Type: object_
@@ -765,7 +690,7 @@ _**frame ( [Frame](#class-frame) )**_<br>
 _**childFrames ( optional array of [FrameResourceTree](#class-frameresourcetree) )**_<br>
 > Child frames.
 
-_**resources ( array )**_<br>
+_**resources ( array of [FrameResource](#class-frameresource) )**_<br>
 > Information about frame resources.
 
 

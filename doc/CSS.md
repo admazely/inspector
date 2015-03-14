@@ -16,8 +16,6 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [getStyleSheetText](#cssgetstylesheettextstylesheetid-callback)
  * [setStyleSheetText](#csssetstylesheettextstylesheetid-text-callback)
  * [setStyleText](#csssetstyletextcssstyleid-text-callback)
- * [setPropertyText](#csssetpropertytextcssstyleid-propertyindex-text-overwrite-callback)
- * [toggleProperty](#csstogglepropertycssstyleid-propertyindex-disable-callback)
  * [setRuleSelector](#csssetruleselectorcssruleid-selector-callback)
  * [addRule](#cssaddruledomnodeid-selector-callback)
  * [getSupportedCSSProperties](#cssgetsupportedcsspropertiescallback)
@@ -28,7 +26,6 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [styleSheetChanged](#event-stylesheetchanged)
  * [namedFlowCreated](#event-namedflowcreated)
  * [namedFlowRemoved](#event-namedflowremoved)
- * [regionLayoutUpdated](#event-regionlayoutupdated)
  * [regionOversetChanged](#event-regionoversetchanged)
  * [registeredNamedFlowContentElement](#event-registerednamedflowcontentelement)
  * [unregisteredNamedFlowContentElement](#event-unregisterednamedflowcontentelement)
@@ -40,6 +37,7 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [PseudoIdMatches](#class-pseudoidmatches)
  * [InheritedStyleEntry](#class-inheritedstyleentry)
  * [RuleMatch](#class-rulematch)
+ * [CSSSelector](#class-cssselector)
  * [SelectorList](#class-selectorlist)
  * [CSSStyleAttribute](#class-cssstyleattribute)
  * [CSSStyleSheetHeader](#class-cssstylesheetheader)
@@ -50,6 +48,7 @@ This domain exposes CSS read/write operations. All CSS objects, like stylesheets
  * [CSSPropertyInfo](#class-csspropertyinfo)
  * [CSSComputedStyleProperty](#class-csscomputedstyleproperty)
  * [CSSStyle](#class-cssstyle)
+ * [CSSPropertyStatus](#class-csspropertystatus)
  * [CSSProperty](#class-cssproperty)
  * [CSSMedia](#class-cssmedia)
  * [Region](#class-region)
@@ -233,45 +232,6 @@ _**style ( [CSSStyle](#class-cssstyle) )**_<br>
 
 
 
-### CSS.setPropertyText([CSSStyleId](#class-cssstyleid), propertyIndex, text, overwrite, callback)
-
-Sets the new `text` for a property in the respective style, at offset `propertyIndex`. If `overwrite` is `true`, a property at the given offset is overwritten, otherwise inserted. `text` entirely replaces the property `name: value`.
-
-### Parameters
-
-_**styleId ( [CSSStyleId](#class-cssstyleid) )**_<br>
-_**propertyIndex ( integer )**_<br>
-_**text ( string )**_<br>
-_**overwrite ( boolean )**_<br>
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**style ( [CSSStyle](#class-cssstyle) )**_<br>
-> The resulting style after the property text modification.
-
-
-
-### CSS.toggleProperty([CSSStyleId](#class-cssstyleid), propertyIndex, disable, callback)
-
-Toggles the property in the respective style, at offset `propertyIndex`. The `disable` parameter denotes whether the property should be disabled (i.e. removed from the style declaration). If `disable == false`, the property gets put back into its original place in the style declaration.
-
-### Parameters
-
-_**styleId ( [CSSStyleId](#class-cssstyleid) )**_<br>
-_**propertyIndex ( integer )**_<br>
-_**disable ( boolean )**_<br>
-_**callback ( function )**_<br>
-
-### Results
-
-_**error ( error )**_<br>
-_**style ( [CSSStyle](#class-cssstyle) )**_<br>
-> The resulting style after the property toggling.
-
-
-
 ### CSS.setRuleSelector([CSSRuleId](#class-cssruleid), selector, callback)
 
 Modifies the rule selector.
@@ -400,17 +360,6 @@ _**documentNodeId ( [DOM.NodeId](DOM.md#class-nodeid) )**_<br>
 
 _**flowName ( string )**_<br>
 > Identifier of the removed Named Flow.
-
-
-
-### Event: regionLayoutUpdated
-
-Fires when a Named Flow's layout may have changed.
-
-### Results
-
-_**namedFlow ( [NamedFlow](#class-namedflow) )**_<br>
-> The Named Flow whose layout may have changed.
 
 
 
@@ -556,6 +505,25 @@ _**matchingSelectors ( array )**_<br>
 
 
 
+### Class: CSSSelector
+
+_Type: object_
+
+CSS selector.
+
+### Properties
+
+_**text ( string )**_<br>
+> Canonicalized selector text.
+
+_**specificity ( optional array )**_<br>
+> Specificity (a, b, c) tuple. Included if the selector is sent in response to CSS.getMatchedStylesForNode which provides a context element.
+
+_**dynamic ( optional boolean )**_<br>
+> Whether or not the specificity can be dynamic. Included if the selector is sent in response to CSS.getMatchedStylesForNode which provides a context element.
+
+
+
 ### Class: SelectorList
 
 _Type: object_
@@ -564,7 +532,7 @@ Selector list data.
 
 ### Properties
 
-_**selectors ( array )**_<br>
+_**selectors ( array of [CSSSelector](#class-cssselector) )**_<br>
 > Selectors in the list.
 
 _**text ( string )**_<br>
@@ -717,6 +685,9 @@ _**name ( string )**_<br>
 _**longhands ( optional array )**_<br>
 > Longhand property names.
 
+_**values ( optional array )**_<br>
+> Supported values for this property.
+
 
 
 ### Class: CSSComputedStyleProperty
@@ -764,6 +735,13 @@ _**height ( optional string )**_<br>
 
 
 
+### Class: CSSPropertyStatus
+
+_Type: string_
+
+The property status: "active" if the property is effective in the style, "inactive" if the property is overridden by a same-named property in this style later on, "disabled" if the property is disabled by the user, "style" (implied if absent) if the property is reported by the browser rather than by the CSS source parser.
+
+
 ### Class: CSSProperty
 
 _Type: object_
@@ -790,8 +768,8 @@ _**text ( optional string )**_<br>
 _**parsedOk ( optional boolean )**_<br>
 > Whether the property is understood by the browser (implies <code>true</code> if absent).
 
-_**status ( optional string enumerated ["active","inactive","disabled","style"] )**_<br>
-> The property status: "active" if the property is effective in the style, "inactive" if the property is overridden by a same-named property in this style later on, "disabled" if the property is disabled by the user, "style" (implied if absent) if the property is reported by the browser rather than by the CSS source parser.
+_**status ( optional [CSSPropertyStatus](#class-csspropertystatus) )**_<br>
+> Whether the property is active or disabled.
 
 _**range ( optional [SourceRange](#class-sourcerange) )**_<br>
 > The entire property range in the enclosing style declaration (if available).

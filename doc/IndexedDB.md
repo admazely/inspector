@@ -163,11 +163,8 @@ Database with an array of object stores.
 _**name ( string )**_<br>
 > Database name.
 
-_**version ( string )**_<br>
-> Deprecated string database version.
-
-_**intVersion ( integer )**_<br>
-> Integer database version.
+_**version ( number )**_<br>
+> Database version.
 
 _**objectStores ( array of [ObjectStore](#class-objectstore) )**_<br>
 > Object stores in this database.
