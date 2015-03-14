@@ -1,7 +1,7 @@
 {
     "name": "inspector",
     "description": "Node.js binding for WebKit Inspector API",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "author": "Admazely <dev@admaze.ly>",
     "maintainers": [
         "AndreasMadsen <andreas@admaze.ly>"
